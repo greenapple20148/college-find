@@ -10,7 +10,7 @@ import { useProfile } from '@/context/ProfileContext'
 import { DollarIcon, BuildingIcon, GraduationCapIcon, CalculatorIcon } from '@/components/ui/Icon'
 import type { College, FinancialProfile, CostEstimate } from '@/lib/types'
 
-const STORAGE_KEY = 'collegematch_financial_profile'
+const STORAGE_KEY = 'collegefind_financial_profile'
 
 const DEFAULT_PROFILE: FinancialProfile = {
   annual_income: 60000,

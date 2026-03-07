@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'acceptance rate',
   ],
   openGraph: {
-    title: 'Search Colleges | CollegeMatch',
+    title: 'Search Colleges | CollegeFind',
     description:
       'Search 6,000+ U.S. colleges with filters for state, size, tuition, acceptance rate, and more.',
     url: '/search',

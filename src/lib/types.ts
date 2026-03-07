@@ -1,4 +1,4 @@
-// CollegeMatch — TypeScript Interfaces
+// CollegeFind — TypeScript Interfaces
 
 export interface College {
   id: string

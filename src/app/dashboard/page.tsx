@@ -7,7 +7,7 @@ import { DeadlineTracker } from '@/components/dashboard/DeadlineTracker'
 import { ClipboardIcon, HeartIcon, ArrowRightIcon } from '@/components/ui/Icon'
 import type { SavedCollege } from '@/lib/types'
 
-const SESSION_KEY = 'collegematch_session_id'
+const SESSION_KEY = 'collegefind_session_id'
 
 function getSessionId(): string | null {
   if (typeof window === 'undefined') return null

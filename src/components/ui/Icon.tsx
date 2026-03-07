@@ -1,5 +1,6 @@
 interface IconProps {
   className?: string
+  style?: React.CSSProperties
 }
 
 export function GraduationCapIcon({ className = 'w-5 h-5' }: IconProps) {
@@ -176,7 +177,7 @@ export function PlusIcon({ className = 'w-4 h-4' }: IconProps) {
 export function CategoryDot({ category }: { category: 'safety' | 'match' | 'reach' }) {
   const color =
     category === 'safety' ? 'text-green-500' :
-    category === 'match'  ? 'text-blue-500'  : 'text-orange-500'
+      category === 'match' ? 'text-blue-500' : 'text-orange-500'
   return (
     <svg className={`w-3 h-3 ${color}`} viewBox="0 0 24 24" fill="currentColor">
       <circle cx="12" cy="12" r="10" />

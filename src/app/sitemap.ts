@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const SITE_URL = 'https://collegematchtool.com'
+const SITE_URL = 'https://collegefindtool.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()

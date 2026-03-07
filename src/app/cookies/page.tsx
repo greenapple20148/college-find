@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Cookie Policy',
-    description: 'CollegeMatch Cookie Policy — how we use cookies and similar technologies.',
+    description: 'CollegeFind Cookie Policy — how we use cookies and similar technologies.',
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -33,7 +33,7 @@ export default function CookiePolicyPage() {
                 <p>
                     Cookies are small text files that are placed on your device when you visit a website. They are widely
                     used to make websites work more efficiently and to provide information to website operators.
-                    CollegeMatch uses cookies and similar technologies (such as localStorage) to enhance your experience.
+                    CollegeFind, operated by RZeal Solutions, USA, uses cookies and similar technologies (such as localStorage) to enhance your experience.
                 </p>
             </Section>
 
@@ -124,8 +124,8 @@ export default function CookiePolicyPage() {
             <Section title="8. Contact Us">
                 <p>
                     If you have questions about our use of cookies, contact us at{' '}
-                    <a href="mailto:privacy@collegematchtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
-                        privacy@collegematchtool.com
+                    <a href="mailto:privacy@collegefindtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
+                        privacy@collegefindtool.com
                     </a>.
                 </p>
             </Section>

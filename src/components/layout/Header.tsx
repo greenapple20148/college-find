@@ -29,8 +29,8 @@ function ThemeToggle() {
       {/* Sun icon */}
       <svg
         className={`w-[18px] h-[18px] absolute transition-all duration-300 ${theme === 'dark'
-            ? 'opacity-100 rotate-0 scale-100'
-            : 'opacity-0 rotate-90 scale-0'
+          ? 'opacity-100 rotate-0 scale-100'
+          : 'opacity-0 rotate-90 scale-0'
           }`}
         viewBox="0 0 24 24"
         fill="none"
@@ -46,8 +46,8 @@ function ThemeToggle() {
       {/* Moon icon */}
       <svg
         className={`w-[18px] h-[18px] absolute transition-all duration-300 ${theme === 'light'
-            ? 'opacity-100 rotate-0 scale-100'
-            : 'opacity-0 -rotate-90 scale-0'
+          ? 'opacity-100 rotate-0 scale-100'
+          : 'opacity-0 -rotate-90 scale-0'
           }`}
         viewBox="0 0 24 24"
         fill="none"
@@ -82,7 +82,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2 group">
             <GraduationCapIcon className="w-6 h-6 transition-colors" style={{ color: 'var(--gold-primary)' }} />
             <span className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>
-              College<span className="heading-serif-italic" style={{ color: 'var(--gold-primary)' }}>Match</span>
+              College<span className="heading-serif-italic" style={{ color: 'var(--gold-primary)' }}>Find</span>
             </span>
           </Link>
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Terms of Service',
-    description: 'CollegeMatch Terms of Service — the rules and guidelines for using our free college search and admissions tool.',
+    description: 'CollegeFind Terms of Service — the rules and guidelines for using our free college search and admissions tool.',
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -31,15 +31,15 @@ export default function TermsPage() {
 
             <Section title="1. Acceptance of Terms">
                 <p>
-                    Welcome to CollegeMatch (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). By accessing or using the
-                    CollegeMatch website and services (the &ldquo;Service&rdquo;), you agree to be bound by these Terms of
+                    Welcome to CollegeFind, operated by RZeal Solutions, USA (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;). By accessing or using the
+                    CollegeFind website and services (the &ldquo;Service&rdquo;), you agree to be bound by these Terms of
                     Service (&ldquo;Terms&rdquo;). If you do not agree, please do not use the Service.
                 </p>
             </Section>
 
             <Section title="2. Description of Service">
                 <p>
-                    CollegeMatch is a free, educational tool that helps high school students search for U.S. colleges,
+                    CollegeFind is a free, educational tool that helps high school students search for U.S. colleges,
                     estimate admission chances, compare schools, estimate costs, and track application deadlines. Our data
                     is sourced from the U.S. Department of Education College Scorecard and other publicly available sources.
                 </p>
@@ -75,7 +75,7 @@ export default function TermsPage() {
             <Section title="6. Intellectual Property">
                 <p>
                     All content, design, graphics, and software associated with the Service are owned by or licensed to
-                    CollegeMatch and are protected by applicable intellectual property laws. You may not copy, modify,
+                    CollegeFind and are protected by applicable intellectual property laws. You may not copy, modify,
                     distribute, sell, or lease any part of the Service without our prior written permission.
                 </p>
             </Section>
@@ -99,7 +99,7 @@ export default function TermsPage() {
 
             <Section title="9. Limitation of Liability">
                 <p>
-                    To the fullest extent permitted by law, CollegeMatch shall not be liable for any indirect, incidental,
+                    To the fullest extent permitted by law, CollegeFind shall not be liable for any indirect, incidental,
                     special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred
                     directly or indirectly, arising from your use of the Service.
                 </p>
@@ -138,8 +138,8 @@ export default function TermsPage() {
             <Section title="14. Contact Us">
                 <p>
                     If you have any questions about these Terms, please contact us at{' '}
-                    <a href="mailto:legal@collegematchtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
-                        legal@collegematchtool.com
+                    <a href="mailto:legal@collegefindtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
+                        legal@collegefindtool.com
                     </a>.
                 </p>
             </Section>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Disclaimer',
-    description: 'CollegeMatch Disclaimer — important disclosures about data accuracy, limitations, and third-party affiliations.',
+    description: 'CollegeFind Disclaimer — important disclosures about data accuracy, limitations, and third-party affiliations.',
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -38,7 +38,7 @@ export default function DisclaimerPage() {
                     ⚠️ Important Notice
                 </p>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    CollegeMatch is an informational tool only. All admission estimates, cost calculations, match
+                    CollegeFind, operated by RZeal Solutions, USA, is an informational tool only. All admission estimates, cost calculations, match
                     predictions, and scholarship information are <strong>approximations</strong> and should not be
                     treated as guarantees or professional advice. Always verify information directly with colleges
                     and qualified advisors.
@@ -47,7 +47,7 @@ export default function DisclaimerPage() {
 
             <Section title="1. General Disclaimer">
                 <p>
-                    The information provided on CollegeMatch is for general informational and educational purposes only.
+                    The information provided on CollegeFind is for general informational and educational purposes only.
                     It is not intended to be and does not constitute professional academic advising, financial counseling,
                     or legal advice. You should not act or refrain from acting based solely on information provided
                     by this Service.
@@ -56,7 +56,7 @@ export default function DisclaimerPage() {
 
             <Section title="2. Data Accuracy">
                 <p>
-                    CollegeMatch sources data from the U.S. Department of Education College Scorecard and other publicly
+                    CollegeFind sources data from the U.S. Department of Education College Scorecard and other publicly
                     available datasets. While we make every effort to ensure accuracy:
                 </p>
                 <ul className="list-disc list-inside space-y-1 ml-2">
@@ -100,7 +100,7 @@ export default function DisclaimerPage() {
 
             <Section title="5. Scholarship Information">
                 <p>
-                    Scholarship listings are compiled from publicly available sources. CollegeMatch does not guarantee
+                    Scholarship listings are compiled from publicly available sources. CollegeFind does not guarantee
                     the availability, accuracy, or eligibility of any scholarship listed. We are not responsible for
                     any decisions made based on scholarship information displayed on this Service.
                 </p>
@@ -108,7 +108,7 @@ export default function DisclaimerPage() {
 
             <Section title="6. No Affiliation">
                 <p>
-                    CollegeMatch is <strong>not affiliated with, endorsed by, or sponsored by</strong>:
+                    CollegeFind is <strong>not affiliated with, endorsed by, or sponsored by</strong>:
                 </p>
                 <ul className="list-disc list-inside space-y-1 ml-2">
                     <li>The U.S. Department of Education</li>
@@ -144,7 +144,7 @@ export default function DisclaimerPage() {
 
             <Section title="9. Indemnification">
                 <p>
-                    By using the Service, you agree to indemnify and hold harmless CollegeMatch, its officers,
+                    By using the Service, you agree to indemnify and hold harmless CollegeFind, its officers,
                     directors, employees, and agents from any claims, damages, losses, or expenses arising out of
                     your use of the Service or violation of these terms.
                 </p>
@@ -153,8 +153,8 @@ export default function DisclaimerPage() {
             <Section title="10. Contact Us">
                 <p>
                     If you have questions about this Disclaimer, please contact us at{' '}
-                    <a href="mailto:legal@collegematchtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
-                        legal@collegematchtool.com
+                    <a href="mailto:legal@collegefindtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
+                        legal@collegefindtool.com
                     </a>.
                 </p>
             </Section>

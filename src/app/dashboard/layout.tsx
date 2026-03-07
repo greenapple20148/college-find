@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     'Track your saved colleges, application deadlines, and application status — from Not Started to Accepted.',
   openGraph: {
-    title: 'My Dashboard | CollegeMatch',
+    title: 'My Dashboard | CollegeFind',
     description: 'Track your college applications, deadlines, and status updates in one place.',
     url: '/dashboard',
   },

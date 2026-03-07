@@ -10,6 +10,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options: SelectOption[]
   placeholder?: string
   error?: string
+  hint?: string
 }
 
 export function Select({

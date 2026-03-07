@@ -7,7 +7,7 @@ import { MatchSection } from '@/components/match/MatchSection'
 import { ClipboardIcon, WarningIcon, CategoryDot, ArrowRightIcon, TargetIcon } from '@/components/ui/Icon'
 import type { MatchResponse, MatchResult } from '@/lib/types'
 
-const SESSION_KEY = 'collegematch_session_id'
+const SESSION_KEY = 'collegefind_session_id'
 
 function getOrCreateSessionId(): string {
   if (typeof window === 'undefined') return ''
