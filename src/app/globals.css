@@ -1,0 +1,354 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme tokens ────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0c0a09;
+  --bg-secondary: #171412;
+  --bg-tertiary: #1e1b18;
+  --bg-surface: #171412;
+  --bg-surface-hover: #1e1b18;
+
+  --border-primary: #2a2520;
+  --border-subtle: #221f1b;
+
+  --text-primary: #FAF9F6;
+  --text-secondary: #E8E4DD;
+  --text-tertiary: #C8C3BA;
+  --text-muted: rgba(232, 228, 221, 0.7);
+  --text-faint: rgba(200, 195, 186, 0.6);
+  --text-ghost: rgba(200, 195, 186, 0.35);
+
+  --gold-primary: #C9923C;
+  --gold-light: #D4AD6A;
+  --gold-dark: #A07228;
+
+  --selection-bg: rgba(201, 146, 60, 0.3);
+  --selection-fg: #FAF9F6;
+
+  --header-bg: rgba(12, 10, 9, 0.85);
+
+  --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 40px rgba(201, 146, 60, 0.12);
+
+  --shimmer-color: rgba(201, 146, 60, 0.06);
+
+  --skeleton-color: #1e1b18;
+
+  --btn-outline-fg: #FAF9F6;
+  --btn-outline-border: rgba(201, 146, 60, 0.4);
+  --btn-outline-hover-bg: rgba(201, 146, 60, 0.1);
+  --btn-outline-hover-border: rgba(201, 146, 60, 0.6);
+
+  /* Badge variants — warm tones */
+  --badge-public-bg: rgba(161, 136, 95, 0.15);
+  --badge-public-fg: #D4AD6A;
+  --badge-public-border: rgba(161, 136, 95, 0.22);
+  --badge-private-bg: rgba(180, 140, 110, 0.12);
+  --badge-private-fg: #C8A882;
+  --badge-private-border: rgba(180, 140, 110, 0.2);
+  --badge-gray-bg: rgba(200, 195, 186, 0.08);
+  --badge-gray-fg: #C8C3BA;
+  --badge-gray-border: rgba(200, 195, 186, 0.1);
+
+  /* Input fields */
+  --input-bg: #141210;
+  --input-border: #2a2520;
+  --input-placeholder: rgba(200, 195, 186, 0.35);
+  --input-focus-ring: rgba(201, 146, 60, 0.5);
+
+  /* Donut chart background */
+  --donut-track: rgba(255, 255, 255, 0.06);
+
+  /* Accent bar colors — warm gold tones */
+  --accent-public-from: #C9923C;
+  --accent-public-to: #D4AD6A;
+  --accent-private-from: #a07228;
+  --accent-private-to: #C9923C;
+
+  /* Red error */
+  --error-bg: rgba(248, 113, 113, 0.1);
+  --error-border: rgba(248, 113, 113, 0.2);
+  --error-fg: #f87171;
+
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg-primary: #FAF8F5;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F5F3EF;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F0EDE8;
+
+  --border-primary: #E0DCD5;
+  --border-subtle: #E8E4DE;
+
+  --text-primary: #1A1814;
+  --text-secondary: #2D2A25;
+  --text-tertiary: #4A4640;
+  --text-muted: #5C5750;
+  --text-faint: #8A8580;
+  --text-ghost: #B0ABA5;
+
+  --gold-primary: #A07228;
+  --gold-light: #B8832E;
+  --gold-dark: #8A6223;
+
+  --selection-bg: rgba(160, 114, 40, 0.2);
+  --selection-fg: #1A1814;
+
+  --header-bg: rgba(250, 248, 245, 0.9);
+
+  --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.07);
+  --shadow-glow: 0 0 30px rgba(160, 114, 40, 0.1);
+
+  --shimmer-color: rgba(160, 114, 40, 0.04);
+
+  --skeleton-color: #E0DCD5;
+
+  --btn-outline-fg: #1A1814;
+  --btn-outline-border: rgba(160, 114, 40, 0.35);
+  --btn-outline-hover-bg: rgba(160, 114, 40, 0.08);
+  --btn-outline-hover-border: rgba(160, 114, 40, 0.6);
+
+  /* Badge variants — warm tones */
+  --badge-public-bg: rgba(160, 114, 40, 0.1);
+  --badge-public-fg: #8A6223;
+  --badge-public-border: rgba(160, 114, 40, 0.18);
+  --badge-private-bg: rgba(140, 110, 80, 0.1);
+  --badge-private-fg: #6B5240;
+  --badge-private-border: rgba(140, 110, 80, 0.18);
+  --badge-gray-bg: rgba(74, 70, 64, 0.06);
+  --badge-gray-fg: #4A4640;
+  --badge-gray-border: rgba(74, 70, 64, 0.1);
+
+  /* Input fields */
+  --input-bg: #FFFFFF;
+  --input-border: #E0DCD5;
+  --input-placeholder: #B0ABA5;
+  --input-focus-ring: rgba(160, 114, 40, 0.35);
+
+  /* Donut chart background */
+  --donut-track: rgba(0, 0, 0, 0.06);
+
+  /* Accent bar colors — warm gold/tan tones */
+  --accent-public-from: #C9923C;
+  --accent-public-to: #D4AD6A;
+  --accent-private-from: #8A6223;
+  --accent-private-to: #A07228;
+
+  /* Red error */
+  --error-bg: rgba(239, 68, 68, 0.06);
+  --error-border: rgba(239, 68, 68, 0.15);
+  --error-fg: #dc2626;
+
+  color-scheme: light;
+}
+
+/* ─── Base layer ──────────────────────────────────────────────────── */
+@layer base {
+  html {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-fg);
+  }
+}
+
+/* ─── Component layer ─────────────────────────────────────────────── */
+@layer components {
+
+  /* Premium card style */
+  .card-dark {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-dark:hover {
+    border-color: var(--gold-primary);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+  }
+
+  /* Gold gradient text */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Serif heading */
+  .heading-serif {
+    font-family: var(--font-playfair), Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Serif italic accent */
+  .heading-serif-italic {
+    font-family: var(--font-playfair), Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Gold underline accent */
+  .accent-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .accent-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-primary), transparent);
+    border-radius: 1px;
+  }
+
+  /* Subtle shimmer animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--shimmer-color) 50%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 8s ease-in-out infinite;
+  }
+
+  /* Card entrance animation */
+  @keyframes cardFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card-animate-in {
+    animation: cardFadeIn 0.4s ease-out both;
+  }
+
+  /* Gold badge/pill */
+  .badge-gold {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    background: rgba(201, 146, 60, 0.15);
+    color: var(--gold-light);
+    border: 1px solid rgba(201, 146, 60, 0.2);
+  }
+
+  /* Premium button */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300;
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+    color: #FAF9F6;
+    box-shadow: 0 4px 20px rgba(201, 146, 60, 0.25);
+  }
+
+  .btn-gold:hover {
+    box-shadow: 0 6px 30px rgba(201, 146, 60, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300;
+    background: transparent;
+    color: var(--btn-outline-fg);
+    border: 1px solid var(--btn-outline-border);
+  }
+
+  .btn-outline:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+  }
+
+  /* ── Theme-aware utility classes ─────────────────────────────── */
+  /* These map semantic tokens for use in Tailwind-style inline */
+  .theme-bg {
+    background-color: var(--bg-primary);
+  }
+
+  .theme-bg-surface {
+    background-color: var(--bg-surface);
+  }
+
+  .theme-bg-card {
+    background-color: var(--bg-secondary);
+  }
+
+  .theme-bg-raised {
+    background-color: var(--bg-tertiary);
+  }
+
+  .theme-border {
+    border-color: var(--border-primary);
+  }
+
+  .theme-border-subtle {
+    border-color: var(--border-subtle);
+  }
+
+  .theme-text {
+    color: var(--text-primary);
+  }
+
+  .theme-text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .theme-text-muted {
+    color: var(--text-muted);
+  }
+
+  .theme-text-faint {
+    color: var(--text-faint);
+  }
+
+  .theme-text-ghost {
+    color: var(--text-ghost);
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}

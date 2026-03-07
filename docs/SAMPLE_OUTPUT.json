@@ -1,0 +1,261 @@
+{
+  "_description": "Sample output for POST /api/match with a student profile of GPA 3.6, SAT 1280, preferred states NY/NJ/PA, budget $25,000 net price max, medium campus size",
+  "_student_profile": {
+    "gpa": 3.6,
+    "sat_total": 1280,
+    "act": null,
+    "intended_major": "Nursing",
+    "preferred_states": ["NY", "NJ", "PA"],
+    "budget_max": 25000,
+    "campus_size": "medium"
+  },
+  "disclaimer": "These are statistical estimates based on publicly available U.S. Department of Education data. They are NOT guarantees of admission and do not account for holistic factors including essays, recommendations, extracurriculars, or institutional priorities. Always consult with a school counselor.",
+  "profile": {
+    "gpa": 3.6,
+    "sat_total": 1280,
+    "act": null,
+    "preferred_states": ["NY", "NJ", "PA"],
+    "budget_max": 25000,
+    "campus_size": "medium"
+  },
+  "results": {
+    "safety": [
+      {
+        "college": {
+          "id": "a1b2c3d4-0001-0001-0001-000000000001",
+          "unit_id": "186399",
+          "name": "Rowan University",
+          "city": "Glassboro",
+          "state": "NJ",
+          "control": "public",
+          "size_category": "medium",
+          "enrollment": 14000,
+          "tuition_in_state": 13536,
+          "tuition_out_state": 22500,
+          "net_price": 14200,
+          "acceptance_rate": 0.73,
+          "graduation_rate": 0.64,
+          "median_earnings": 47000,
+          "sat_math_50": 590,
+          "sat_read_50": 580,
+          "act_50": 25,
+          "website": "https://www.rowan.edu"
+        },
+        "probability": 0.87,
+        "category": "safety",
+        "probability_label": "87% estimated chance",
+        "budget_fit": true,
+        "budget_note": "Net price $14,200 — within your $25,000 budget"
+      },
+      {
+        "college": {
+          "id": "a1b2c3d4-0002-0002-0002-000000000002",
+          "unit_id": "215293",
+          "name": "West Chester University of Pennsylvania",
+          "city": "West Chester",
+          "state": "PA",
+          "control": "public",
+          "size_category": "medium",
+          "enrollment": 13500,
+          "tuition_in_state": 10286,
+          "tuition_out_state": 20286,
+          "net_price": 13800,
+          "acceptance_rate": 0.79,
+          "graduation_rate": 0.69,
+          "median_earnings": 45000,
+          "sat_math_50": 565,
+          "sat_read_50": 565,
+          "act_50": 24,
+          "website": "https://www.wcupa.edu"
+        },
+        "probability": 0.88,
+        "category": "safety",
+        "probability_label": "88% estimated chance",
+        "budget_fit": true,
+        "budget_note": "Net price $13,800 — within your $25,000 budget"
+      },
+      {
+        "college": {
+          "id": "a1b2c3d4-0003-0003-0003-000000000003",
+          "unit_id": "186867",
+          "name": "Kean University",
+          "city": "Union",
+          "state": "NJ",
+          "control": "public",
+          "size_category": "medium",
+          "enrollment": 12000,
+          "tuition_in_state": 12590,
+          "tuition_out_state": 17100,
+          "net_price": 12000,
+          "acceptance_rate": 0.81,
+          "graduation_rate": 0.48,
+          "median_earnings": 41000,
+          "sat_math_50": 520,
+          "sat_read_50": 510,
+          "act_50": 21,
+          "website": "https://www.kean.edu"
+        },
+        "probability": 0.91,
+        "category": "safety",
+        "probability_label": "91% estimated chance",
+        "budget_fit": true,
+        "budget_note": "Net price $12,000 — within your $25,000 budget"
+      }
+    ],
+    "match": [
+      {
+        "college": {
+          "id": "a1b2c3d4-0004-0004-0004-000000000004",
+          "unit_id": "186131",
+          "name": "Rutgers University-New Brunswick",
+          "city": "New Brunswick",
+          "state": "NJ",
+          "control": "public",
+          "size_category": "large",
+          "enrollment": 36000,
+          "tuition_in_state": 16336,
+          "tuition_out_state": 35190,
+          "net_price": 20000,
+          "acceptance_rate": 0.61,
+          "graduation_rate": 0.83,
+          "median_earnings": 58000,
+          "sat_math_50": 670,
+          "sat_read_50": 640,
+          "act_50": 29,
+          "website": "https://www.rutgers.edu"
+        },
+        "probability": 0.58,
+        "category": "match",
+        "probability_label": "58% estimated chance",
+        "budget_fit": true,
+        "budget_note": "Net price $20,000 — within your $25,000 budget",
+        "size_note": "Large campus (36,000 students) — outside your medium preference"
+      },
+      {
+        "college": {
+          "id": "a1b2c3d4-0005-0005-0005-000000000005",
+          "unit_id": "215062",
+          "name": "Temple University",
+          "city": "Philadelphia",
+          "state": "PA",
+          "control": "public",
+          "size_category": "large",
+          "enrollment": 30000,
+          "tuition_in_state": 19212,
+          "tuition_out_state": 30760,
+          "net_price": 22000,
+          "acceptance_rate": 0.66,
+          "graduation_rate": 0.73,
+          "median_earnings": 52000,
+          "sat_math_50": 600,
+          "sat_read_50": 590,
+          "act_50": 27,
+          "website": "https://www.temple.edu"
+        },
+        "probability": 0.61,
+        "category": "match",
+        "probability_label": "61% estimated chance",
+        "budget_fit": true,
+        "budget_note": "Net price $22,000 — within your $25,000 budget",
+        "size_note": "Large campus (30,000 students) — outside your medium preference"
+      },
+      {
+        "college": {
+          "id": "a1b2c3d4-0006-0006-0006-000000000006",
+          "unit_id": "193654",
+          "name": "SUNY New Paltz",
+          "city": "New Paltz",
+          "state": "NY",
+          "control": "public",
+          "size_category": "medium",
+          "enrollment": 7800,
+          "tuition_in_state": 7680,
+          "tuition_out_state": 17530,
+          "net_price": 18500,
+          "acceptance_rate": 0.54,
+          "graduation_rate": 0.71,
+          "median_earnings": 44000,
+          "sat_math_50": 600,
+          "sat_read_50": 610,
+          "act_50": 26,
+          "website": "https://www.newpaltz.edu"
+        },
+        "probability": 0.55,
+        "category": "match",
+        "probability_label": "55% estimated chance",
+        "budget_fit": true,
+        "budget_note": "Net price $18,500 — within your $25,000 budget"
+      }
+    ],
+    "reach": [
+      {
+        "college": {
+          "id": "a1b2c3d4-0007-0007-0007-000000000007",
+          "unit_id": "190150",
+          "name": "New York University",
+          "city": "New York",
+          "state": "NY",
+          "control": "private_nonprofit",
+          "size_category": "large",
+          "enrollment": 26000,
+          "tuition_in_state": 58168,
+          "tuition_out_state": 58168,
+          "net_price": 38000,
+          "acceptance_rate": 0.12,
+          "graduation_rate": 0.84,
+          "median_earnings": 67000,
+          "sat_math_50": 740,
+          "sat_read_50": 730,
+          "act_50": 33,
+          "website": "https://www.nyu.edu"
+        },
+        "probability": 0.06,
+        "category": "reach",
+        "probability_label": "6% estimated chance",
+        "budget_fit": false,
+        "budget_note": "Net price $38,000 — exceeds your $25,000 budget"
+      },
+      {
+        "college": {
+          "id": "a1b2c3d4-0008-0008-0008-000000000008",
+          "unit_id": "167358",
+          "name": "University of Pennsylvania",
+          "city": "Philadelphia",
+          "state": "PA",
+          "control": "private_nonprofit",
+          "size_category": "medium",
+          "enrollment": 10000,
+          "tuition_in_state": 63452,
+          "tuition_out_state": 63452,
+          "net_price": 21000,
+          "acceptance_rate": 0.07,
+          "graduation_rate": 0.96,
+          "median_earnings": 95000,
+          "sat_math_50": 780,
+          "sat_read_50": 760,
+          "act_50": 35,
+          "website": "https://www.upenn.edu"
+        },
+        "probability": 0.04,
+        "category": "reach",
+        "probability_label": "4% estimated chance",
+        "budget_fit": true,
+        "budget_note": "Net price $21,000 — within your $25,000 budget (meets 100% of need)"
+      }
+    ]
+  },
+  "counts": {
+    "safety": 3,
+    "match": 3,
+    "reach": 2,
+    "total": 8
+  },
+  "filters_applied": {
+    "preferred_states": ["NY", "NJ", "PA"],
+    "budget_max": 25000,
+    "campus_size": "medium",
+    "states_relaxed": false,
+    "budget_relaxed": false
+  },
+  "generated_at": "2026-03-07T12:00:00.000Z"
+}
