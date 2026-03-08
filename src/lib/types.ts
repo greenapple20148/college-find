@@ -124,6 +124,65 @@ export interface Scholarship {
   created_at?: string
 }
 
+// ─── College Deadlines ────────────────────────────────────────────────────────
+
+export type DeadlineSourceType = 'official' | 'commonapp' | 'manual'
+
+export type DeadlineVerificationStatus =
+  | 'official_verified'
+  | 'commonapp_verified'
+  | 'needs_review'
+
+export interface CollegeDeadline {
+  id: string
+  college_id: string
+
+  // Application deadlines
+  early_action_deadline: string | null
+  early_decision_1_deadline: string | null
+  early_decision_2_deadline: string | null
+  regular_decision_deadline: string | null
+
+  // Rolling & transfer
+  rolling_admission: boolean
+  transfer_fall_deadline: string | null
+  transfer_spring_deadline: string | null
+
+  // Financial aid
+  scholarship_priority_deadline: string | null
+  fafsa_priority_deadline: string | null
+
+  // Source tracking
+  source_url: string
+  source_type: DeadlineSourceType
+
+  // Verification
+  verification_status: DeadlineVerificationStatus
+  last_verified_at: string | null
+  verified_by: string | null
+
+  // Cycle
+  cycle_year: number
+
+  // Admin
+  admin_notes: string
+
+  created_at?: string
+  updated_at?: string
+
+  // Joined data
+  college?: College
+}
+
+export interface CollegeDeadlineApiResponse {
+  data: CollegeDeadline | null
+}
+
+export interface CollegeDeadlinesListResponse {
+  data: CollegeDeadline[]
+  total: number
+}
+
 // Search/filter params
 export interface CollegeFilters {
   q?: string
@@ -249,6 +308,22 @@ export interface CostEstimate {
   // Metadata
   is_in_state: boolean
   aid_breakdown: CostLineItem[]
+}
+
+// ─── Auth / User Profile ──────────────────────────────────────────────────────
+
+export interface UserProfile {
+  id: string
+  user_id: string
+  gpa: number | null
+  sat_score: number | null
+  act_score: number | null
+  major: string | null
+  preferred_states: string[]
+  budget_max: number | null
+  campus_size: 'small' | 'medium' | 'large' | 'any'
+  created_at: string
+  updated_at: string
 }
 
 export const MAJOR_OPTIONS = [

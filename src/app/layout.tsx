@@ -7,6 +7,7 @@ import { ChatWidget } from '@/components/chat/ChatWidget'
 import { ProfileProvider } from '@/context/ProfileContext'
 import { CompareProvider } from '@/context/CompareContext'
 import { ThemeProvider } from '@/context/ThemeContext'
+import { AuthProvider } from '@/context/AuthContext'
 import { Analytics } from '@vercel/analytics/next'
 
 const dmSans = DM_Sans({
@@ -124,17 +125,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <ThemeProvider>
-          <CompareProvider>
-            <ProfileProvider>
-              <Header />
-              <main className="min-h-screen">{children}</main>
-              <Footer />
-              <ChatWidget />
-              <Analytics />
-            </ProfileProvider>
-          </CompareProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <CompareProvider>
+              <ProfileProvider>
+                <Header />
+                <main className="min-h-screen">{children}</main>
+                <Footer />
+                <ChatWidget />
+                <Analytics />
+              </ProfileProvider>
+            </CompareProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

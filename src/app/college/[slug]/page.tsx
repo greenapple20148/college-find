@@ -6,6 +6,7 @@ import { formatUSD, formatPct } from '@/lib/utils'
 import { CollegeCard } from '@/components/colleges/CollegeCard'
 import { AdmissionCalculator } from '@/components/calculator/AdmissionCalculator'
 import { SaveButton } from '@/components/colleges/SaveButton'
+import { CollegeDeadlines } from '@/components/colleges/CollegeDeadlines'
 import { Badge } from '@/components/ui/Badge'
 import { US_STATES, MAJOR_OPTIONS } from '@/lib/types'
 import type { College } from '@/lib/types'
@@ -272,6 +273,9 @@ export default async function CollegeProfilePage({ params }: { params: Promise<{
             </div>
           </div>
         </div>
+
+        {/* Application Deadlines */}
+        <CollegeDeadlines collegeId={college.id} collegeName={college.name} />
 
         {/* Programs */}
         {college.programs.length > 0 && (

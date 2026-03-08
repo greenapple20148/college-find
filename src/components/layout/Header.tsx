@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCompare } from '@/context/CompareContext'
 import { useTheme } from '@/context/ThemeContext'
+import { useAuth } from '@/context/AuthContext'
 import { GraduationCapIcon } from '@/components/ui/Icon'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 const navLinks = [
   { href: '/search', label: 'Search' },
@@ -63,10 +64,94 @@ function ThemeToggle() {
   )
 }
 
+function UserMenu() {
+  const { user, signOut } = useAuth()
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  if (!user) {
+    return (
+      <div className="flex items-center gap-2 ml-2">
+        <Link
+          href="/login"
+          className="px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[var(--bg-surface-hover)]"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          Log in
+        </Link>
+        <Link
+          href="/signup"
+          className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90"
+          style={{ background: 'var(--gold-gradient)', color: '#000' }}
+        >
+          Sign up
+        </Link>
+      </div>
+    )
+  }
+
+  const initial = (user.email ?? 'U')[0].toUpperCase()
+
+  return (
+    <div className="relative ml-2" ref={ref}>
+      <button
+        onClick={() => setOpen(v => !v)}
+        className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-opacity hover:opacity-80"
+        style={{ background: 'var(--gold-gradient)', color: '#000' }}
+        aria-label="Account menu"
+      >
+        {initial}
+      </button>
+      {open && (
+        <div
+          className="absolute right-0 top-10 w-48 rounded-xl border py-1 shadow-xl z-50"
+          style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}
+        >
+          <p className="px-3 py-2 text-xs truncate" style={{ color: 'var(--text-faint)' }}>{user.email}</p>
+          <div className="my-1 border-t" style={{ borderColor: 'var(--border-subtle)' }} />
+          <Link
+            href="/dashboard"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/profile"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            My Profile
+          </Link>
+          <div className="my-1 border-t" style={{ borderColor: 'var(--border-subtle)' }} />
+          <button
+            onClick={() => { setOpen(false); signOut() }}
+            className="block w-full text-left px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Sign out
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function Header() {
   const pathname = usePathname()
   const { compareList } = useCompare()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { user, signOut } = useAuth()
 
   return (
     <header
@@ -116,14 +201,7 @@ export function Header() {
             ))}
 
             <ThemeToggle />
-
-            <Link
-              href="/profile"
-              className="ml-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90"
-              style={{ backgroundColor: 'var(--gold-primary)', color: '#FAF9F6' }}
-            >
-              My Profile
-            </Link>
+            <UserMenu />
           </nav>
 
           {/* Mobile right cluster */}
@@ -174,14 +252,44 @@ export function Header() {
                 )}
               </Link>
             ))}
-            <Link
-              href="/profile"
-              onClick={() => setMobileOpen(false)}
-              className="mt-2 px-3 py-2 rounded-lg text-sm font-semibold text-center"
-              style={{ backgroundColor: 'var(--gold-primary)', color: '#FAF9F6' }}
-            >
-              My Profile
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 px-3 py-2 rounded-lg text-sm font-medium text-center"
+                  style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}
+                >
+                  My Profile
+                </Link>
+                <button
+                  onClick={() => { setMobileOpen(false); signOut() }}
+                  className="px-3 py-2 rounded-lg text-sm font-medium text-center"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <div className="flex gap-2 mt-2">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-center border"
+                  style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex-1 px-3 py-2 rounded-lg text-sm font-semibold text-center"
+                  style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                >
+                  Sign up
+                </Link>
+              </div>
+            )}
           </nav>
         )}
       </div>
