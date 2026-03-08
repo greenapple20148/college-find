@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { createClient } from '@supabase/supabase-js'
 
 const SYSTEM_PROMPT = `You are CollegeFind AI Advisor — a warm, knowledgeable college admissions counselor built into the CollegeFind platform. You help high school students (primarily 11th and 12th graders) navigate the college search and application process.
 
@@ -67,7 +68,13 @@ export async function POST(req: NextRequest) {
         )
     }
 
-    let body: { messages: { role: string; content: string }[]; profile?: Record<string, unknown> }
+    let body: {
+        messages: { role: string; content: string }[]
+        profile?: Record<string, unknown>
+        recommendations?: { name: string; category: string; fit_score: number; admission_probability: number; tuition_estimate: number; reasons: string[] }[]
+        saveSession?: boolean
+        sessionId?: string
+    }
     try {
         body = await req.json()
     } catch {
@@ -77,7 +84,7 @@ export async function POST(req: NextRequest) {
         )
     }
 
-    const { messages, profile } = body
+    const { messages, profile, recommendations, saveSession, sessionId } = body
 
     if (!Array.isArray(messages) || messages.length === 0) {
         return new Response(
@@ -102,6 +109,24 @@ export async function POST(req: NextRequest) {
             profileLines.push(`- Preferred Campus Size: ${profile.campus_size}`)
         }
         systemPrompt += profileLines.join('\n')
+    }
+
+    // Inject recommendation engine results if provided
+    if (recommendations && recommendations.length > 0) {
+        const recsLines: string[] = ['\n\n## Algorithm-Generated College Recommendations']
+        recsLines.push('The following colleges were ranked by our scoring algorithm. Reference these when the student asks for recommendations:\n')
+        for (const rec of recommendations) {
+            recsLines.push(`### ${rec.name} (${rec.category})`)
+            recsLines.push(`- Fit Score: ${rec.fit_score}/100`)
+            recsLines.push(`- Admission Probability: ${Math.round(rec.admission_probability * 100)}%`)
+            recsLines.push(`- Estimated Tuition: $${rec.tuition_estimate.toLocaleString()}/yr`)
+            if (rec.reasons.length > 0) {
+                recsLines.push(`- Why: ${rec.reasons.join('; ')}`)
+            }
+            recsLines.push('')
+        }
+        recsLines.push('Use these data points to explain WHY each college is a good fit. You may also suggest additional schools not in this list.')
+        systemPrompt += recsLines.join('\n')
     }
 
     const client = new Anthropic({ apiKey })
@@ -133,6 +158,41 @@ export async function POST(req: NextRequest) {
                     }
                 }
                 controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+
+                // Save session to DB if requested
+                if (saveSession && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+                    try {
+                        const supabaseAdmin = createClient(
+                            process.env.NEXT_PUBLIC_SUPABASE_URL,
+                            process.env.SUPABASE_SERVICE_ROLE_KEY
+                        )
+                        // Extract user from auth header
+                        const authHeader = req.headers.get('authorization')
+                        if (authHeader) {
+                            const supabaseUser = createClient(
+                                process.env.NEXT_PUBLIC_SUPABASE_URL!,
+                                process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+                            )
+                            const { data: { user } } = await supabaseUser.auth.getUser(authHeader.replace('Bearer ', ''))
+                            if (user) {
+                                const title = messages[0]?.content.slice(0, 60) || 'Advisor Session'
+                                const sessionData = {
+                                    user_id: user.id,
+                                    title,
+                                    messages: JSON.stringify(messages),
+                                    recommended_colleges_json: recommendations ? JSON.stringify(recommendations) : null,
+                                    updated_at: new Date().toISOString(),
+                                }
+                                if (sessionId) {
+                                    await supabaseAdmin.from('advisor_sessions').update(sessionData).eq('id', sessionId)
+                                } else {
+                                    await supabaseAdmin.from('advisor_sessions').insert(sessionData)
+                                }
+                            }
+                        }
+                    } catch { /* session save is best-effort */ }
+                }
+
                 controller.close()
             } catch (err: unknown) {
                 const errorMsg = err instanceof Error ? err.message : 'Unknown streaming error'

@@ -322,6 +322,7 @@ export interface UserProfile {
   preferred_states: string[]
   budget_max: number | null
   campus_size: 'small' | 'medium' | 'large' | 'any'
+  plan?: string | null
   created_at: string
   updated_at: string
 }
@@ -350,4 +351,155 @@ export const MAJOR_OPTIONS = [
   'Science',
   'Technology',
   'Undecided',
+]
+
+// ─── ROI Calculator ───────────────────────────────────────────────────────────
+
+export interface MajorSalaryData {
+  id: string
+  major: string
+  median_salary: number
+  salary_growth_rate: number
+  salary_10yr: number | null
+  source: string
+}
+
+export type ROICategory = 'high' | 'medium' | 'low'
+
+export interface ROIInputs {
+  college_id: string
+  major: string
+  years_of_study: number
+  tuition_per_year: number
+  scholarship_amount: number
+  living_cost_per_year: number
+  loan_interest_rate: number
+  is_in_state: boolean
+}
+
+export interface ROIResult {
+  // Input echo
+  inputs: ROIInputs
+  college_name: string
+
+  // Calculated outputs
+  total_tuition: number
+  total_cost: number
+  net_cost: number
+  loan_amount: number
+  expected_salary: number
+  monthly_payment: number
+  repayment_years: number
+  roi_score: number
+  roi_category: ROICategory
+
+  // Extra insight
+  salary_10yr: number | null
+  lifetime_earnings_premium: number   // vs. avg high school grad ($30k/yr baseline)
+
+  // Enhanced model fields
+  salary_growth_rate: number          // Annual salary growth rate
+  salary_by_year: number[]            // Salary at year 0..10
+  graduation_rate: number             // 0.0–1.0
+  employment_rate: number             // 0.0–1.0 (major-specific)
+  adjusted_salary: number             // salary × grad_rate × employment_rate
+  net_earnings_10yr: number           // Cumulative earnings minus loan payments after 10 years
+  projections: YearlyProjection[]     // Year-by-year breakdown
+}
+
+export interface YearlyProjection {
+  year: number                        // 1–10
+  salary: number                      // Salary in that year
+  cumulative_earnings: number         // Total cumulative earnings
+  loan_balance: number                // Remaining loan balance
+  cumulative_loan_paid: number        // Total loan payments made
+  net_earnings: number                // cumulative_earnings - cumulative_loan_paid
+  hs_cumulative_earnings: number      // High school baseline cumulative
+}
+
+export interface SavedROICalculation {
+  id: string
+  user_id: string
+  college_id: string
+  major: string
+  years_of_study: number
+  tuition_per_year: number
+  scholarship_amount: number
+  living_cost_per_year: number
+  loan_interest_rate: number
+  is_in_state: boolean
+  total_cost: number
+  net_cost: number
+  loan_amount: number
+  expected_salary: number
+  monthly_payment: number
+  repayment_years: number
+  roi_score: number
+  roi_category: ROICategory
+  created_at: string
+  college?: College
+}
+
+// ─── Application Checklist ────────────────────────────────────────────────────
+
+export type TaskStatus = 'pending' | 'completed'
+
+export interface ChecklistTask {
+  id: string
+  user_id: string
+  college_id: string
+  task_name: string
+  task_status: TaskStatus
+  due_date: string | null
+  is_custom: boolean
+  sort_order: number
+  created_at: string
+}
+
+export const DEFAULT_TASKS = [
+  'Create Common App account',
+  'Add college to Common App',
+  'Write personal essay',
+  'Write supplemental essays',
+  'Request recommendation letters',
+  'Send transcripts',
+  'Submit SAT/ACT scores',
+  'Complete FAFSA',
+  'Pay application fee',
+  'Submit application',
+]
+
+// ─── Essay Brainstorming ──────────────────────────────────────────────────────
+
+export interface EssayIdea {
+  title: string
+  hook: string
+  themes: string[]
+  outline: string[]
+  reflection: string
+}
+
+export interface EssaySession {
+  id: string
+  user_id: string
+  major: string | null
+  activities: string | null
+  leadership: string | null
+  challenges: string | null
+  achievements: string | null
+  goals: string | null
+  values: string | null
+  essay_prompt: string
+  generated_output: { ideas: EssayIdea[] } | null
+  created_at: string
+}
+
+export const COMMON_APP_PROMPTS = [
+  { key: 'background', label: 'Background, identity, interest, or talent' },
+  { key: 'challenge', label: 'Lessons from an obstacle, setback, or failure' },
+  { key: 'belief', label: 'A time you questioned or challenged a belief or idea' },
+  { key: 'gratitude', label: 'An act of kindness or problem you were inspired to solve' },
+  { key: 'growth', label: 'Personal growth or a new understanding of yourself' },
+  { key: 'passion', label: 'A topic, idea, or concept that captivates you' },
+  { key: 'choice', label: 'Topic of your choice' },
 ]

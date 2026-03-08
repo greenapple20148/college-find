@@ -12,12 +12,14 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
+    "@stripe/stripe-js": "^8.9.0",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.4",
     "@vercel/analytics": "^1.6.1",
     "next": "^15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "stripe": "^20.4.1"
   },
   "devDependencies": {
     "@types/node": "^20",

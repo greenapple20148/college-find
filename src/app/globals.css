@@ -24,6 +24,7 @@
   --gold-primary: #C9923C;
   --gold-light: #D4AD6A;
   --gold-dark: #A07228;
+  --gold-gradient: linear-gradient(135deg, #C9923C, #D4AD6A);
 
   --selection-bg: rgba(201, 146, 60, 0.3);
   --selection-fg: #FAF9F6;
@@ -97,6 +98,7 @@
   --gold-primary: #A07228;
   --gold-light: #B8832E;
   --gold-dark: #8A6223;
+  --gold-gradient: linear-gradient(135deg, #A07228, #B8832E);
 
   --selection-bg: rgba(160, 114, 40, 0.2);
   --selection-fg: #1A1814;
