@@ -1,9 +1,66 @@
 import type { MetadataRoute } from 'next'
+import { createServiceClient } from '@/lib/supabase/server'
+import { US_STATES, MAJOR_OPTIONS } from '@/lib/types'
 
 const SITE_URL = 'https://collegefindtool.com'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const GPA_VALUES = [4.0, 3.9, 3.8, 3.7, 3.6, 3.5, 3.4, 3.3, 3.2, 3.0, 2.8, 2.5]
+const SAT_VALUES = [1600, 1550, 1500, 1450, 1400, 1350, 1300, 1250, 1200, 1150, 1100, 1000]
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
+
+  // Fetch top 2000 college slugs
+  let collegeUrls: MetadataRoute.Sitemap = []
+  try {
+    const supabase = createServiceClient()
+    const { data } = await supabase
+      .from('colleges')
+      .select('slug, updated_at')
+      .not('slug', 'is', null)
+      .order('enrollment', { ascending: false })
+      .limit(2000)
+    collegeUrls = (data ?? [])
+      .filter((c: { slug?: string | null }) => c.slug)
+      .map((c: { slug: string; updated_at?: string }) => ({
+        url: `${SITE_URL}/college/${c.slug}`,
+        lastModified: c.updated_at ? new Date(c.updated_at) : now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      }))
+  } catch {
+    // If DB is unavailable at build time, skip college URLs
+  }
+
+  const gpaUrls: MetadataRoute.Sitemap = GPA_VALUES.map(g => ({
+    url: `${SITE_URL}/gpa/${g.toFixed(1)}-colleges`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }))
+
+  const satUrls: MetadataRoute.Sitemap = SAT_VALUES.map(s => ({
+    url: `${SITE_URL}/sat/${s}-colleges`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }))
+
+  const majorUrls: MetadataRoute.Sitemap = MAJOR_OPTIONS
+    .filter(m => m !== 'Undecided')
+    .map(m => ({
+      url: `${SITE_URL}/major/${m.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '')}-colleges`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }))
+
+  const stateUrls: MetadataRoute.Sitemap = US_STATES.map(s => ({
+    url: `${SITE_URL}/state/${s.name.toLowerCase().replace(/\s+/g, '-')}-colleges`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
 
   return [
     {
@@ -42,5 +99,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.6,
     },
+    ...collegeUrls,
+    ...gpaUrls,
+    ...satUrls,
+    ...majorUrls,
+    ...stateUrls,
   ]
 }

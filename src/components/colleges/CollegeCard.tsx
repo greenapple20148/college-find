@@ -138,6 +138,16 @@ export function CollegeCard({ college, onSave, saved = false, viewMode = 'grid',
 
           {/* Actions */}
           <div className="flex gap-1.5 flex-shrink-0">
+            {college.slug && (
+              <Link
+                href={`/college/${college.slug}`}
+                className="p-2 rounded-lg transition-all duration-200 text-xs font-medium hidden sm:flex items-center"
+                style={{ color: 'var(--gold-primary)' }}
+                title="View college profile"
+              >
+                Profile
+              </Link>
+            )}
             <button
               onClick={handleSave}
               className="p-2 rounded-lg transition-all duration-200"
@@ -255,6 +265,19 @@ export function CollegeCard({ college, onSave, saved = false, viewMode = 'grid',
 
         {/* Actions */}
         <div className="flex gap-2 pt-3 mt-auto" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+          {college.slug && (
+            <Link
+              href={`/college/${college.slug}`}
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border hover:border-[var(--gold-primary)]"
+              style={{
+                backgroundColor: 'transparent',
+                color: 'var(--gold-primary)',
+                borderColor: 'rgba(201,146,60,0.2)',
+              }}
+            >
+              View Profile
+            </Link>
+          )}
           <button
             onClick={handleSave}
             className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border"

@@ -28,6 +28,7 @@ export interface College {
   graduation_rate: number | null   // 0.0–1.0
   median_earnings: number | null
   programs: string[]
+  slug?: string | null
   created_at?: string
   updated_at?: string
 }
