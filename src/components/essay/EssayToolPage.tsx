@@ -378,7 +378,7 @@ interface Session {
 }
 
 export default function EssayToolPage({ tool }: { tool: ToolConfig }) {
-    const { user } = useAuth()
+    const { user, loading: authLoading } = useAuth()
 
     const [inputs, setInputs] = useState<Record<string, string>>({})
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -399,6 +399,30 @@ export default function EssayToolPage({ tool }: { tool: ToolConfig }) {
     }, [user, tool.slug])
 
     useEffect(() => { loadSessions() }, [loadSessions])
+
+    // Auth gate — show login prompt if not signed in
+    if (!authLoading && !user) {
+        return (
+            <div className="max-w-lg mx-auto px-4 py-24 text-center">
+                <div className="flex justify-center mb-4" style={{ color: 'var(--gold-primary)' }}>
+                    <SparklesSvg />
+                </div>
+                <h1 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                    Sign in to use {tool.title}
+                </h1>
+                <p className="text-sm mb-6" style={{ color: 'var(--text-faint)' }}>
+                    {tool.description}
+                </p>
+                <Link
+                    href={`/login?redirect=/${tool.slug}`}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}
+                >
+                    Sign in to get started
+                </Link>
+            </div>
+        )
+    }
 
     function updateInput(key: string, value: string) {
         setInputs(prev => ({ ...prev, [key]: value }))
