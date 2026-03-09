@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextValue>({
   user: null,
   session: null,
   loading: true,
-  signOut: async () => {},
+  signOut: async () => { },
 })
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -26,11 +26,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const supabase = createClient()
 
-  // Merge anonymous session saves into newly authenticated account
+  // Merge anonymous session saves into newly authenticated account (once per session)
   async function mergeAnonymousSaves() {
     try {
       const sessionId = localStorage.getItem('collegefind_session_id')
       if (!sessionId) return
+      // Prevent duplicate merge calls across re-renders
+      const mergeKey = `collegefind_merged_${sessionId}`
+      if (sessionStorage.getItem(mergeKey)) return
+      sessionStorage.setItem(mergeKey, '1')
       await fetch('/api/saved/merge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,6 +47,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut()
+    // Clear sensitive local data
+    try {
+      localStorage.removeItem('collegefind_profile')
+      localStorage.removeItem('collegefind_session_id')
+      localStorage.removeItem('cm-profile')
+    } catch { /* ignore */ }
     setUser(null)
     setSession(null)
     router.push('/login')

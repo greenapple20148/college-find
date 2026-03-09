@@ -3,18 +3,22 @@ import { DM_Sans, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { ChatWidget } from '@/components/chat/ChatWidget'
-import { FeedbackWidget } from '@/components/feedback/FeedbackWidget'
+import dynamic from 'next/dynamic'
 import { ProfileProvider } from '@/context/ProfileContext'
 import { CompareProvider } from '@/context/CompareContext'
 import { ThemeProvider } from '@/context/ThemeContext'
 import { AuthProvider } from '@/context/AuthContext'
 import { Analytics } from '@vercel/analytics/next'
 
+// Lazy-load interactive overlays — they don't need to be in the initial bundle
+const ChatWidget = dynamic(() => import('@/components/chat/ChatWidget').then(m => m.ChatWidget), { ssr: false })
+const FeedbackWidget = dynamic(() => import('@/components/feedback/FeedbackWidget').then(m => m.FeedbackWidget), { ssr: false })
+
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   weight: ['300', '400', '500', '600'],
+  display: 'swap',
 })
 
 const playfair = Playfair_Display({
@@ -22,6 +26,7 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
   weight: ['400', '700'],
   style: ['normal', 'italic'],
+  display: 'swap',
 })
 
 const SITE_URL = 'https://collegefindtool.com'
@@ -95,10 +100,10 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: '/icon-192.png',
   },
 
   manifest: '/manifest.webmanifest',
