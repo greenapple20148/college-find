@@ -3,8 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
-import { useSubscription } from '@/hooks/useSubscription'
-import { UpgradeGate } from '@/components/ui/UpgradeGate'
+
 import type { ToolConfig } from '@/lib/essay-tools'
 
 /* ═══════════════════════════════════════════════════════════════
@@ -380,7 +379,7 @@ interface Session {
 
 export default function EssayToolPage({ tool }: { tool: ToolConfig }) {
     const { user } = useAuth()
-    const { limits, loading: subLoading } = useSubscription()
+
     const [inputs, setInputs] = useState<Record<string, string>>({})
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [output, setOutput] = useState<any>(null)
@@ -465,27 +464,7 @@ export default function EssayToolPage({ tool }: { tool: ToolConfig }) {
         )
     }
 
-    if (!subLoading && !limits.canUseEssayToolkit) {
-        return (
-            <div className="max-w-5xl mx-auto px-4 py-8">
-                <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                        style={{ background: 'var(--gold-gradient)', boxShadow: 'var(--shadow-glow)' }}>
-                        <SparklesSvg />
-                    </div>
-                    <div>
-                        <h1 className="text-2xl font-bold heading-serif" style={{ color: 'var(--text-primary)' }}>{tool.title}</h1>
-                        <p className="text-sm mt-0.5" style={{ color: 'var(--text-faint)' }}>{tool.description}</p>
-                    </div>
-                </div>
-                <UpgradeGate planName="College Prep Pro+" feature="AI Essay Toolkit">
-                    <p className="text-xs mb-4" style={{ color: 'var(--text-ghost)' }}>
-                        All 8 AI essay tools are included with Pro+ — brainstorm, outline, analyze, and more.
-                    </p>
-                </UpgradeGate>
-            </div>
-        )
-    }
+
 
     return (
         <div className="max-w-5xl mx-auto px-4 py-8">

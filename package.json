@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "seed": "tsx scripts/seed-colleges.ts"
+    "seed": "tsx scripts/seed-colleges.ts",
+    "seed:scholarships": "tsx scripts/ingest-scholarships.ts",
+    "crawl:scholarships": "tsx scripts/crawl-university-scholarships.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",

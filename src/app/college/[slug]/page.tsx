@@ -7,6 +7,7 @@ import { CollegeCard } from '@/components/colleges/CollegeCard'
 import { AdmissionCalculator } from '@/components/calculator/AdmissionCalculator'
 import { SaveButton } from '@/components/colleges/SaveButton'
 import { CollegeDeadlines } from '@/components/colleges/CollegeDeadlines'
+import { CollegeScholarships } from '@/components/colleges/CollegeScholarships'
 import { Badge } from '@/components/ui/Badge'
 import { US_STATES, MAJOR_OPTIONS } from '@/lib/types'
 import type { College } from '@/lib/types'
@@ -16,13 +17,27 @@ export const dynamicParams = true
 
 async function getCollegeBySlug(slug: string): Promise<College | null> {
   const supabase = createServiceClient()
+
+  // Exact match first
   const { data, error } = await supabase
     .from('colleges')
     .select('*')
     .eq('slug', slug)
     .single()
-  if (error || !data) return null
-  return data as College
+  if (!error && data) return data as College
+
+  // Fallback: slug may have been disambiguated with a unit_id suffix
+  // e.g. "international-beauty-education-center-123456"
+  const { data: prefixData } = await supabase
+    .from('colleges')
+    .select('*')
+    .like('slug', `${slug}-%`)
+    .order('enrollment', { ascending: false })
+    .limit(1)
+    .single()
+  if (prefixData) return prefixData as College
+
+  return null
 }
 
 async function getRelatedColleges(college: College): Promise<College[]> {
@@ -276,6 +291,9 @@ export default async function CollegeProfilePage({ params }: { params: Promise<{
 
         {/* Application Deadlines */}
         <CollegeDeadlines collegeId={college.id} collegeName={college.name} />
+
+        {/* University Scholarships */}
+        <CollegeScholarships collegeId={college.id} collegeName={college.name} />
 
         {/* Programs */}
         {college.programs.length > 0 && (

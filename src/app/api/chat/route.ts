@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@supabase/supabase-js'
+import { checkRateLimit, AI_CHAT_LIMIT } from '@/lib/rate-limit'
 
 const SYSTEM_PROMPT = `You are CollegeFind AI Advisor — a warm, knowledgeable college admissions counselor built into the CollegeFind platform. You help high school students (primarily 11th and 12th graders) navigate the college search and application process.
 
@@ -65,6 +66,34 @@ export async function POST(req: NextRequest) {
         return new Response(
             JSON.stringify({ error: 'ANTHROPIC_API_KEY is not configured' }),
             { status: 500, headers: { 'Content-Type': 'application/json' } }
+        )
+    }
+
+    // Rate limiting — identify user by auth token or fall back to IP
+    let rateLimitKey = `chat:${req.headers.get('x-forwarded-for') || 'unknown'}`
+    const authHeader = req.headers.get('authorization')
+    if (authHeader && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        try {
+            const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+            const { data: { user: authUser } } = await sb.auth.getUser(authHeader.replace('Bearer ', ''))
+            if (authUser) rateLimitKey = `chat:${authUser.id}`
+        } catch { /* use IP-based key */ }
+    }
+
+    const rl = checkRateLimit(rateLimitKey, AI_CHAT_LIMIT)
+    if (!rl.allowed) {
+        return new Response(
+            JSON.stringify({
+                error: 'Rate limit exceeded. Please wait a few minutes before sending more messages.',
+                retryAfterMs: rl.retryAfterMs,
+            }),
+            {
+                status: 429,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Retry-After': String(Math.ceil((rl.retryAfterMs || 60000) / 1000)),
+                },
+            }
         )
     }
 

@@ -6,7 +6,7 @@ import { useCompare } from '@/context/CompareContext'
 import { useTheme } from '@/context/ThemeContext'
 import { useAuth } from '@/context/AuthContext'
 import { GraduationCapIcon } from '@/components/ui/Icon'
-import { useSubscription } from '@/hooks/useSubscription'
+
 import { useState, useRef, useEffect } from 'react'
 
 const navLinks = [
@@ -15,7 +15,6 @@ const navLinks = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/advisor', label: 'AI Advisor' },
   { href: '/college-essays', label: 'Essays' },
-  { href: '/pricing', label: 'Pricing' },
 ]
 
 const toolsDropdownLinks = [
@@ -77,7 +76,6 @@ function ThemeToggle() {
 
 function UserMenu() {
   const { user, signOut } = useAuth()
-  const { planLabel, isPro, loading: subLoading } = useSubscription()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -128,29 +126,6 @@ function UserMenu() {
           style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}
         >
           <p className="px-3 py-2 text-xs truncate" style={{ color: 'var(--text-faint)' }}>{user.email}</p>
-          {!subLoading && (
-            <div className="px-3 pb-2 flex items-center gap-2">
-              <span
-                className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                style={{
-                  backgroundColor: isPro ? 'rgba(201,146,60,0.15)' : 'rgba(120,120,120,0.1)',
-                  color: isPro ? 'var(--gold-primary)' : 'var(--text-faint)',
-                }}
-              >
-                {planLabel}
-              </span>
-              {!isPro && (
-                <Link
-                  href="/pricing"
-                  onClick={() => setOpen(false)}
-                  className="text-[10px] font-medium hover:underline"
-                  style={{ color: 'var(--gold-primary)' }}
-                >
-                  Upgrade
-                </Link>
-              )}
-            </div>
-          )}
           <div className="my-1 border-t" style={{ borderColor: 'var(--border-subtle)' }} />
           <Link
             href="/dashboard"
@@ -159,6 +134,14 @@ function UserMenu() {
             style={{ color: 'var(--text-secondary)' }}
           >
             Dashboard
+          </Link>
+          <Link
+            href="/invite"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Invite Friends
           </Link>
           <Link
             href="/profile"

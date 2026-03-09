@@ -117,7 +117,7 @@ export default function EssayToolkitPage() {
 
             {/* SEO content */}
             <div className="mt-16 max-w-2xl mx-auto" style={{ color: 'var(--text-faint)' }}>
-                <h2 className="text-lg font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-lg font-bold mb-3 heading-serif" style={{ color: 'var(--text-primary)' }}>
                     How the Essay Toolkit Works
                 </h2>
                 <p className="text-sm mb-4">

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { getToolBySlug } from '@/lib/essay-tools'
+import { checkRateLimit, AI_ESSAY_TOOLKIT_LIMIT } from '@/lib/rate-limit'
 
 export async function POST(req: NextRequest) {
     const apiKey = process.env.ANTHROPIC_API_KEY
@@ -13,6 +14,15 @@ export async function POST(req: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Rate limiting
+    const rl = checkRateLimit(`essay-toolkit:${user.id}`, AI_ESSAY_TOOLKIT_LIMIT)
+    if (!rl.allowed) {
+        return NextResponse.json(
+            { error: 'Rate limit exceeded. Please wait a few minutes before generating again.', retryAfterMs: rl.retryAfterMs },
+            { status: 429, headers: { 'Retry-After': String(Math.ceil((rl.retryAfterMs || 60000) / 1000)) } }
+        )
     }
 
     let body: { tool: string; inputs: Record<string, string> }

@@ -13,21 +13,8 @@ export async function GET() {
         return NextResponse.json({ error: 'Authentication required' }, { status: 401 })
     }
 
-    // Check plan level — export requires Student Pro+
-    const service = createServiceClient()
-    const { data: profile } = await service
-        .from('user_profiles')
-        .select('plan')
-        .eq('user_id', user.id)
-        .single()
-
-    const plan = profile?.plan || 'free'
-    const PAID_PLANS = ['student-pro', 'prep-pro-plus', 'toolkit', 'bundle']
-    if (!PAID_PLANS.includes(plan)) {
-        return NextResponse.json({ error: 'Upgrade to Student Pro to export your college list' }, { status: 403 })
-    }
-
     // Fetch saved colleges with full college data
+    const service = createServiceClient()
     const { data: saved, error } = await service
         .from('saved_colleges')
         .select('*, college:colleges(*)')

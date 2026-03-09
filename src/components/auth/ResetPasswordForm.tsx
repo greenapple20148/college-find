@@ -90,7 +90,7 @@ export function ResetPasswordForm() {
                     </svg>
                 </div>
                 <h2
-                    className="text-xl font-bold mb-2"
+                    className="text-xl font-bold mb-2 heading-serif"
                     style={{ color: 'var(--text-primary)' }}
                 >
                     Invalid or expired link
@@ -147,7 +147,7 @@ export function ResetPasswordForm() {
                     </svg>
                 </div>
                 <h2
-                    className="text-xl font-bold mb-2"
+                    className="text-xl font-bold mb-2 heading-serif"
                     style={{ color: 'var(--text-primary)' }}
                 >
                     Password updated
@@ -169,7 +169,7 @@ export function ResetPasswordForm() {
     return (
         <div>
             <h1
-                className="text-2xl font-bold mb-1"
+                className="text-2xl font-bold mb-1 heading-serif"
                 style={{ color: 'var(--text-primary)' }}
             >
                 Choose a new password

@@ -76,7 +76,7 @@ export function SignupForm() {
             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
           </svg>
         </div>
-        <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Check your email</h2>
+        <h2 className="text-xl font-bold mb-2 heading-serif" style={{ color: 'var(--text-primary)' }}>Check your email</h2>
         <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
           We sent a confirmation link to <strong>{email}</strong>. Click it to activate your account.
         </p>
@@ -89,7 +89,7 @@ export function SignupForm() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Create your account</h1>
+      <h1 className="text-2xl font-bold mb-1 heading-serif" style={{ color: 'var(--text-primary)' }}>Create your account</h1>
       <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
         Already have an account?{' '}
         <Link href="/login" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>Sign in</Link>

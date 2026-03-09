@@ -121,7 +121,9 @@ export interface Scholarship {
   deadline: string | null     // ISO date string
   website: string | null
   description: string | null
+  college_id: string | null   // FK to colleges table (null = national/non-university-specific)
   created_at?: string
+  college?: College           // Joined data when fetched with college info
 }
 
 // ─── College Deadlines ────────────────────────────────────────────────────────

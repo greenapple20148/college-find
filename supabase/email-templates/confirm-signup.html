@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Confirm your CollegeMatch account</title>
+  <!--[if mso]>
+  <noscript>
+    <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+  </noscript>
+  <![endif]-->
+</head>
+<body style="margin:0;padding:0;background-color:#0c0a09;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+
+  <!-- Preheader (hidden preview text) -->
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">
+    You're almost there — confirm your email to start finding your perfect college match.&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;
+  </div>
+
+  <!-- Outer wrapper -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0c0a09;min-height:100vh;">
+    <tr>
+      <td align="center" style="padding:48px 16px;">
+
+        <!-- Email card -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+
+          <!-- Logo / wordmark -->
+          <tr>
+            <td align="center" style="padding-bottom:32px;">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background:linear-gradient(135deg,#C9923C,#D4AD6A);border-radius:10px;padding:8px 10px;line-height:0;vertical-align:middle;">
+                    <!-- Mortarboard icon -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 9L12 5L2 9L12 13L22 9Z" fill="#0c0a09" stroke="#0c0a09" stroke-width="1.5" stroke-linejoin="round"/>
+                      <path d="M6 11v5c0 0 2 3 6 3s6-3 6-3v-5" stroke="#0c0a09" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M22 9v5" stroke="#0c0a09" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </td>
+                  <td style="padding-left:10px;">
+                    <span style="font-size:20px;font-weight:700;letter-spacing:-0.5px;color:#FAF9F6;">College<span style="color:#C9923C;">Match</span></span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background-color:#171412;border:1px solid #2a2520;border-radius:16px;padding:40px 40px 36px;">
+
+              <!-- Icon -->
+              <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 24px;">
+                <tr>
+                  <td align="center" style="width:56px;height:56px;background:rgba(201,146,60,0.12);border:1px solid rgba(201,146,60,0.25);border-radius:14px;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:14px auto 0;">
+                      <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6z" stroke="#C9923C" stroke-width="1.5" stroke-linejoin="round"/>
+                      <path d="M2 6l10 7 10-7" stroke="#C9923C" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Heading -->
+              <h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#FAF9F6;text-align:center;letter-spacing:-0.4px;">
+                Confirm your email
+              </h1>
+              <p style="margin:0 0 28px;font-size:15px;color:#A09890;text-align:center;line-height:1.6;">
+                You're one step away from finding your perfect college match.
+              </p>
+
+              <!-- CTA button -->
+              <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 28px;width:100%;">
+                <tr>
+                  <td align="center">
+                    <a href="{{ .ConfirmationURL }}"
+                       style="display:inline-block;background:linear-gradient(135deg,#C9923C,#D4AD6A);color:#0c0a09;font-size:15px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:10px;letter-spacing:0.1px;">
+                      Confirm Email Address
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Divider -->
+              <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:24px;">
+                <tr>
+                  <td style="border-top:1px solid #2a2520;"></td>
+                </tr>
+              </table>
+
+              <!-- Fallback link -->
+              <p style="margin:0 0 8px;font-size:13px;color:#6B6560;text-align:center;line-height:1.5;">
+                Button not working? Copy and paste this link into your browser:
+              </p>
+              <p style="margin:0;font-size:12px;text-align:center;word-break:break-all;">
+                <a href="{{ .ConfirmationURL }}" style="color:#C9923C;text-decoration:none;">{{ .ConfirmationURL }}</a>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Security note -->
+          <tr>
+            <td style="padding:20px 8px 0;">
+              <p style="margin:0;font-size:12px;color:#4A4540;text-align:center;line-height:1.6;">
+                This link expires in 24 hours. If you didn't create a CollegeMatch account,
+                you can safely ignore this email.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:24px 8px 0;border-top:0;">
+              <p style="margin:0;font-size:12px;color:#3A3530;text-align:center;">
+                © 2026 CollegeMatch · Built for students, by students
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

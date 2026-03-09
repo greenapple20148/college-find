@@ -3,8 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
-import { useSubscription } from '@/hooks/useSubscription'
-import { UpgradeGate } from '@/components/ui/UpgradeGate'
+
 import { createClient } from '@/lib/supabase/client'
 import type { StudentProfile, College } from '@/lib/types'
 import { generateRecommendations } from '@/lib/recommendations'
@@ -83,7 +82,7 @@ const QUICK_PROMPTS = [
 
 export default function AdvisorClient() {
     const { user } = useAuth()
-    const { limits, loading: subLoading } = useSubscription()
+
     const supabase = createClient()
 
     const [messages, setMessages] = useState<Message[]>([])
@@ -256,23 +255,7 @@ export default function AdvisorClient() {
         )
     }
 
-    if (!subLoading && !limits.canUseAIAdvisor) {
-        return (
-            <div className="max-w-6xl mx-auto px-4 py-6">
-                <h1 className="text-2xl font-bold heading-serif mb-1" style={{ color: 'var(--text-primary)' }}>
-                    AI College Advisor
-                </h1>
-                <p className="text-sm mb-6" style={{ color: 'var(--text-faint)' }}>
-                    Personalized recommendations and strategic advice powered by your profile
-                </p>
-                <UpgradeGate planName="College Prep Pro+" feature="AI College Advisor">
-                    <p className="text-xs mb-4" style={{ color: 'var(--text-ghost)' }}>
-                        Get personalized college recommendations, admission chance breakdowns, essay strategy, and more.
-                    </p>
-                </UpgradeGate>
-            </div>
-        )
-    }
+
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-6">

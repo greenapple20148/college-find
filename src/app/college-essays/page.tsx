@@ -62,7 +62,7 @@ export default function CollegeEssaysHub() {
 
             {/* AI Tools section */}
             <section className="mb-14">
-                <h2 className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-xl font-bold mb-1 heading-serif" style={{ color: 'var(--text-primary)' }}>
                     AI Essay Tools
                 </h2>
                 <p className="text-sm mb-4" style={{ color: 'var(--text-faint)' }}>
@@ -91,7 +91,7 @@ export default function CollegeEssaysHub() {
 
                 return (
                     <section key={group.key} className="mb-10">
-                        <h2 className="text-xl font-bold mb-1 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+                        <h2 className="text-xl font-bold mb-1 heading-serif flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                             {SVG_ICONS[GROUP_ICON_MAP[group.key]]?.('w-5 h-5')}
                             {group.label}
                         </h2>
@@ -121,7 +121,7 @@ export default function CollegeEssaysHub() {
 
             {/* FAQ */}
             <section className="mt-14 max-w-2xl mx-auto" style={{ color: 'var(--text-faint)' }}>
-                <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+                <h2 className="text-lg font-bold mb-4 heading-serif" style={{ color: 'var(--text-primary)' }}>
                     Frequently Asked Questions
                 </h2>
                 <div className="space-y-4 text-sm">

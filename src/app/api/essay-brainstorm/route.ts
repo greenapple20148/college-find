@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { checkRateLimit, AI_ESSAY_BRAINSTORM_LIMIT } from '@/lib/rate-limit'
 
 const SYSTEM_PROMPT = `You are a college admissions counselor helping a student brainstorm essay ideas.
 
@@ -44,6 +45,15 @@ export async function POST(req: NextRequest) {
 
     if (!user) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Rate limiting
+    const rl = checkRateLimit(`essay-brainstorm:${user.id}`, AI_ESSAY_BRAINSTORM_LIMIT)
+    if (!rl.allowed) {
+        return NextResponse.json(
+            { error: 'Rate limit exceeded. Please wait a few minutes before generating again.', retryAfterMs: rl.retryAfterMs },
+            { status: 429, headers: { 'Retry-After': String(Math.ceil((rl.retryAfterMs || 60000) / 1000)) } }
+        )
     }
 
     let body: {

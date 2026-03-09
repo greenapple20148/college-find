@@ -35,29 +35,29 @@ export interface PlanLimits {
 
 const PLAN_LIMITS: Record<number, PlanLimits> = {
     0: {
-        // Free
-        maxSavedColleges: 10,
-        maxComparisons: 2,
-        canExportList: false,
-        canUseAIAdvisor: false,
-        canUseEssayToolkit: false,
-        canViewRecommendations: false,
-        canUseChecklist: false,
-        hasEssayContent: true,        // SEO pages are free
-    },
-    1: {
-        // Student Pro / Toolkit
+        // All features are now available to every logged-in user
         maxSavedColleges: Infinity,
         maxComparisons: Infinity,
         canExportList: true,
-        canUseAIAdvisor: false,
-        canUseEssayToolkit: false,
+        canUseAIAdvisor: true,
+        canUseEssayToolkit: true,
+        canViewRecommendations: true,
+        canUseChecklist: true,
+        hasEssayContent: true,
+    },
+    1: {
+        // Student Pro / Toolkit  (same as free now)
+        maxSavedColleges: Infinity,
+        maxComparisons: Infinity,
+        canExportList: true,
+        canUseAIAdvisor: true,
+        canUseEssayToolkit: true,
         canViewRecommendations: true,
         canUseChecklist: true,
         hasEssayContent: true,
     },
     2: {
-        // Prep Pro+ / Bundle
+        // Prep Pro+ / Bundle  (same as free now)
         maxSavedColleges: Infinity,
         maxComparisons: Infinity,
         canExportList: true,
@@ -68,6 +68,7 @@ const PLAN_LIMITS: Record<number, PlanLimits> = {
         hasEssayContent: true,
     },
 }
+
 
 /* ═══════════════════════════════════════════════════════════════
    Hook

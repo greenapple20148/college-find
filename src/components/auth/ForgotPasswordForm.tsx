@@ -53,7 +53,7 @@ export function ForgotPasswordForm() {
                     </svg>
                 </div>
                 <h2
-                    className="text-xl font-bold mb-2"
+                    className="text-xl font-bold mb-2 heading-serif"
                     style={{ color: 'var(--text-primary)' }}
                 >
                     Check your email
@@ -91,7 +91,7 @@ export function ForgotPasswordForm() {
     return (
         <div>
             <h1
-                className="text-2xl font-bold mb-1"
+                className="text-2xl font-bold mb-1 heading-serif"
                 style={{ color: 'var(--text-primary)' }}
             >
                 Reset your password

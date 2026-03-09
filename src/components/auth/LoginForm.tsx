@@ -50,7 +50,7 @@ export function LoginForm() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Welcome back</h1>
+      <h1 className="text-2xl font-bold mb-1 heading-serif" style={{ color: 'var(--text-primary)' }}>Welcome back</h1>
       <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
         Don&apos;t have an account?{' '}
         <Link href="/signup" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>Sign up free</Link>
