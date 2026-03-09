@@ -2,10 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { stripe } from '@/lib/stripe'
 
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getSupabaseAdmin() {
+    return createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
+}
 
 export async function POST(req: NextRequest) {
     try {
@@ -16,7 +18,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Missing userId' }, { status: 400 })
         }
 
-        const { data: profile } = await supabaseAdmin
+        const { data: profile } = await getSupabaseAdmin()
             .from('user_profiles')
             .select('stripe_customer_id')
             .eq('user_id', userId)
