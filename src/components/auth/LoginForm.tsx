@@ -26,9 +26,9 @@ export function LoginForm() {
     setLoading(true)
     setError(null)
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
-      setError(error.message)
+    const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
+    if (authError) {
+      setError(authError.message)
       setLoading(false)
     } else {
       router.push(redirectTo)
@@ -38,12 +38,12 @@ export function LoginForm() {
   async function handleGoogleSignIn() {
     setGoogleLoading(true)
     setError(null)
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: `${siteUrl}/auth/callback?next=${redirectTo}` },
     })
-    if (error) {
-      setError(error.message)
+    if (oauthError) {
+      setError(oauthError.message)
       setGoogleLoading(false)
     }
   }

@@ -29,13 +29,13 @@ export function SignupForm() {
     setLoading(true)
     setError(null)
 
-    const { error } = await supabase.auth.signUp({
+    const { error: signupError } = await supabase.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: `${siteUrl}/auth/callback` },
     })
-    if (error) {
-      setError(error.message)
+    if (signupError) {
+      setError(signupError.message)
       setLoading(false)
     } else {
       setSuccess(true)
@@ -45,12 +45,12 @@ export function SignupForm() {
   async function handleGoogleSignIn() {
     setGoogleLoading(true)
     setError(null)
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: `${siteUrl}/auth/callback` },
     })
-    if (error) {
-      setError(error.message)
+    if (oauthError) {
+      setError(oauthError.message)
       setGoogleLoading(false)
     }
   }
