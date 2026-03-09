@@ -56,9 +56,6 @@ export function ChatWidget() {
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLTextAreaElement>(null)
 
-    // Hide chat widget for unauthenticated users
-    if (!user) return null
-
     // Load student profile from localStorage
     useEffect(() => {
         try {
@@ -200,6 +197,8 @@ export function ChatWidget() {
     const clearChat = () => {
         setMessages([])
     }
+    // Hide chat widget for unauthenticated users
+    if (!user) return null
 
     return (
         <>
