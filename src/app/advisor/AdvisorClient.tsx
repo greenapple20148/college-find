@@ -81,7 +81,7 @@ const QUICK_PROMPTS = [
    ═══════════════════════════════════════════════════════════════ */
 
 export default function AdvisorClient() {
-    const { user } = useAuth()
+    const { user, loading: authLoading } = useAuth()
 
     const supabase = createClient()
 
@@ -95,6 +95,30 @@ export default function AdvisorClient() {
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLTextAreaElement>(null)
+
+    // Auth gate — show login prompt if not signed in
+    if (!authLoading && !user) {
+        return (
+            <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: 'var(--bg-primary)' }}>
+                <div className="text-center max-w-md">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center" style={{ background: 'var(--gold-gradient)' }}>
+                        <IconSchool />
+                    </div>
+                    <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Sign in to use AI Advisor</h2>
+                    <p className="text-sm mb-6" style={{ color: 'var(--text-faint)' }}>
+                        Get personalized college recommendations, essay help, and application strategy from our AI advisor.
+                    </p>
+                    <Link
+                        href="/login?redirect=/advisor"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:opacity-90"
+                        style={{ background: 'var(--gold-gradient)', color: '#fff' }}
+                    >
+                        Sign in to get started
+                    </Link>
+                </div>
+            </div>
+        )
+    }
 
     // Load student profile & run recommendations
     useEffect(() => {

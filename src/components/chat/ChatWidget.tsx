@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { useAuth } from '@/context/AuthContext'
 
 /* ─── SVG Icons ─── */
 const IconTarget = () => (
@@ -46,6 +47,7 @@ const QUICK_PROMPTS = [
 ]
 
 export function ChatWidget() {
+    const { user } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
     const [messages, setMessages] = useState<Message[]>([])
     const [input, setInput] = useState('')
@@ -53,6 +55,9 @@ export function ChatWidget() {
     const [profile, setProfile] = useState<StudentProfile | null>(null)
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLTextAreaElement>(null)
+
+    // Hide chat widget for unauthenticated users
+    if (!user) return null
 
     // Load student profile from localStorage
     useEffect(() => {

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useAuth } from '@/context/AuthContext'
 import { useProfile } from '@/context/ProfileContext'
 import type { Recommendation } from '@/lib/recommendations'
 
@@ -142,7 +143,7 @@ function RecommendationCard({
                 className="absolute -top-2.5 -left-2.5 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold"
                 style={{
                     background: rank <= 3 ? 'var(--gold-gradient)' : 'var(--bg-tertiary)',
-                    color: rank <= 3 ? '#000' : 'var(--text-faint)',
+                    color: rank <= 3 ? '#fff' : 'var(--text-faint)',
                     border: rank <= 3 ? 'none' : '1px solid var(--border-subtle)',
                 }}
             >
@@ -236,6 +237,7 @@ function getOrCreateSessionId(): string {
 }
 
 export default function RecommendationsClient() {
+    const { user, loading: authLoading } = useAuth()
     const { profile, hasProfile, isLoaded } = useProfile()
     const [recs, setRecs] = useState<Recommendation[]>([])
     const [totalEvaluated, setTotalEvaluated] = useState(0)
@@ -282,6 +284,30 @@ export default function RecommendationsClient() {
         } catch (e) {
             console.error('Save failed:', e)
         }
+    }
+
+    // Auth gate
+    if (!authLoading && !user) {
+        return (
+            <div className="max-w-lg mx-auto px-4 py-24 text-center">
+                <div className="flex justify-center mb-4" style={{ color: 'var(--text-ghost)' }}>
+                    <ClipboardSvg />
+                </div>
+                <h1 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                    Sign in for personalized recommendations
+                </h1>
+                <p className="mb-6 text-sm" style={{ color: 'var(--text-faint)' }}>
+                    Get AI-powered college picks based on your GPA, test scores, and preferences.
+                </p>
+                <Link
+                    href="/login?redirect=/recommendations"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}
+                >
+                    Sign in to get started
+                </Link>
+            </div>
+        )
     }
 
     if (!isLoaded) {
