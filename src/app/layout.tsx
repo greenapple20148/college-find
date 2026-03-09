@@ -3,16 +3,12 @@ import { DM_Sans, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import dynamic from 'next/dynamic'
+import { LazyWidgets } from '@/components/layout/LazyWidgets'
 import { ProfileProvider } from '@/context/ProfileContext'
 import { CompareProvider } from '@/context/CompareContext'
 import { ThemeProvider } from '@/context/ThemeContext'
 import { AuthProvider } from '@/context/AuthContext'
 import { Analytics } from '@vercel/analytics/next'
-
-// Lazy-load interactive overlays — they don't need to be in the initial bundle
-const ChatWidget = dynamic(() => import('@/components/chat/ChatWidget').then(m => m.ChatWidget), { ssr: false })
-const FeedbackWidget = dynamic(() => import('@/components/feedback/FeedbackWidget').then(m => m.FeedbackWidget), { ssr: false })
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -138,8 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Header />
                 <main className="min-h-screen">{children}</main>
                 <Footer />
-                <ChatWidget />
-                <FeedbackWidget />
+                <LazyWidgets />
                 <Analytics />
               </ProfileProvider>
             </CompareProvider>
