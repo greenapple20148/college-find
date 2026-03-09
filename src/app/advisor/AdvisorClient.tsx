@@ -299,7 +299,7 @@ export default function AdvisorClient() {
                     <Link
                         href="/profile"
                         className="text-xs font-semibold px-4 py-2 rounded-lg flex-shrink-0"
-                        style={{ backgroundColor: 'var(--gold-primary)', color: '#000' }}
+                        style={{ backgroundColor: 'var(--gold-primary)', color: '#fff' }}
                     >
                         Set Up Profile
                     </Link>

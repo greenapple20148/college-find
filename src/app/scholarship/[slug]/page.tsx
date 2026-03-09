@@ -174,7 +174,7 @@ export default async function ScholarshipByUniversityPage({ params }: { params: 
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all"
-                                style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                                style={{ background: 'var(--gold-gradient)', color: '#fff' }}
                             >
                                 Visit {college.name} →
                             </a>

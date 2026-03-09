@@ -164,7 +164,7 @@ function ResultCard({ data, index, toolSlug }: { data: any; index: number; toolS
             style={{ backgroundColor: 'var(--bg-secondary)', borderColor: expanded ? 'rgba(201,146,60,0.25)' : 'var(--border-subtle)' }}>
             <button onClick={() => setExpanded(v => !v)} className="w-full flex items-center gap-3 p-4 text-left">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-sm font-bold"
-                    style={{ background: 'var(--gold-gradient)', color: '#000' }}>
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}>
                     {index + 1}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -457,7 +457,7 @@ export default function EssayToolPage({ tool }: { tool: ToolConfig }) {
                 <h1 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>{tool.title}</h1>
                 <p className="mb-6" style={{ color: 'var(--text-muted)' }}>{tool.description}</p>
                 <Link href="/login" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold hover:opacity-90"
-                    style={{ background: 'var(--gold-gradient)', color: '#000' }}>
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}>
                     Log in to get started
                 </Link>
             </div>
@@ -525,7 +525,7 @@ export default function EssayToolPage({ tool }: { tool: ToolConfig }) {
 
                         <button onClick={handleGenerate} disabled={loading}
                             className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-50"
-                            style={{ background: 'var(--gold-gradient)', color: '#000' }}>
+                            style={{ background: 'var(--gold-gradient)', color: '#fff' }}>
                             {loading ? (
                                 <><span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" /> Generating…</>
                             ) : (

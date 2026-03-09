@@ -100,7 +100,7 @@ function UserMenu() {
         <Link
           href="/signup"
           className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90"
-          style={{ background: 'var(--gold-gradient)', color: '#000' }}
+          style={{ background: 'var(--gold-gradient)', color: '#fff' }}
         >
           Sign up
         </Link>
@@ -115,7 +115,7 @@ function UserMenu() {
       <button
         onClick={() => setOpen(v => !v)}
         className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-opacity hover:opacity-80"
-        style={{ background: 'var(--gold-gradient)', color: '#000' }}
+        style={{ background: 'var(--gold-gradient)', color: '#fff' }}
         aria-label="Account menu"
       >
         {initial}
@@ -375,7 +375,7 @@ export function Header() {
                   href="/signup"
                   onClick={() => setMobileOpen(false)}
                   className="flex-1 px-3 py-2 rounded-lg text-sm font-semibold text-center"
-                  style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                  style={{ background: 'var(--gold-gradient)', color: '#fff' }}
                 >
                   Sign up
                 </Link>

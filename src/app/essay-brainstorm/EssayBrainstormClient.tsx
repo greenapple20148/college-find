@@ -125,7 +125,7 @@ function IdeaCard({ idea, index }: { idea: EssayIdea; index: number }) {
                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-sm font-bold"
                     style={{
                         background: 'var(--gold-gradient)',
-                        color: '#000',
+                        color: '#fff',
                     }}
                 >
                     {index + 1}
@@ -359,7 +359,7 @@ export default function EssayBrainstormClient() {
                 <Link
                     href="/login"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
-                    style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}
                 >
                     Log in to get started
                 </Link>
@@ -439,7 +439,7 @@ export default function EssayBrainstormClient() {
                             onClick={handleGenerate}
                             disabled={!essayPrompt || loading}
                             className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-50"
-                            style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                            style={{ background: 'var(--gold-gradient)', color: '#fff' }}
                         >
                             {loading ? (
                                 <>

@@ -406,7 +406,7 @@ export function FeedbackWidget() {
                                 className="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                                 style={{
                                     background: canSubmit ? 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))' : 'var(--bg-tertiary)',
-                                    color: canSubmit ? '#000' : 'var(--text-ghost)',
+                                    color: canSubmit ? '#fff' : 'var(--text-ghost)',
                                     boxShadow: canSubmit ? '0 2px 8px rgba(201,146,60,0.3)' : 'none',
                                 }}
                             >

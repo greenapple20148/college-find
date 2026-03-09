@@ -33,7 +33,7 @@ export function UpgradeGate({ planName, feature, children }: UpgradeGateProps) {
             <Link
                 href="/pricing"
                 className="inline-block text-sm font-semibold px-6 py-2.5 rounded-lg transition-all hover:scale-[1.02]"
-                style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark, #8A6D30))', color: '#000' }}
+                style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark, #8A6D30))', color: '#fff' }}
             >
                 View Plans
             </Link>

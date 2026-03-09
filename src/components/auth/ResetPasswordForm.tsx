@@ -101,7 +101,7 @@ export function ResetPasswordForm() {
                 <Link
                     href="/forgot-password"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all"
-                    style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}
                 >
                     Request new link
                 </Link>
@@ -281,7 +281,7 @@ export function ResetPasswordForm() {
                     type="submit"
                     disabled={loading}
                     className="w-full py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-60"
-                    style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}
                 >
                     {loading ? 'Updating…' : 'Update Password'}
                 </button>
