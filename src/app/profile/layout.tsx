@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     'Set up your student profile — enter your GPA, SAT or ACT scores, intended major, preferred states, and budget to get a personalized college match list.',
   openGraph: {
-    title: 'My Profile | CollegeMatch',
+    title: 'My Profile | CollegeFind',
     description:
       'Enter your academic profile to get a personalized Safety, Match, and Reach college list tailored to you.',
     url: '/profile',

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     'acceptance rate comparison',
   ],
   openGraph: {
-    title: 'Compare Colleges | CollegeMatch',
+    title: 'Compare Colleges | CollegeFind',
     description:
       'Compare up to 4 colleges side by side on tuition, acceptance rate, graduation rate, and more.',
     url: '/compare',

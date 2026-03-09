@@ -3,14 +3,18 @@ import { DM_Sans, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { LazyWidgets } from '@/components/layout/LazyWidgets'
 import { ProfileProvider } from '@/context/ProfileContext'
 import { CompareProvider } from '@/context/CompareContext'
 import { ThemeProvider } from '@/context/ThemeContext'
+import { AuthProvider } from '@/context/AuthContext'
+import { Analytics } from '@vercel/analytics/next'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   weight: ['300', '400', '500', '600'],
+  display: 'swap',
 })
 
 const playfair = Playfair_Display({
@@ -18,10 +22,11 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
   weight: ['400', '700'],
   style: ['normal', 'italic'],
+  display: 'swap',
 })
 
-const SITE_URL = 'https://collegematchtool.com'
-const SITE_NAME = 'CollegeMatch'
+const SITE_URL = 'https://collegefindtool.com'
+const SITE_NAME = 'CollegeFind'
 const DEFAULT_DESCRIPTION =
   'Free college search and admission match tool for 12th-grade students. Search 6,000+ U.S. colleges, estimate admission chances, compare schools, and track application deadlines — all in one place.'
 
@@ -29,8 +34,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default: 'CollegeMatch — Find Your Perfect College',
-    template: '%s | CollegeMatch',
+    default: 'CollegeFind — Find Your Perfect College',
+    template: '%s | CollegeFind',
   },
   description: DEFAULT_DESCRIPTION,
   keywords: [
@@ -49,30 +54,30 @@ export const metadata: Metadata = {
     'U.S. colleges',
     'College Scorecard',
   ],
-  authors: [{ name: 'CollegeMatch' }],
-  creator: 'CollegeMatch',
-  publisher: 'CollegeMatch',
+  authors: [{ name: 'CollegeFind' }],
+  creator: 'CollegeFind',
+  publisher: 'CollegeFind',
 
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: 'CollegeMatch — Find Your Perfect College',
+    title: 'CollegeFind — Find Your Perfect College',
     description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'CollegeMatch — Free College Search & Admissions Tool',
+        alt: 'CollegeFind — Free College Search & Admissions Tool',
       },
     ],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'CollegeMatch — Find Your Perfect College',
+    title: 'CollegeFind — Find Your Perfect College',
     description: DEFAULT_DESCRIPTION,
     images: ['/og-image.png'],
   },
@@ -91,10 +96,10 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: '/icon-192.png',
   },
 
   manifest: '/manifest.webmanifest',
@@ -122,15 +127,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <ThemeProvider>
-          <CompareProvider>
-            <ProfileProvider>
-              <Header />
-              <main className="min-h-screen">{children}</main>
-              <Footer />
-            </ProfileProvider>
-          </CompareProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <CompareProvider>
+              <ProfileProvider>
+                <Header />
+                <main className="min-h-screen">{children}</main>
+                <Footer />
+                <LazyWidgets />
+                <Analytics />
+              </ProfileProvider>
+            </CompareProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

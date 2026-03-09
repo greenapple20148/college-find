@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'scholarship by GPA',
   ],
   openGraph: {
-    title: 'Scholarships | CollegeMatch',
+    title: 'Scholarships | CollegeFind',
     description:
       'Discover national and state scholarships matched to your GPA, home state, and intended major.',
     url: '/scholarships',

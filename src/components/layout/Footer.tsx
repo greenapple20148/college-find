@@ -29,7 +29,7 @@ export function Footer() {
                     <div className="md:col-span-1">
                         <Link href="/" className="flex items-center gap-2 mb-3">
                             <span className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
-                                College<span className="heading-serif-italic" style={{ color: 'var(--gold-primary)' }}>Match</span>
+                                College<span className="heading-serif-italic" style={{ color: 'var(--gold-primary)' }}>Find</span>
                             </span>
                         </Link>
                         <p className="text-sm leading-relaxed" style={{ color: 'var(--text-faint)' }}>
@@ -104,9 +104,14 @@ export function Footer() {
                     className="mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3"
                     style={{ borderTop: '1px solid var(--border-subtle)' }}
                 >
-                    <p className="text-xs" style={{ color: 'var(--text-ghost)' }}>
-                        &copy; {currentYear} CollegeMatch. All rights reserved.
-                    </p>
+                    <div>
+                        <p className="text-xs" style={{ color: 'var(--text-ghost)' }}>
+                            &copy; {currentYear} CollegeFind. All rights reserved.
+                        </p>
+                        <p className="text-[11px] mt-0.5" style={{ color: 'var(--text-ghost)' }}>
+                            Operated by RZeal Solutions, USA
+                        </p>
+                    </div>
                     <p className="text-xs" style={{ color: 'var(--text-ghost)' }}>
                         Not affiliated with the U.S. Department of Education.
                     </p>

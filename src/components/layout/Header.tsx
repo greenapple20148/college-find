@@ -4,17 +4,28 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCompare } from '@/context/CompareContext'
 import { useTheme } from '@/context/ThemeContext'
+import { useAuth } from '@/context/AuthContext'
 import { GraduationCapIcon } from '@/components/ui/Icon'
-import { useState } from 'react'
+
+import { useState, useRef, useEffect } from 'react'
 
 const navLinks = [
   { href: '/search', label: 'Search' },
+  { href: '/recommendations', label: 'For You' },
+  { href: '/dashboard', label: 'Dashboard' },
+  { href: '/advisor', label: 'AI Advisor' },
+  { href: '/college-essays', label: 'Essays' },
+]
+
+const toolsDropdownLinks = [
   { href: '/match', label: 'My Matches' },
   { href: '/compare', label: 'Compare' },
   { href: '/cost-calculator', label: 'Cost Calculator' },
-  { href: '/dashboard', label: 'Dashboard' },
+  { href: '/college-roi-calculator', label: 'ROI Calculator' },
   { href: '/scholarships', label: 'Scholarships' },
 ]
+
+const allNavLinks = [...navLinks, ...toolsDropdownLinks]
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
@@ -29,8 +40,8 @@ function ThemeToggle() {
       {/* Sun icon */}
       <svg
         className={`w-[18px] h-[18px] absolute transition-all duration-300 ${theme === 'dark'
-            ? 'opacity-100 rotate-0 scale-100'
-            : 'opacity-0 rotate-90 scale-0'
+          ? 'opacity-100 rotate-0 scale-100'
+          : 'opacity-0 rotate-90 scale-0'
           }`}
         viewBox="0 0 24 24"
         fill="none"
@@ -46,8 +57,8 @@ function ThemeToggle() {
       {/* Moon icon */}
       <svg
         className={`w-[18px] h-[18px] absolute transition-all duration-300 ${theme === 'light'
-            ? 'opacity-100 rotate-0 scale-100'
-            : 'opacity-0 -rotate-90 scale-0'
+          ? 'opacity-100 rotate-0 scale-100'
+          : 'opacity-0 -rotate-90 scale-0'
           }`}
         viewBox="0 0 24 24"
         fill="none"
@@ -63,10 +74,114 @@ function ThemeToggle() {
   )
 }
 
+function UserMenu() {
+  const { user, signOut } = useAuth()
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  if (!user) {
+    return (
+      <div className="flex items-center gap-2 ml-2">
+        <Link
+          href="/login"
+          className="px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[var(--bg-surface-hover)]"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          Log in
+        </Link>
+        <Link
+          href="/signup"
+          className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90"
+          style={{ background: 'var(--gold-gradient)', color: '#000' }}
+        >
+          Sign up
+        </Link>
+      </div>
+    )
+  }
+
+  const initial = (user.email ?? 'U')[0].toUpperCase()
+
+  return (
+    <div className="relative ml-2" ref={ref}>
+      <button
+        onClick={() => setOpen(v => !v)}
+        className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-opacity hover:opacity-80"
+        style={{ background: 'var(--gold-gradient)', color: '#000' }}
+        aria-label="Account menu"
+      >
+        {initial}
+      </button>
+      {open && (
+        <div
+          className="absolute right-0 top-10 w-48 rounded-xl border py-1 shadow-xl z-50"
+          style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}
+        >
+          <p className="px-3 py-2 text-xs truncate" style={{ color: 'var(--text-faint)' }}>{user.email}</p>
+          <div className="my-1 border-t" style={{ borderColor: 'var(--border-subtle)' }} />
+          <Link
+            href="/dashboard"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/invite"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Invite Friends
+          </Link>
+          <Link
+            href="/profile"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            My Profile
+          </Link>
+          <div className="my-1 border-t" style={{ borderColor: 'var(--border-subtle)' }} />
+          <button
+            onClick={() => { setOpen(false); signOut() }}
+            className="block w-full text-left px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Sign out
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function Header() {
   const pathname = usePathname()
   const { compareList } = useCompare()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [toolsOpen, setToolsOpen] = useState(false)
+  const toolsRef = useRef<HTMLDivElement>(null)
+  const { user, signOut } = useAuth()
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (toolsRef.current && !toolsRef.current.contains(e.target as Node)) setToolsOpen(false)
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const isToolsActive = toolsDropdownLinks.some(l => pathname === l.href)
 
   return (
     <header
@@ -82,13 +197,13 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2 group">
             <GraduationCapIcon className="w-6 h-6 transition-colors" style={{ color: 'var(--gold-primary)' }} />
             <span className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>
-              College<span className="heading-serif-italic" style={{ color: 'var(--gold-primary)' }}>Match</span>
+              College<span className="heading-serif-italic" style={{ color: 'var(--gold-primary)' }}>Find</span>
             </span>
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map(link => (
+            {navLinks.slice(0, 3).map(link => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -104,26 +219,80 @@ export function Header() {
                 }}
               >
                 {link.label}
-                {link.href === '/compare' && compareList.length > 0 && (
-                  <span
-                    className="absolute -top-1 -right-1 text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold"
-                    style={{ backgroundColor: 'var(--gold-primary)', color: 'var(--bg-primary)' }}
-                  >
-                    {compareList.length}
-                  </span>
-                )}
+              </Link>
+            ))}
+
+            {/* Tools dropdown */}
+            <div className="relative" ref={toolsRef}>
+              <button
+                onClick={() => setToolsOpen(v => !v)}
+                className={[
+                  'flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                  isToolsActive
+                    ? 'text-[var(--gold-primary)]'
+                    : 'hover:bg-[var(--bg-surface-hover)]',
+                ].join(' ')}
+                style={{
+                  color: isToolsActive ? 'var(--gold-primary)' : 'var(--text-muted)',
+                  backgroundColor: isToolsActive ? 'rgba(201,146,60,0.1)' : undefined,
+                }}
+              >
+                Tools
+                <svg className={`w-3 h-3 transition-transform duration-200 ${toolsOpen ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+              {toolsOpen && (
+                <div
+                  className="absolute left-0 top-full mt-1 w-48 rounded-xl border py-1 shadow-xl z-50"
+                  style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}
+                >
+                  {toolsDropdownLinks.map(link => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setToolsOpen(false)}
+                      className="flex items-center justify-between px-3 py-2 text-sm transition-colors hover:bg-[var(--bg-surface-hover)]"
+                      style={{
+                        color: pathname === link.href ? 'var(--gold-primary)' : 'var(--text-secondary)',
+                      }}
+                    >
+                      {link.label}
+                      {link.href === '/compare' && compareList.length > 0 && (
+                        <span
+                          className="text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold"
+                          style={{ backgroundColor: 'var(--gold-primary)', color: 'var(--bg-primary)' }}
+                        >
+                          {compareList.length}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {navLinks.slice(3).map(link => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={[
+                  'relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                  pathname === link.href
+                    ? 'text-[var(--gold-primary)]'
+                    : 'hover:bg-[var(--bg-surface-hover)]',
+                ].join(' ')}
+                style={{
+                  color: pathname === link.href ? 'var(--gold-primary)' : 'var(--text-muted)',
+                  backgroundColor: pathname === link.href ? 'rgba(201,146,60,0.1)' : undefined,
+                }}
+              >
+                {link.label}
               </Link>
             ))}
 
             <ThemeToggle />
-
-            <Link
-              href="/profile"
-              className="ml-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:opacity-90"
-              style={{ backgroundColor: 'var(--gold-primary)', color: '#FAF9F6' }}
-            >
-              My Profile
-            </Link>
+            <UserMenu />
           </nav>
 
           {/* Mobile right cluster */}
@@ -152,7 +321,7 @@ export function Header() {
             className="md:hidden pb-4 flex flex-col gap-1 border-t pt-3 transition-colors"
             style={{ borderTopColor: 'var(--border-subtle)' }}
           >
-            {navLinks.map(link => (
+            {allNavLinks.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -174,14 +343,44 @@ export function Header() {
                 )}
               </Link>
             ))}
-            <Link
-              href="/profile"
-              onClick={() => setMobileOpen(false)}
-              className="mt-2 px-3 py-2 rounded-lg text-sm font-semibold text-center"
-              style={{ backgroundColor: 'var(--gold-primary)', color: '#FAF9F6' }}
-            >
-              My Profile
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 px-3 py-2 rounded-lg text-sm font-medium text-center"
+                  style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}
+                >
+                  My Profile
+                </Link>
+                <button
+                  onClick={() => { setMobileOpen(false); signOut() }}
+                  className="px-3 py-2 rounded-lg text-sm font-medium text-center"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <div className="flex gap-2 mt-2">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex-1 px-3 py-2 rounded-lg text-sm font-medium text-center border"
+                  style={{ borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex-1 px-3 py-2 rounded-lg text-sm font-semibold text-center"
+                  style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                >
+                  Sign up
+                </Link>
+              </div>
+            )}
           </nav>
         )}
       </div>

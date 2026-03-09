@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/dashboard', '/match'],
       },
     ],
-    sitemap: 'https://collegematchtool.com/sitemap.xml',
-    host: 'https://collegematchtool.com',
+    sitemap: 'https://collegefindtool.com/sitemap.xml',
+    host: 'https://collegefindtool.com',
   }
 }

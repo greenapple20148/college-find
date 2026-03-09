@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     'personalized college list',
   ],
   openGraph: {
-    title: 'My College Matches | CollegeMatch',
+    title: 'My College Matches | CollegeFind',
     description:
       'See your personalized Safety, Match, and Reach colleges with estimated admission probabilities.',
     url: '/match',

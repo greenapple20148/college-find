@@ -1,11 +1,21 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useProfile } from '@/context/ProfileContext'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { DollarIcon, WarningIcon, ArrowRightIcon } from '@/components/ui/Icon'
 import type { Scholarship } from '@/lib/types'
+
+interface UniversityWithScholarships {
+  id: string
+  name: string
+  city: string | null
+  state: string | null
+  slug: string | null
+  scholarship_count: number
+}
 
 function formatDeadline(d: string | null): string {
   if (!d) return 'Rolling / No deadline'
@@ -35,6 +45,16 @@ export default function ScholarshipsPage() {
   const [gpaFilter, setGpaFilter] = useState('')
   const [stateFilter, setStateFilter] = useState('')
   const [majorFilter, setMajorFilter] = useState('')
+  const [universities, setUniversities] = useState<UniversityWithScholarships[]>([])
+  const [uniLoading, setUniLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/scholarships/universities')
+      .then(res => res.json())
+      .then(data => setUniversities(data.data ?? []))
+      .catch(console.error)
+      .finally(() => setUniLoading(false))
+  }, [])
 
   useEffect(() => {
     if (profile) {
@@ -168,6 +188,44 @@ export default function ScholarshipsPage() {
           </span>
         </div>
       </div>
+
+      {/* Browse by University */}
+      {(!uniLoading && universities.length > 0) && (
+        <div className="mb-10">
+          <h2 className="text-lg font-semibold heading-serif mb-3" style={{ color: 'var(--text-primary)' }}>
+            Scholarships by University
+          </h2>
+          <p className="text-sm mb-4" style={{ color: 'var(--text-faint)' }}>
+            Browse merit scholarships offered directly by colleges and universities.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {universities.map(uni => (
+              <Link
+                key={uni.id}
+                href={uni.slug ? `/scholarship/${uni.slug}` : '#'}
+                className="rounded-xl border p-4 transition-all duration-200 hover:border-[rgba(201,146,60,0.3)] hover:shadow-md group"
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderColor: 'var(--border-subtle)',
+                }}
+              >
+                <h3 className="font-semibold text-sm group-hover:text-[var(--gold-primary)] transition-colors" style={{ color: 'var(--text-primary)' }}>
+                  {uni.name}
+                </h3>
+                <p className="text-xs mt-0.5" style={{ color: 'var(--text-faint)' }}>
+                  {uni.city ? `${uni.city}, ${uni.state}` : uni.state ?? ''}
+                </p>
+                <div className="flex items-center gap-1.5 mt-2">
+                  <DollarIcon className="w-3.5 h-3.5" style={{ color: 'var(--gold-primary)' } as React.CSSProperties} />
+                  <span className="text-xs font-medium" style={{ color: 'var(--gold-primary)' }}>
+                    {uni.scholarship_count} scholarship{uni.scholarship_count > 1 ? 's' : ''}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Results */}
       {loading ? (

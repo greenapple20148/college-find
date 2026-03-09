@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     'financial aid estimator',
   ],
   openGraph: {
-    title: 'College Cost Calculator | CollegeMatch',
+    title: 'College Cost Calculator | CollegeFind',
     description:
       'Estimate your net price at any U.S. college based on your family income. No FAFSA required.',
     url: '/cost-calculator',

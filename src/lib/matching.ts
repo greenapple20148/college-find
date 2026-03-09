@@ -1,5 +1,5 @@
 /**
- * CollegeMatch — Admissions Probability Engine v2
+ * CollegeFind — Admissions Probability Engine v2
  *
  * Algorithm: Weighted additive adjustment model
  *

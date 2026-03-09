@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Privacy Policy',
-    description: 'CollegeMatch Privacy Policy — how we collect, use, and protect your personal information.',
+    description: 'CollegeFind Privacy Policy — how we collect, use, and protect your personal information.',
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -31,9 +31,9 @@ export default function PrivacyPage() {
 
             <Section title="1. Introduction">
                 <p>
-                    CollegeMatch (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) respects your privacy and is
+                    CollegeFind, operated by RZeal Solutions, USA (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) respects your privacy and is
                     committed to protecting your personal information. This Privacy Policy explains how we collect, use,
-                    disclose, and safeguard your information when you use the CollegeMatch website and services.
+                    disclose, and safeguard your information when you use the CollegeFind website and services.
                 </p>
             </Section>
 
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
                 <ul className="list-disc list-inside space-y-1 ml-2">
                     <li><strong>Service Providers:</strong> Trusted third parties that help us operate, maintain, or improve the Service (hosting, analytics)</li>
                     <li><strong>Legal Requirements:</strong> If required by law, regulation, subpoena, or legal process</li>
-                    <li><strong>Safety:</strong> To protect the rights, property, or safety of CollegeMatch, our users, or the public</li>
+                    <li><strong>Safety:</strong> To protect the rights, property, or safety of CollegeFind, our users, or the public</li>
                     <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
                 </ul>
             </Section>
@@ -119,8 +119,8 @@ export default function PrivacyPage() {
                 </ul>
                 <p>
                     To exercise any of these rights, contact us at{' '}
-                    <a href="mailto:privacy@collegematchtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
-                        privacy@collegematchtool.com
+                    <a href="mailto:privacy@collegefindtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
+                        privacy@collegefindtool.com
                     </a>.
                 </p>
             </Section>
@@ -152,8 +152,8 @@ export default function PrivacyPage() {
             <Section title="12. Contact Us">
                 <p>
                     If you have questions or concerns about this Privacy Policy or our data practices, contact us at{' '}
-                    <a href="mailto:privacy@collegematchtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
-                        privacy@collegematchtool.com
+                    <a href="mailto:privacy@collegefindtool.com" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>
+                        privacy@collegefindtool.com
                     </a>.
                 </p>
             </Section>

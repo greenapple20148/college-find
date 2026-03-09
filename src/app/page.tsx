@@ -13,12 +13,12 @@ import {
 } from '@/components/ui/Icon'
 
 export const metadata: Metadata = {
-  title: 'CollegeMatch — Free College Search & Admissions Tool',
+  title: 'CollegeFind — Free College Search & Admissions Tool',
   description:
     'Free college search and admission match tool for 12th-grade students. Search 6,000+ U.S. colleges, estimate admission chances, compare schools side by side, find scholarships, and track deadlines — all in one place.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'CollegeMatch — Free College Search & Admissions Tool for Students',
+    title: 'CollegeFind — Free College Search & Admissions Tool for Students',
     description:
       'Search 6,000+ U.S. colleges, get a personalized Safety/Match/Reach list, compare schools, estimate costs, and find scholarships. Free, no account required.',
     url: '/',
@@ -30,25 +30,25 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': 'https://collegematchtool.com/#website',
-      url: 'https://collegematchtool.com',
-      name: 'CollegeMatch',
+      '@id': 'https://collegefindtool.com/#website',
+      url: 'https://collegefindtool.com',
+      name: 'CollegeFind',
       description:
         'Free college search and admissions probability tool for U.S. high school seniors.',
       potentialAction: {
         '@type': 'SearchAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: 'https://collegematchtool.com/search?q={search_term_string}',
+          urlTemplate: 'https://collegefindtool.com/search?q={search_term_string}',
         },
         'query-input': 'required name=search_term_string',
       },
     },
     {
       '@type': 'WebApplication',
-      '@id': 'https://collegematchtool.com/#app',
-      name: 'CollegeMatch',
-      url: 'https://collegematchtool.com',
+      '@id': 'https://collegefindtool.com/#app',
+      name: 'CollegeFind',
+      url: 'https://collegefindtool.com',
       applicationCategory: 'EducationApplication',
       operatingSystem: 'Web',
       offers: {
@@ -74,9 +74,9 @@ const jsonLd = {
     },
     {
       '@type': 'Organization',
-      '@id': 'https://collegematchtool.com/#organization',
-      name: 'CollegeMatch',
-      url: 'https://collegematchtool.com',
+      '@id': 'https://collegefindtool.com/#organization',
+      name: 'CollegeFind',
+      url: 'https://collegefindtool.com',
     },
   ],
 }
@@ -238,21 +238,45 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {[
-                { step: '1', title: 'Set Your Profile', desc: 'Enter your GPA, test scores, preferred states, and budget.' },
-                { step: '2', title: 'Get Your Match List', desc: 'See Safety, Match, and Reach schools tailored to your profile.' },
-                { step: '3', title: 'Save & Track', desc: 'Save favorites, add deadlines, and track your application status.' },
-              ].map(s => (
-                <div key={s.step} className="flex flex-col items-center">
+                {
+                  title: 'Set Your Profile',
+                  desc: 'Enter your GPA, test scores, preferred states, and budget.',
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: 'Get Your Match List',
+                  desc: 'See Safety, Match, and Reach schools tailored to your profile.',
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: 'Save & Track',
+                  desc: 'Save favorites, add deadlines, and track your application status.',
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                    </svg>
+                  ),
+                },
+              ].map((s, i) => (
+                <div key={i} className="flex flex-col items-center">
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-xl font-bold mb-5 border"
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 border"
                     style={{
                       background: 'rgba(201, 146, 60, 0.08)',
                       borderColor: 'rgba(201, 146, 60, 0.3)',
                       color: 'var(--gold-primary)',
                     }}
-                    aria-label={`Step ${s.step}`}
+                    aria-label={s.title}
                   >
-                    {s.step}
+                    {s.icon}
                   </div>
                   <h3 className="font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>{s.title}</h3>
                   <p className="text-sm font-light" style={{ color: 'var(--text-faint)' }}>{s.desc}</p>
@@ -283,7 +307,7 @@ export default function HomePage() {
             </a>{' '}
             (U.S. Department of Education). Admission estimates are statistical approximations, not guarantees.
           </p>
-          <p className="mt-2">CollegeMatch — Built for students, by students.</p>
+          <p className="mt-2">CollegeFind — Built for students, by students.</p>
         </footer>
       </div>
     </>

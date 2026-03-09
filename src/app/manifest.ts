@@ -2,14 +2,14 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'CollegeMatch — Find Your Perfect College',
-    short_name: 'CollegeMatch',
+    name: 'CollegeFind — Find Your Perfect College',
+    short_name: 'CollegeFind',
     description:
       'Free college search and admission match tool for 12th-grade students.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
-    theme_color: '#4f46e5',
+    theme_color: '#C9923C',
     icons: [
       {
         src: '/icon-192.png',

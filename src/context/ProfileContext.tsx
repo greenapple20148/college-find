@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import type { StudentProfile } from '@/lib/types'
 
-const STORAGE_KEY = 'collegematch_profile'
+const STORAGE_KEY = 'collegefind_profile'
 
 const defaultProfile: StudentProfile = {
   gpa: 3.0,

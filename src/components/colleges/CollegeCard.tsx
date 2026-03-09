@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { HeartIcon, CheckIcon, PlusIcon } from '@/components/ui/Icon'
 import { useCompare } from '@/context/CompareContext'
+import { useAuth } from '@/context/AuthContext'
+import { getOrCreateSessionId } from '@/lib/utils'
 import type { College } from '@/lib/types'
 
 function fmt(n: number | null, prefix = '$'): string {
@@ -48,14 +50,61 @@ interface CollegeCardProps {
 
 export function CollegeCard({ college, onSave, saved = false, viewMode = 'grid', index = 0 }: CollegeCardProps) {
   const { addToCompare, removeFromCompare, isInCompare, canAddMore } = useCompare()
+  const { user } = useAuth()
   const inCompare = isInCompare(college.id)
   const [isSaved, setIsSaved] = useState(saved)
+  const [saveLoading, setSaveLoading] = useState(false)
+  const savedRecordId = useRef<string | null>(null)
 
-  function handleSave(e: React.MouseEvent) {
+  async function handleSave(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    setIsSaved(s => !s)
-    onSave?.(college)
+    if (saveLoading) return
+    setSaveLoading(true)
+
+    if (!isSaved) {
+      const sessionId = getOrCreateSessionId()
+      const body: Record<string, string> = { college_id: college.id }
+      if (!user) body.session_id = sessionId
+      try {
+        const res = await fetch('/api/saved', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        const data = await res.json()
+        if (res.ok) {
+          savedRecordId.current = data.id ?? data.data?.id ?? null
+          setIsSaved(true)
+          onSave?.(college)
+        }
+      } catch { /* ignore */ }
+    } else {
+      // Unsave — look up the record ID if we don't have it
+      let recordId = savedRecordId.current
+      if (!recordId) {
+        try {
+          const sessionId = getOrCreateSessionId()
+          const url = user ? '/api/saved' : `/api/saved?session_id=${sessionId}`
+          const res = await fetch(url)
+          const data = await res.json()
+          const match = (data.data ?? []).find((s: { college_id: string; id: string }) => s.college_id === college.id)
+          recordId = match?.id ?? null
+        } catch { /* ignore */ }
+      }
+      if (recordId) {
+        try {
+          const sessionId = getOrCreateSessionId()
+          const url = user ? `/api/saved/${recordId}` : `/api/saved/${recordId}?session_id=${sessionId}`
+          const res = await fetch(url, { method: 'DELETE' })
+          if (res.ok) {
+            savedRecordId.current = null
+            setIsSaved(false)
+          }
+        } catch { /* ignore */ }
+      }
+    }
+    setSaveLoading(false)
   }
 
   function handleCompare(e: React.MouseEvent) {
@@ -138,6 +187,16 @@ export function CollegeCard({ college, onSave, saved = false, viewMode = 'grid',
 
           {/* Actions */}
           <div className="flex gap-1.5 flex-shrink-0">
+            {college.slug && (
+              <Link
+                href={`/college/${college.slug}`}
+                className="p-2 rounded-lg transition-all duration-200 text-xs font-medium hidden sm:flex items-center"
+                style={{ color: 'var(--gold-primary)' }}
+                title="View college profile"
+              >
+                Profile
+              </Link>
+            )}
             <button
               onClick={handleSave}
               className="p-2 rounded-lg transition-all duration-200"
@@ -255,6 +314,19 @@ export function CollegeCard({ college, onSave, saved = false, viewMode = 'grid',
 
         {/* Actions */}
         <div className="flex gap-2 pt-3 mt-auto" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+          {college.slug && (
+            <Link
+              href={`/college/${college.slug}`}
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border hover:border-[var(--gold-primary)]"
+              style={{
+                backgroundColor: 'transparent',
+                color: 'var(--gold-primary)',
+                borderColor: 'rgba(201,146,60,0.2)',
+              }}
+            >
+              View Profile
+            </Link>
+          )}
           <button
             onClick={handleSave}
             className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border"
