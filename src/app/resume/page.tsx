@@ -91,7 +91,7 @@ export default function ResumePage() {
           target="_blank"
           rel="noopener noreferrer"
           className="flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90 whitespace-nowrap"
-          style={{ background: 'var(--gold-gradient)', color: '#000' }}
+          style={{ background: 'var(--gold-gradient)', color: '#fff' }}
         >
           Open Resume Builder →
         </a>

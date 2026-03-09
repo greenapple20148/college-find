@@ -79,7 +79,7 @@ function CtaBlock({ tool, label, text, variant = 'primary' }: {
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90 flex-shrink-0"
                 style={{
                     background: variant === 'primary' ? 'var(--gold-gradient)' : 'transparent',
-                    color: variant === 'primary' ? '#000' : 'var(--gold-primary)',
+                    color: variant === 'primary' ? '#fff' : 'var(--gold-primary)',
                     border: variant === 'primary' ? 'none' : '1px solid var(--gold-primary)',
                 }}
             >

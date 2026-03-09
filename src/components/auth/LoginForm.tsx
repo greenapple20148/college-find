@@ -100,7 +100,7 @@ export function LoginForm() {
           type="submit"
           disabled={loading}
           className="w-full py-2.5 rounded-lg text-sm font-semibold transition-opacity disabled:opacity-60"
-          style={{ background: 'var(--gold-gradient)', color: '#000' }}
+          style={{ background: 'var(--gold-gradient)', color: '#fff' }}
         >
           {loading ? 'Signing in…' : 'Sign In'}
         </button>

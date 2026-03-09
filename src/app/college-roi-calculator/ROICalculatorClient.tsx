@@ -857,7 +857,7 @@ export function ROICalculatorPage() {
                                 className="w-full py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2"
                                 style={{
                                     background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))',
-                                    color: '#000',
+                                    color: '#fff',
                                     boxShadow: '0 4px 20px rgba(201,146,60,0.2)',
                                 }}
                             >

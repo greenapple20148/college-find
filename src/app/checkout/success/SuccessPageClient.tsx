@@ -159,7 +159,7 @@ export function SuccessPageClient() {
                             className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
                             style={{
                                 background: 'var(--gold-gradient)',
-                                color: '#000',
+                                color: '#fff',
                                 boxShadow: '0 4px 20px rgba(201,146,60,0.25)',
                             }}
                         >

@@ -414,7 +414,7 @@ export function PricingPage() {
                                         className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold"
                                         style={{
                                             background: 'var(--gold-gradient)',
-                                            color: '#000',
+                                            color: '#fff',
                                         }}
                                     >
                                         Current Plan
@@ -426,7 +426,7 @@ export function PricingPage() {
                                         className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold"
                                         style={{
                                             background: 'var(--gold-gradient)',
-                                            color: '#000',
+                                            color: '#fff',
                                         }}
                                     >
                                         Most Popular
@@ -539,7 +539,7 @@ export function PricingPage() {
                                             plan.ctaStyle === 'gold'
                                                 ? {
                                                     background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))',
-                                                    color: '#000',
+                                                    color: '#fff',
                                                     boxShadow: '0 4px 20px rgba(201,146,60,0.25)',
                                                     border: 'none',
                                                 }
@@ -830,7 +830,7 @@ export function PricingPage() {
                         style={{
                             background:
                                 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))',
-                            color: '#000',
+                            color: '#fff',
                             boxShadow: '0 4px 20px rgba(201,146,60,0.2)',
                         }}
                     >

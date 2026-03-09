@@ -101,7 +101,7 @@ function TaskItem({
                 style={{
                     borderColor: done ? 'var(--gold-primary)' : 'var(--border-primary)',
                     backgroundColor: done ? 'var(--gold-primary)' : 'transparent',
-                    color: done ? '#000' : 'transparent',
+                    color: done ? '#fff' : 'transparent',
                 }}
             >
                 {done && <CheckIcon />}
@@ -240,7 +240,7 @@ function ChecklistCard({
                                 className="text-xs font-medium px-3 py-1.5 rounded-lg transition-opacity hover:opacity-80"
                                 style={{
                                     background: 'var(--gold-gradient)',
-                                    color: '#000',
+                                    color: '#fff',
                                 }}
                             >
                                 Add
@@ -414,7 +414,7 @@ export function ApplicationChecklist({ savedColleges }: { savedColleges: SavedCo
                     className="w-full flex items-center justify-center gap-2 py-2.5 mb-3 rounded-lg text-sm font-medium transition-all hover:opacity-90 disabled:opacity-50"
                     style={{
                         background: 'var(--gold-gradient)',
-                        color: '#000',
+                        color: '#fff',
                     }}
                 >
                     <PlusIcon />

@@ -307,7 +307,7 @@ export default function RecommendationsClient() {
                 <Link
                     href="/profile"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
-                    style={{ background: 'var(--gold-gradient)', color: '#000' }}
+                    style={{ background: 'var(--gold-gradient)', color: '#fff' }}
                 >
                     Create My Profile <ArrowRightSvg />
                 </Link>
