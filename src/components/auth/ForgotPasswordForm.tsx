@@ -18,12 +18,12 @@ export function ForgotPasswordForm() {
         setLoading(true)
         setError(null)
 
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
             redirectTo: `${siteUrl}/auth/callback?next=/reset-password`,
         })
 
-        if (error) {
-            setError(error.message)
+        if (resetError) {
+            setError(resetError.message)
             setLoading(false)
         } else {
             setSent(true)
