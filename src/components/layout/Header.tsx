@@ -12,6 +12,7 @@ import { useState, useRef, useEffect } from 'react'
 const navLinks = [
   { href: '/search', label: 'Search' },
   { href: '/recommendations', label: 'For You' },
+  { href: '/sat-prep', label: 'SAT Ace' },
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/advisor', label: 'AI Advisor' },
   { href: '/college-essays', label: 'Essays' },

@@ -9,6 +9,7 @@ import { useProfile } from '@/context/ProfileContext'
 import { SavedCollegeRow } from '@/components/dashboard/SavedCollegeRow'
 import { EnhancedDeadlineTracker } from '@/components/dashboard/EnhancedDeadlineTracker'
 import { ApplicationChecklist } from '@/components/dashboard/ApplicationChecklist'
+import { ProductTour, RestartTourButton } from '@/components/tour/ProductTour'
 import { ClipboardIcon, HeartIcon, ArrowRightIcon } from '@/components/ui/Icon'
 
 const STATUS_OPTIONS: { key: ApplicationStatus; label: string; color: string }[] = [
@@ -106,7 +107,7 @@ export function DashboardClient({ saved: initialSaved, profile, userEmail }: Pro
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* College list */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="lg:col-span-2 space-y-3" data-tour="college-list">
             <div className="flex items-center justify-between mb-1">
               <h2 className="font-semibold text-sm uppercase tracking-wide" style={{ color: 'var(--text-secondary)' }}>
                 My College List ({saved.length})
@@ -132,6 +133,7 @@ export function DashboardClient({ saved: initialSaved, profile, userEmail }: Pro
                     disabled={exporting}
                     className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all hover:border-[rgba(201,146,60,0.3)]"
                     style={{ borderColor: 'var(--border-subtle)', color: 'var(--gold-primary)' }}
+                    data-tour="export"
                   >
                     <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
@@ -182,9 +184,13 @@ export function DashboardClient({ saved: initialSaved, profile, userEmail }: Pro
               </div>
             </div>
 
-            <EnhancedDeadlineTracker savedColleges={saved} />
+            <div data-tour="deadlines">
+              <EnhancedDeadlineTracker savedColleges={saved} />
+            </div>
 
-            <ApplicationChecklist savedColleges={saved} />
+            <div data-tour="checklist">
+              <ApplicationChecklist savedColleges={saved} />
+            </div>
 
             {/* Status summary */}
             <div className="rounded-xl border p-5" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)' }}>
@@ -221,7 +227,10 @@ export function DashboardClient({ saved: initialSaved, profile, userEmail }: Pro
               <Link href="/resume" className="block text-sm hover:underline" style={{ color: 'var(--gold-primary)' }}>
                 Build activity resume →
               </Link>
+              <RestartTourButton />
             </div>
+
+            <ProductTour />
           </div>
         </div>
       )}

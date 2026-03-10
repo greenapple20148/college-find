@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import DemoShowcase from '@/components/landing/DemoShowcase'
 import {
   SearchIcon,
   TargetIcon,
@@ -207,6 +208,107 @@ export default function HomePage() {
                   <p className="text-sm leading-relaxed font-light" style={{ color: 'var(--text-muted)' }}>{f.desc}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Interactive Demo Showcase */}
+        <DemoShowcase />
+
+        {/* ─── SAT Ace Promo ─────────────────────── */}
+        <section className="py-20 px-4 relative overflow-hidden" aria-label="SAT Ace">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            aria-hidden="true"
+            style={{
+              background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(59,130,246,0.06) 0%, transparent 70%)',
+            }}
+          />
+          <div className="relative max-w-5xl mx-auto">
+            <div className="rounded-2xl border p-8 sm:p-12" style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'rgba(59,130,246,0.2)',
+              boxShadow: '0 0 60px rgba(59,130,246,0.06)',
+            }}>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
+                    <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                      New Feature
+                    </span>
+                  </div>
+                  <h2 className="heading-serif text-3xl sm:text-4xl mb-4" style={{ color: 'var(--text-primary)' }}>
+                    Introducing{' '}
+                    <span
+                      className="heading-serif-italic"
+                      style={{
+                        background: 'linear-gradient(135deg, #60a5fa, #3b82f6, #818cf8)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                      }}
+                    >
+                      SAT Ace
+                    </span>
+                  </h2>
+                  <p className="text-base leading-relaxed mb-6 font-light" style={{ color: 'var(--text-muted)' }}>
+                    Everything you need to ace the Digital SAT — free score calculator,
+                    adaptive practice questions, full-length mock tests, AI explanations,
+                    and personalized study plans.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link
+                      href="/sat-prep"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300"
+                      style={{
+                        background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                        color: '#fff',
+                        boxShadow: '0 4px 15px rgba(59,130,246,0.25)',
+                      }}
+                    >
+                      Explore SAT Ace <ArrowRightIcon className="w-4 h-4" />
+                    </Link>
+                    <Link
+                      href="/sat-prep/calculator"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 border"
+                      style={{
+                        borderColor: 'rgba(59,130,246,0.4)',
+                        color: 'var(--text-primary)',
+                      }}
+                    >
+                      Free Score Calculator
+                    </Link>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: '📊', title: 'Score Calculator', desc: 'Estimate your SAT score instantly', free: true },
+                    { icon: '✏️', title: 'Practice Questions', desc: '10K+ questions by topic', free: true },
+                    { icon: '🧠', title: 'AI Explanations', desc: 'Step-by-step breakdowns', free: false },
+                    { icon: '📅', title: 'Study Planner', desc: 'Personalized weekly plans', free: false },
+                  ].map(f => (
+                    <div
+                      key={f.title}
+                      className="rounded-xl p-4 border transition-all duration-300 hover:-translate-y-0.5"
+                      style={{
+                        backgroundColor: 'var(--bg-tertiary)',
+                        borderColor: 'var(--border-subtle)',
+                      }}
+                    >
+                      <span className="text-2xl mb-2 block">{f.icon}</span>
+                      <h4 className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>
+                        {f.title}
+                      </h4>
+                      <p className="text-[11px]" style={{ color: 'var(--text-faint)' }}>{f.desc}</p>
+                      {f.free && (
+                        <span className="text-[9px] font-semibold uppercase tracking-wider mt-1 inline-block" style={{ color: '#22c55e' }}>
+                          Free
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
