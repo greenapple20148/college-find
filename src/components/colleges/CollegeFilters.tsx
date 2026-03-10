@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import { Select } from '@/components/ui/Select'
 import { SearchIcon } from '@/components/ui/Icon'
-import { US_STATES } from '@/lib/types'
+import { US_STATES, MAJOR_OPTIONS } from '@/lib/types'
 
 export interface FilterState {
   q: string
   state: string
   control: string
   size: string
+  major: string
   tuition_max: string
   acceptance_min: string
   acceptance_max: string
@@ -28,11 +29,17 @@ const stateOptions = [
   ...US_STATES.map(s => ({ value: s.code, label: `${s.code} — ${s.name}` })),
 ]
 
+const majorOptions = [
+  { value: '', label: 'All Majors' },
+  ...MAJOR_OPTIONS.filter(m => m !== 'Undecided').map(m => ({ value: m, label: m })),
+]
+
 export function CollegeFilters({ filters, onChange, onReset, total, loading }: CollegeFiltersProps) {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     search: true,
     location: true,
     type: true,
+    major: false,
     cost: false,
     selectivity: false,
   })
@@ -50,6 +57,7 @@ export function CollegeFilters({ filters, onChange, onReset, total, loading }: C
     filters.state,
     filters.control,
     filters.size,
+    filters.major,
     filters.tuition_max,
     filters.acceptance_min,
     filters.acceptance_max,
@@ -134,6 +142,15 @@ export function CollegeFilters({ filters, onChange, onReset, total, loading }: C
             { value: 'medium', label: 'Medium (2,000–15,000)' },
             { value: 'large', label: 'Large (> 15,000)' },
           ]}
+        />
+      </FilterSection>
+
+      {/* Major / Program */}
+      <FilterSection title="Major / Program" expanded={expanded.major} onToggle={() => toggle('major')} icon="book">
+        <Select
+          value={filters.major}
+          onChange={e => update('major', e.target.value)}
+          options={majorOptions}
         />
       </FilterSection>
 
@@ -297,6 +314,8 @@ function FilterIcon({ type }: { type: string }) {
       return <svg className={cls} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" x2="12" y1="2" y2="22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
     case 'target':
       return <svg className={cls} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>
+    case 'book':
+      return <svg className={cls} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" /></svg>
     default:
       return null
   }

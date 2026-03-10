@@ -11,6 +11,7 @@ const DEFAULT_FILTERS: FilterState = {
   state: '',
   control: '',
   size: '',
+  major: '',
   tuition_max: '',
   acceptance_min: '',
   acceptance_max: '',
@@ -48,6 +49,7 @@ function getFilterLabel(key: string, value: string): string {
     case 'tuition_max': return `≤ $${parseInt(value).toLocaleString()}`
     case 'acceptance_min': return `≥ ${value}% acceptance`
     case 'acceptance_max': return `≤ ${value}% acceptance`
+    case 'major': return value
     default: return value
   }
 }
@@ -72,6 +74,7 @@ export default function SearchPage() {
     if (f.state) params.set('state', f.state)
     if (f.control) params.set('control', f.control)
     if (f.size) params.set('size', f.size)
+    if (f.major) params.set('major', f.major)
     if (f.tuition_max) params.set('tuition_max', f.tuition_max)
     if (f.acceptance_min) params.set('acceptance_min', f.acceptance_min)
     if (f.acceptance_max) params.set('acceptance_max', f.acceptance_max)
