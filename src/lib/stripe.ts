@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 const key = process.env.STRIPE_SECRET_KEY
 
 if (!key) {
-    console.warn('⚠️  STRIPE_SECRET_KEY is not set — Stripe features will be unavailable')
+    console.warn('[STRIPE] STRIPE_SECRET_KEY is not set — Stripe features will be unavailable')
 }
 
 export const stripe = key

@@ -143,19 +143,19 @@ function EssayMockup() {
         <div style={{ padding: '20px', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '16px' }}>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: 'rgba(255,255,255,0.9)', marginBottom: '4px' }}>
-                    ✨ Essay Toolkit
+                    <svg className="inline-block w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /></svg>Essay Toolkit
                 </div>
                 <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>8 AI-powered writing tools</div>
             </div>
             {/* Tool grid */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                 {[
-                    { icon: '💡', name: 'Topic Generator' },
-                    { icon: '🎯', name: 'Common App Brainstormer' },
-                    { icon: '🔍', name: 'Story Finder' },
-                    { icon: '📝', name: 'Outline Builder' },
-                    { icon: '✏️', name: 'Hook Generator' },
-                    { icon: '📊', name: 'Strength Analyzer' },
+                    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2"><circle cx="12" cy="12" r="4" /><path d="M12 2v4m0 12v4m-10-10h4m12 0h4" /></svg>, name: 'Topic Generator' },
+                    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="3" /></svg>, name: 'Common App Brainstormer' },
+                    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>, name: 'Story Finder' },
+                    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>, name: 'Outline Builder' },
+                    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21" /></svg>, name: 'Hook Generator' },
+                    { icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2"><path d="M18 20V10" /><path d="M12 20V4" /><path d="M6 20v-6" /></svg>, name: 'Strength Analyzer' },
                 ].map((t, i) => (
                     <div key={i} style={{
                         padding: '12px 10px', borderRadius: '10px', textAlign: 'center',
@@ -186,7 +186,7 @@ function RecommendationsMockup() {
         <div style={{ padding: '20px', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '16px' }}>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: 'rgba(255,255,255,0.9)', marginBottom: '4px' }}>
-                    🎯 Personalized For You
+                    <svg className="inline-block w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="#C9923C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="3" /></svg>Personalized For You
                 </div>
                 <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>Based on your GPA: 3.8, SAT: 1420</div>
             </div>

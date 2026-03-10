@@ -20,25 +20,25 @@ interface TourStep {
 const TOUR_STEPS: TourStep[] = [
     {
         target: '[data-tour="college-list"]',
-        title: '📋 Your College List',
+        title: 'Your College List',
         description: 'All your saved colleges appear here. Track status, set deadlines, and add notes for each school.',
         position: 'bottom',
     },
     {
         target: '[data-tour="deadlines"]',
-        title: '📅 Deadline Tracker',
+        title: 'Deadline Tracker',
         description: 'Never miss a deadline. Upcoming due dates are highlighted with urgency indicators.',
         position: 'left',
     },
     {
         target: '[data-tour="checklist"]',
-        title: '✅ Application Checklist',
+        title: 'Application Checklist',
         description: 'Track every step — from Common App to transcripts. Check off tasks as you complete them.',
         position: 'left',
     },
     {
         target: '[data-tour="export"]',
-        title: '📥 Export Your List',
+        title: 'Export Your List',
         description: 'Download your college list as a CSV spreadsheet to share with parents or counselors.',
         position: 'bottom',
     },

@@ -98,12 +98,13 @@ function CollegeRow({ result }: { result: MatchResult }) {
   )
 }
 
-function CollegeTable({ title, results, limit = 12 }: { title: string; results: MatchResult[]; limit?: number }) {
+function CollegeTable({ title, color, results, limit = 12 }: { title: string; color?: string; results: MatchResult[]; limit?: number }) {
   const shown = results.slice(0, limit)
   if (shown.length === 0) return null
   return (
     <div>
       <h2 className="heading-serif text-xl mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+        {color && <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />}
         {title}
         <span className="text-sm font-normal font-sans" style={{ color: 'var(--text-faint)' }}>({results.length} schools)</span>
       </h2>
@@ -323,7 +324,7 @@ export default async function SatScorePage({ params }: { params: Promise<{ score
 
         {/* ── Test-Optional Note ── */}
         <div className="p-4 rounded-xl border text-sm" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-subtle)', color: 'var(--text-secondary)' }}>
-          <strong style={{ color: 'var(--text-primary)' }}>📋 Test-Optional Note:</strong>{' '}
+          <strong style={{ color: 'var(--text-primary)' }}><svg className="inline-block w-4 h-4 mr-1 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><rect x="8" y="2" width="8" height="4" rx="1" ry="1" /></svg>Test-Optional Note:</strong>{' '}
           Many colleges no longer require SAT/ACT scores. If you apply test-optional, GPA, essays, and extracurriculars carry more weight.
           Use our <Link href="/match" className="hover:underline" style={{ color: 'var(--gold-primary)' }}>personalized match tool</Link> for a complete picture.
         </div>
@@ -334,9 +335,9 @@ export default async function SatScorePage({ params }: { params: Promise<{ score
             Recommended Colleges for {sat} SAT
           </h2>
           <div className="space-y-8">
-            <CollegeTable title="🟢 Safety Schools" results={safety} />
-            <CollegeTable title="🟡 Match Schools" results={match} />
-            <CollegeTable title="🟠 Reach Schools" results={reach} />
+            <CollegeTable title="Safety Schools" color="#34d399" results={safety} />
+            <CollegeTable title="Match Schools" color="#C9923C" results={match} />
+            <CollegeTable title="Reach Schools" color="#fb923c" results={reach} />
           </div>
         </section>
 

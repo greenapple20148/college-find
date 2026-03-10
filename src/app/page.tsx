@@ -282,10 +282,10 @@ export default function HomePage() {
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { icon: '📊', title: 'Score Calculator', desc: 'Estimate your SAT score instantly', free: true },
-                    { icon: '✏️', title: 'Practice Questions', desc: '10K+ questions by topic', free: true },
-                    { icon: '🧠', title: 'AI Explanations', desc: 'Step-by-step breakdowns', free: false },
-                    { icon: '📅', title: 'Study Planner', desc: 'Personalized weekly plans', free: false },
+                    { icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 20V10" /><path d="M12 20V4" /><path d="M6 20v-6" /></svg>, title: 'Score Calculator', desc: 'Estimate your SAT score instantly', free: true },
+                    { icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>, title: 'Practice Questions', desc: '10K+ questions by topic', free: true },
+                    { icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 5.5-4 7.5L12 22l-3-5.5C7 14.5 5 12 5 9a7 7 0 0 1 7-7z" /><circle cx="12" cy="9" r="2" /></svg>, title: 'AI Explanations', desc: 'Step-by-step breakdowns', free: false },
+                    { icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>, title: 'Study Planner', desc: 'Personalized weekly plans', free: false },
                   ].map(f => (
                     <div
                       key={f.title}
@@ -295,7 +295,7 @@ export default function HomePage() {
                         borderColor: 'var(--border-subtle)',
                       }}
                     >
-                      <span className="text-2xl mb-2 block">{f.icon}</span>
+                      <span className="mb-2 block">{f.icon}</span>
                       <h4 className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>
                         {f.title}
                       </h4>

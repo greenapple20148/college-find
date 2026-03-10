@@ -15,22 +15,22 @@ const STATUS_OPTIONS: { value: ApplicationStatus; label: string }[] = [
 ]
 
 const STATUS_STYLES: Record<ApplicationStatus, { color: string; bg: string; dot: string }> = {
-  not_started: { color: 'var(--text-faint)',    bg: 'var(--bg-tertiary)',          dot: '#9ca3af' },
-  in_progress: { color: '#3b82f6',              bg: 'rgba(59,130,246,0.10)',       dot: '#3b82f6' },
-  submitted:   { color: 'var(--gold-primary)',  bg: 'rgba(201,146,60,0.10)',       dot: 'var(--gold-primary)' },
-  accepted:    { color: '#22c55e',              bg: 'rgba(34,197,94,0.10)',        dot: '#22c55e' },
-  rejected:    { color: '#ef4444',              bg: 'rgba(239,68,68,0.10)',        dot: '#ef4444' },
-  waitlisted:  { color: '#eab308',              bg: 'rgba(234,179,8,0.10)',        dot: '#eab308' },
+  not_started: { color: 'var(--text-faint)', bg: 'var(--bg-tertiary)', dot: '#9ca3af' },
+  in_progress: { color: '#3b82f6', bg: 'rgba(59,130,246,0.10)', dot: '#3b82f6' },
+  submitted: { color: 'var(--gold-primary)', bg: 'rgba(201,146,60,0.10)', dot: 'var(--gold-primary)' },
+  accepted: { color: '#22c55e', bg: 'rgba(34,197,94,0.10)', dot: '#22c55e' },
+  rejected: { color: '#ef4444', bg: 'rgba(239,68,68,0.10)', dot: '#ef4444' },
+  waitlisted: { color: '#eab308', bg: 'rgba(234,179,8,0.10)', dot: '#eab308' },
 }
 
 const CHANCE_STYLES: Record<MatchCategory, { label: string; color: string; bg: string; border: string }> = {
-  safety: { label: 'Safety', color: '#16a34a', bg: 'rgba(22,163,74,0.08)',   border: 'rgba(22,163,74,0.2)' },
-  match:  { label: 'Match',  color: '#d97706', bg: 'rgba(217,119,6,0.08)',   border: 'rgba(217,119,6,0.2)' },
-  reach:  { label: 'Reach',  color: '#dc2626', bg: 'rgba(220,38,38,0.08)',   border: 'rgba(220,38,38,0.2)' },
+  safety: { label: 'Safety', color: '#16a34a', bg: 'rgba(22,163,74,0.08)', border: 'rgba(22,163,74,0.2)' },
+  match: { label: 'Match', color: '#d97706', bg: 'rgba(217,119,6,0.08)', border: 'rgba(217,119,6,0.2)' },
+  reach: { label: 'Reach', color: '#dc2626', bg: 'rgba(220,38,38,0.08)', border: 'rgba(220,38,38,0.2)' },
 }
 
 const CONTROL_ACCENT: Record<string, string> = {
-  public:            'var(--gold-primary)',
+  public: 'var(--gold-primary)',
   private_nonprofit: 'var(--gold-dark)',
   private_forprofit: 'var(--gold-light)',
 }
@@ -43,11 +43,11 @@ function deadlinePill(deadline: string | null): { label: string; color: string; 
   if (!deadline) return null
   const days = daysUntil(deadline)
   const d = new Date(deadline + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-  if (days < 0)  return { label: `${d} · past`,      color: '#9ca3af', bg: 'rgba(156,163,175,0.1)' }
-  if (days === 0) return { label: 'Due today!',        color: '#dc2626', bg: 'rgba(220,38,38,0.1)' }
-  if (days <= 7)  return { label: `${d} · ${days}d`,  color: '#dc2626', bg: 'rgba(220,38,38,0.1)' }
-  if (days <= 30) return { label: `${d} · ${days}d`,  color: '#ca8a04', bg: 'rgba(202,138,4,0.1)' }
-  return           { label: d,                         color: '#16a34a', bg: 'rgba(22,163,74,0.1)' }
+  if (days < 0) return { label: `${d} · past`, color: '#9ca3af', bg: 'rgba(156,163,175,0.1)' }
+  if (days === 0) return { label: 'Due today!', color: '#dc2626', bg: 'rgba(220,38,38,0.1)' }
+  if (days <= 7) return { label: `${d} · ${days}d`, color: '#dc2626', bg: 'rgba(220,38,38,0.1)' }
+  if (days <= 30) return { label: `${d} · ${days}d`, color: '#ca8a04', bg: 'rgba(202,138,4,0.1)' }
+  return { label: d, color: '#16a34a', bg: 'rgba(22,163,74,0.1)' }
 }
 
 export interface AdmissionChance {
@@ -63,16 +63,16 @@ interface SavedCollegeRowProps {
 }
 
 export function SavedCollegeRow({ saved, onUpdate, onDelete, chance }: SavedCollegeRowProps) {
-  const [status, setStatus]     = useState<ApplicationStatus>(saved.status)
+  const [status, setStatus] = useState<ApplicationStatus>(saved.status)
   const [deadline, setDeadline] = useState(saved.deadline ?? '')
-  const [notes, setNotes]       = useState(saved.notes ?? '')
+  const [notes, setNotes] = useState(saved.notes ?? '')
   const [showNotes, setShowNotes] = useState(false)
-  const [saving, setSaving]     = useState(false)
+  const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
   const college = saved.college
-  const accent  = CONTROL_ACCENT[college?.control ?? ''] ?? '#9ca3af'
-  const pill    = deadlinePill(deadline || null)
+  const accent = CONTROL_ACCENT[college?.control ?? ''] ?? '#9ca3af'
+  const pill = deadlinePill(deadline || null)
   const statusStyle = STATUS_STYLES[status]
   const chanceStyle = chance ? CHANCE_STYLES[chance.category] : null
 
@@ -196,7 +196,7 @@ export function SavedCollegeRow({ saved, onUpdate, onDelete, chance }: SavedColl
                 backgroundColor: showNotes ? 'rgba(201,146,60,0.06)' : 'transparent',
               }}
             >
-              {notes ? '📝 Notes' : 'Notes'}
+              {notes ? <><svg className="inline-block w-3.5 h-3.5 mr-0.5 -mt-px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>Notes</> : 'Notes'}
             </button>
             {saving && (
               <span className="text-xs" style={{ color: 'var(--text-ghost)' }}>saving…</span>

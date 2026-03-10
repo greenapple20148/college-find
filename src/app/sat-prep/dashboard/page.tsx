@@ -148,7 +148,7 @@ export default function SATDashboard() {
                         <StatCard label="EST. Score" value={stats.estimatedScore ? String(stats.estimatedScore) : '—'} sub={stats.estimatedScore ? 'from latest score' : 'use calculator'} color="var(--gold-primary)" />
                         <StatCard label="Questions" value={String(stats.totalQuestions)} sub="completed" color="var(--text-primary)" />
                         <StatCard label="Accuracy" value={`${stats.accuracy}%`} sub={`${stats.correctCount} correct`} color={stats.accuracy >= 70 ? '#22c55e' : '#eab308'} />
-                        <StatCard label="Streak" value={stats.streak > 0 ? `${stats.streak} day${stats.streak !== 1 ? 's' : ''}` : '—'} sub={stats.streak > 0 ? '🔥 keep going!' : 'practice today!'} color="#f97316" />
+                        <StatCard label="Streak" value={stats.streak > 0 ? `${stats.streak} day${stats.streak !== 1 ? 's' : ''}` : '—'} sub={stats.streak > 0 ? 'keep going!' : 'practice today!'} color="#f97316" />
                     </div>
 
                     {/* Score Trend & Section Breakdown */}

@@ -252,7 +252,7 @@ function OutlineViewer({ outline }: { outline: any }) {
                 </OutputSection>
             )}
             {outline.word_count_guidance && (
-                <p className="text-xs" style={{ color: 'var(--text-ghost)' }}>📝 {outline.word_count_guidance}</p>
+                <p className="text-xs flex items-center gap-1" style={{ color: 'var(--text-ghost)' }}><svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>{outline.word_count_guidance}</p>
             )}
         </div>
     )
@@ -358,7 +358,7 @@ function SupplementalView({ data }: { data: any }) {
 
             {data.word_count_tip && (
                 <p className="text-xs rounded-lg px-3 py-2" style={{ backgroundColor: 'rgba(201,146,60,0.04)', color: 'var(--text-faint)' }}>
-                    📝 {data.word_count_tip}
+                    <svg className="inline-block w-3.5 h-3.5 mr-0.5 -mt-px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>{data.word_count_tip}
                 </p>
             )}
         </div>
