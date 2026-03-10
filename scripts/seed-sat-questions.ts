@@ -24,7 +24,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 const questions = [
     // ─── MATH: Algebra (Easy) ────────────────────────────────────────
     {
-        section: 'math', topic: 'Algebra', difficulty: 'easy',
+        section: 'math', topic: 'Algebra', subtopic: 'Solving Linear Equations', difficulty: 'easy', status: 'published',
         question_text: 'If 3x + 7 = 22, what is the value of x?',
         passage_text: null,
         option_a: '3', option_b: '5', option_c: '7', option_d: '15',
@@ -33,7 +33,7 @@ const questions = [
         source_type: 'seed',
     },
     {
-        section: 'math', topic: 'Algebra', difficulty: 'easy',
+        section: 'math', topic: 'Algebra', subtopic: 'Evaluating Expressions', difficulty: 'easy', status: 'published',
         question_text: 'What is the value of 2(x + 3) when x = 4?',
         passage_text: null,
         option_a: '10', option_b: '14', option_c: '11', option_d: '16',
@@ -43,7 +43,7 @@ const questions = [
     },
     // ─── MATH: Linear Equations (Medium) ─────────────────────────────
     {
-        section: 'math', topic: 'Linear Equations', difficulty: 'medium',
+        section: 'math', topic: 'Linear Equations', subtopic: 'Slope Calculation', difficulty: 'medium', status: 'published',
         question_text: 'A line passes through (2, 5) and (6, 13). What is the slope?',
         passage_text: null,
         option_a: '1', option_b: '2', option_c: '3', option_d: '4',
@@ -52,7 +52,7 @@ const questions = [
         source_type: 'seed',
     },
     {
-        section: 'math', topic: 'Linear Equations', difficulty: 'medium',
+        section: 'math', topic: 'Linear Equations', subtopic: 'Y-Intercept', difficulty: 'medium', status: 'published',
         question_text: 'The equation y = 3x - 7 crosses the y-axis at which point?',
         passage_text: null,
         option_a: '(0, 3)', option_b: '(0, -7)', option_c: '(7, 0)', option_d: '(-7, 0)',
@@ -62,7 +62,7 @@ const questions = [
     },
     // ─── MATH: Quadratics (Hard) ─────────────────────────────────────
     {
-        section: 'math', topic: 'Quadratic Equations', difficulty: 'hard',
+        section: 'math', topic: 'Quadratic Equations', subtopic: 'Factoring', difficulty: 'hard', status: 'published',
         question_text: 'If x² - 5x + 6 = 0, what is the sum of all possible values of 2x?',
         passage_text: null,
         option_a: '5', option_b: '6', option_c: '10', option_d: '12',
@@ -72,7 +72,7 @@ const questions = [
     },
     // ─── MATH: Percentages (Easy) ────────────────────────────────────
     {
-        section: 'math', topic: 'Percentages', difficulty: 'easy',
+        section: 'math', topic: 'Percentages', subtopic: 'Discount Calculation', difficulty: 'easy', status: 'published',
         question_text: 'A shirt costs $40 and is 25% off. What is the sale price?',
         passage_text: null,
         option_a: '$10', option_b: '$25', option_c: '$30', option_d: '$35',
@@ -82,7 +82,7 @@ const questions = [
     },
     // ─── MATH: Statistics (Medium) ───────────────────────────────────
     {
-        section: 'math', topic: 'Statistics & Probability', difficulty: 'medium',
+        section: 'math', topic: 'Statistics & Probability', subtopic: 'Mean Calculation', difficulty: 'medium', status: 'published',
         question_text: 'The mean of 5 numbers is 12. If one is removed and the mean becomes 10, what was removed?',
         passage_text: null,
         option_a: '16', option_b: '18', option_c: '20', option_d: '22',
@@ -92,7 +92,7 @@ const questions = [
     },
     // ─── MATH: Geometry (Hard) ───────────────────────────────────────
     {
-        section: 'math', topic: 'Geometry', difficulty: 'hard',
+        section: 'math', topic: 'Geometry', subtopic: 'Sector Area', difficulty: 'hard', status: 'published',
         question_text: 'A circle of radius 5 has a sector with central angle 72°. What is the sector area?',
         passage_text: null,
         option_a: '5π', option_b: '10π', option_c: '15π', option_d: '25π',
@@ -101,7 +101,7 @@ const questions = [
         source_type: 'seed',
     },
     {
-        section: 'math', topic: 'Geometry', difficulty: 'medium',
+        section: 'math', topic: 'Geometry', subtopic: 'Pythagorean Theorem', difficulty: 'medium', status: 'published',
         question_text: 'A rectangle has length 12 and width 5. What is the length of its diagonal?',
         passage_text: null,
         option_a: '11', option_b: '13', option_c: '15', option_d: '17',
@@ -111,7 +111,7 @@ const questions = [
     },
     // ─── MATH: Systems (Medium) ──────────────────────────────────────
     {
-        section: 'math', topic: 'Systems of Equations', difficulty: 'medium',
+        section: 'math', topic: 'Systems of Equations', subtopic: 'Elimination Method', difficulty: 'medium', status: 'published',
         question_text: 'If 2x + y = 10 and x - y = 2, what is x?',
         passage_text: null,
         option_a: '2', option_b: '3', option_c: '4', option_d: '5',
@@ -121,7 +121,7 @@ const questions = [
     },
     // ─── READING: Vocabulary (Easy) ──────────────────────────────────
     {
-        section: 'reading', topic: 'Vocabulary in Context', difficulty: 'easy',
+        section: 'reading', topic: 'Vocabulary in Context', subtopic: 'Academic Vocabulary', difficulty: 'easy', status: 'published',
         question_text: 'In "The scientist\'s findings were corroborated by subsequent experiments," "corroborated" means:',
         passage_text: null,
         option_a: 'Disproved', option_b: 'Confirmed', option_c: 'Questioned', option_d: 'Ignored',
@@ -130,7 +130,7 @@ const questions = [
         source_type: 'seed',
     },
     {
-        section: 'reading', topic: 'Vocabulary in Context', difficulty: 'medium',
+        section: 'reading', topic: 'Vocabulary in Context', subtopic: 'Tone Words', difficulty: 'medium', status: 'published',
         question_text: 'In "The author\'s tone was deliberately sardonic throughout the essay," "sardonic" most nearly means:',
         passage_text: null,
         option_a: 'Enthusiastic', option_b: 'Mocking', option_c: 'Neutral', option_d: 'Melancholic',
@@ -140,7 +140,7 @@ const questions = [
     },
     // ─── READING: Main Idea (Medium) ─────────────────────────────────
     {
-        section: 'reading', topic: 'Main Idea', difficulty: 'medium',
+        section: 'reading', topic: 'Main Idea', subtopic: 'Author Purpose', difficulty: 'medium', status: 'published',
         question_text: 'Based on the passage, the primary purpose of the author is to:',
         passage_text: 'Recent studies have shown that regular physical exercise improves not only cardiovascular health but also cognitive function. Researchers at Harvard found that adults who exercised for 30 minutes daily showed improved memory recall and faster problem-solving abilities compared to sedentary peers.',
         option_a: 'Argue that exercise is dangerous',
@@ -153,7 +153,7 @@ const questions = [
     },
     // ─── READING: Inference (Hard) ───────────────────────────────────
     {
-        section: 'reading', topic: 'Inference', difficulty: 'hard',
+        section: 'reading', topic: 'Inference', subtopic: 'Historical Inference', difficulty: 'hard', status: 'published',
         question_text: 'It can be inferred from the passage that the Harlem Renaissance:',
         passage_text: 'During the 1920s, African American artists, writers, and musicians in Harlem created works that challenged prevailing stereotypes and celebrated Black culture. Writers like Langston Hughes and Zora Neale Hurston drew from folk traditions while pioneering new literary forms. This artistic explosion occurred alongside—and partly because of—the Great Migration, which brought millions of African Americans from the rural South to northern cities.',
         option_a: 'Had no connection to larger demographic shifts',
@@ -166,7 +166,7 @@ const questions = [
     },
     // ─── WRITING: Grammar (Easy) ─────────────────────────────────────
     {
-        section: 'writing', topic: 'Grammar & Punctuation', difficulty: 'easy',
+        section: 'writing', topic: 'Grammar & Punctuation', subtopic: 'Verb Tense', difficulty: 'easy', status: 'published',
         question_text: 'Which correctly completes the sentence? "The students _____ their homework before the deadline."',
         passage_text: null,
         option_a: 'submits', option_b: 'submitted', option_c: 'submitting', option_d: 'have submit',
@@ -176,7 +176,7 @@ const questions = [
     },
     // ─── WRITING: Transitions (Medium) ───────────────────────────────
     {
-        section: 'writing', topic: 'Transitions', difficulty: 'medium',
+        section: 'writing', topic: 'Transitions', subtopic: 'Contrast Transitions', difficulty: 'medium', status: 'published',
         question_text: 'Which transition fits? "The project seemed impossible. _____, the team finished on time."',
         passage_text: null,
         option_a: 'Therefore', option_b: 'Meanwhile', option_c: 'Nevertheless', option_d: 'Similarly',
@@ -186,7 +186,7 @@ const questions = [
     },
     // ─── WRITING: Subject-Verb (Medium) ──────────────────────────────
     {
-        section: 'writing', topic: 'Subject-Verb Agreement', difficulty: 'medium',
+        section: 'writing', topic: 'Subject-Verb Agreement', subtopic: 'Indefinite Pronouns', difficulty: 'medium', status: 'published',
         question_text: 'Which is correct? "Each of the students _____ required to submit a portfolio."',
         passage_text: null,
         option_a: 'are', option_b: 'is', option_c: 'were', option_d: 'have been',
@@ -196,7 +196,7 @@ const questions = [
     },
     // ─── WRITING: Sentence Structure (Hard) ──────────────────────────
     {
-        section: 'writing', topic: 'Sentence Structure', difficulty: 'hard',
+        section: 'writing', topic: 'Sentence Structure', subtopic: 'Dangling Modifiers', difficulty: 'hard', status: 'published',
         question_text: 'Which revision eliminates the dangling modifier?',
         passage_text: 'Walking through the park, the flowers were beautiful.',
         option_a: 'Walking through the park, the flowers were seen as beautiful.',
@@ -209,7 +209,7 @@ const questions = [
     },
     // ─── MATH: Ratios (Easy) ─────────────────────────────────────────
     {
-        section: 'math', topic: 'Ratios & Proportions', difficulty: 'easy',
+        section: 'math', topic: 'Ratios & Proportions', subtopic: 'Ratio Problems', difficulty: 'easy', status: 'published',
         question_text: 'If the ratio of boys to girls in a class is 3:5 and there are 24 students total, how many are girls?',
         passage_text: null,
         option_a: '9', option_b: '12', option_c: '15', option_d: '18',
@@ -219,7 +219,7 @@ const questions = [
     },
     // ─── MATH: Data Analysis (Medium) ────────────────────────────────
     {
-        section: 'math', topic: 'Data Analysis', difficulty: 'medium',
+        section: 'math', topic: 'Data Analysis', subtopic: 'Scatter Plots', difficulty: 'medium', status: 'published',
         question_text: 'A scatter plot shows a negative linear association. Which best describes the relationship?',
         passage_text: null,
         option_a: 'As x increases, y increases',

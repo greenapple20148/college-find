@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
+import { useAuth } from '@/context/AuthContext'
 import { calculateSATScore, getScoreColor } from '@/lib/sat-scoring'
 import type { SATScoreResult } from '@/lib/sat-types'
 
@@ -29,6 +30,7 @@ function ScoreGauge({ label, low, high, max = 800 }: { label: string; low: numbe
 }
 
 export default function SATCalculatorPage() {
+    const { user } = useAuth()
     const [mathCorrect, setMathCorrect] = useState('')
     const [rwCorrect, setRwCorrect] = useState('')
     const [result, setResult] = useState<SATScoreResult | null>(null)
@@ -45,8 +47,23 @@ export default function SATCalculatorPage() {
         setTimeout(() => {
             setResult(score)
             setAnimateIn(true)
+
+            // Save score to history if logged in
+            if (user) {
+                fetch('/api/sat/score', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        source: 'calculator',
+                        math_score: score.mathScaledLow,
+                        rw_score: score.rwScaledLow,
+                        total_score: score.totalMid,
+                    }),
+                }).catch(() => { }) // silent fail
+            }
         }, 50)
-    }, [mathCorrect, rwCorrect])
+    }, [mathCorrect, rwCorrect, user])
 
     const handleReset = () => {
         setResult(null)

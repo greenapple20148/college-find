@@ -16,6 +16,7 @@ export async function GET(req: NextRequest) {
             .from('sat_questions')
             .select('*', { count: 'exact' })
             .eq('active_status', true)
+            .eq('status', 'published')
             .range(offset, offset + limit - 1)
 
         if (section) query = query.eq('section', section)
@@ -39,3 +40,4 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: message }, { status: 500 })
     }
 }
+

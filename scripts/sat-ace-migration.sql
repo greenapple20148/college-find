@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS sat_questions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   section TEXT NOT NULL CHECK (section IN ('math', 'reading', 'writing')),
   topic TEXT NOT NULL,
+  subtopic TEXT,
   difficulty TEXT NOT NULL CHECK (difficulty IN ('easy', 'medium', 'hard')),
   question_text TEXT NOT NULL,
   passage_text TEXT,
@@ -18,6 +19,7 @@ CREATE TABLE IF NOT EXISTS sat_questions (
   correct_answer TEXT NOT NULL CHECK (correct_answer IN ('A', 'B', 'C', 'D')),
   explanation TEXT NOT NULL DEFAULT '',
   source_type TEXT NOT NULL DEFAULT 'manual',
+  status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'review', 'published', 'archived')),
   active_status BOOLEAN NOT NULL DEFAULT true,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -26,6 +28,8 @@ CREATE TABLE IF NOT EXISTS sat_questions (
 CREATE INDEX IF NOT EXISTS idx_sat_questions_section ON sat_questions(section);
 CREATE INDEX IF NOT EXISTS idx_sat_questions_difficulty ON sat_questions(difficulty);
 CREATE INDEX IF NOT EXISTS idx_sat_questions_topic ON sat_questions(topic);
+CREATE INDEX IF NOT EXISTS idx_sat_questions_subtopic ON sat_questions(subtopic);
+CREATE INDEX IF NOT EXISTS idx_sat_questions_status ON sat_questions(status);
 CREATE INDEX IF NOT EXISTS idx_sat_questions_active ON sat_questions(active_status);
 
 -- ─── Practice Sessions ──────────────────────────────────────

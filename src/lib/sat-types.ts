@@ -28,11 +28,13 @@ export interface SATScoreResult {
 export type SATSection = 'math' | 'reading' | 'writing'
 export type Difficulty = 'easy' | 'medium' | 'hard'
 export type AnswerChoice = 'A' | 'B' | 'C' | 'D'
+export type QuestionStatus = 'draft' | 'review' | 'published' | 'archived'
 
 export interface SATQuestion {
     id: string
     section: SATSection
     topic: string
+    subtopic: string | null
     difficulty: Difficulty
     question_text: string
     passage_text: string | null
@@ -43,6 +45,7 @@ export interface SATQuestion {
     correct_answer: AnswerChoice
     explanation: string
     source_type: string
+    status: QuestionStatus
     active_status: boolean
     created_at?: string
 }
