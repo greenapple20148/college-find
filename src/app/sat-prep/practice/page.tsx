@@ -219,8 +219,8 @@ export default function PracticePage() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
                 <div>
                     <div className="flex items-center gap-2 mb-2">
-                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                             Practice
                         </span>
                     </div>
@@ -231,7 +231,7 @@ export default function PracticePage() {
                 {score.total > 0 && (
                     <div className="flex items-center gap-4">
                         <div className="text-center">
-                            <div className="text-xl font-bold" style={{ color: '#60a5fa' }}>
+                            <div className="text-xl font-bold" style={{ color: 'var(--gold-primary)' }}>
                                 {score.correct}/{score.total}
                             </div>
                             <div className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-ghost)' }}>Score</div>
@@ -255,8 +255,8 @@ export default function PracticePage() {
                             onClick={() => setSection(s)}
                             className="px-4 py-2 text-sm font-medium transition-colors"
                             style={{
-                                backgroundColor: section === s ? 'rgba(59,130,246,0.15)' : 'transparent',
-                                color: section === s ? '#60a5fa' : 'var(--text-ghost)',
+                                backgroundColor: section === s ? 'rgba(201,146,60,0.15)' : 'transparent',
+                                color: section === s ? 'var(--gold-primary)' : 'var(--text-ghost)',
                                 borderRight: s !== 'writing' ? '1px solid var(--border-primary)' : 'none',
                             }}
                         >
@@ -271,8 +271,8 @@ export default function PracticePage() {
                             onClick={() => setDifficulty(d)}
                             className="px-4 py-2 text-sm font-medium transition-colors"
                             style={{
-                                backgroundColor: difficulty === d ? 'rgba(59,130,246,0.15)' : 'transparent',
-                                color: difficulty === d ? '#60a5fa' : 'var(--text-ghost)',
+                                backgroundColor: difficulty === d ? 'rgba(201,146,60,0.15)' : 'transparent',
+                                color: difficulty === d ? 'var(--gold-primary)' : 'var(--text-ghost)',
                                 borderRight: d !== 'hard' ? '1px solid var(--border-primary)' : 'none',
                             }}
                         >
@@ -285,7 +285,7 @@ export default function PracticePage() {
             {/* Loading */}
             {loading ? (
                 <div className="card-dark p-12 text-center">
-                    <div className="w-8 h-8 border-2 rounded-full animate-spin mx-auto mb-3" style={{ borderColor: 'var(--border-primary)', borderTopColor: '#60a5fa' }} />
+                    <div className="w-8 h-8 border-2 rounded-full animate-spin mx-auto mb-3" style={{ borderColor: 'var(--border-primary)', borderTopColor: 'var(--gold-primary)' }} />
                     <p className="text-sm" style={{ color: 'var(--text-faint)' }}>Loading questions...</p>
                 </div>
             ) : question ? (
@@ -304,8 +304,8 @@ export default function PracticePage() {
                                 {question.difficulty}
                             </span>
                             <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{
-                                backgroundColor: 'rgba(59,130,246,0.1)', color: '#60a5fa',
-                                border: '1px solid rgba(59,130,246,0.2)',
+                                backgroundColor: 'rgba(201,146,60,0.1)', color: 'var(--gold-primary)',
+                                border: '1px solid rgba(201,146,60,0.2)',
                             }}>
                                 {question.section.charAt(0).toUpperCase() + question.section.slice(1)} — {question.topic}{question.subtopic ? ` › ${question.subtopic}` : ''}
                             </span>
@@ -322,7 +322,7 @@ export default function PracticePage() {
                     {question.passage_text && (
                         <div
                             className="rounded-xl p-5 mb-6 text-sm leading-relaxed italic"
-                            style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)', borderLeft: '3px solid rgba(59,130,246,0.4)' }}
+                            style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)', borderLeft: '3px solid rgba(201,146,60,0.4)' }}
                         >
                             {question.passage_text}
                         </div>
@@ -346,7 +346,7 @@ export default function PracticePage() {
 
                             if (isCorrect) { borderColor = '#22c55e'; bgColor = 'rgba(34,197,94,0.08)'; textColor = '#22c55e' }
                             else if (isWrong) { borderColor = '#ef4444'; bgColor = 'rgba(239,68,68,0.08)'; textColor = '#ef4444' }
-                            else if (isSelected) { borderColor = '#3b82f6'; bgColor = 'rgba(59,130,246,0.08)'; textColor = '#60a5fa' }
+                            else if (isSelected) { borderColor = 'var(--gold-primary)'; bgColor = 'rgba(201,146,60,0.08)'; textColor = 'var(--gold-primary)' }
 
                             return (
                                 <button
@@ -403,9 +403,9 @@ export default function PracticePage() {
                             {aiExplanation ? (
                                 <div
                                     className="rounded-xl p-5 text-sm leading-relaxed"
-                                    style={{ backgroundColor: 'rgba(59,130,246,0.05)', border: '1px solid rgba(59,130,246,0.15)' }}
+                                    style={{ backgroundColor: 'rgba(201,146,60,0.05)', border: '1px solid rgba(201,146,60,0.15)' }}
                                 >
-                                    <p className="font-semibold mb-2 flex items-center gap-2" style={{ color: '#60a5fa' }}>
+                                    <p className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--gold-primary)' }}>
                                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z" />
                                             <path d="M10 21h4" />
@@ -420,14 +420,14 @@ export default function PracticePage() {
                                     disabled={aiLoading}
                                     className="w-full py-3 rounded-xl text-sm font-medium border transition-all flex items-center justify-center gap-2"
                                     style={{
-                                        borderColor: 'rgba(59,130,246,0.3)',
-                                        color: '#60a5fa',
-                                        backgroundColor: aiLoading ? 'rgba(59,130,246,0.05)' : 'transparent',
+                                        borderColor: 'rgba(201,146,60,0.3)',
+                                        color: 'var(--gold-primary)',
+                                        backgroundColor: aiLoading ? 'rgba(201,146,60,0.05)' : 'transparent',
                                     }}
                                 >
                                     {aiLoading ? (
                                         <>
-                                            <div className="w-4 h-4 border-2 rounded-full animate-spin" style={{ borderColor: 'rgba(59,130,246,0.2)', borderTopColor: '#60a5fa' }} />
+                                            <div className="w-4 h-4 border-2 rounded-full animate-spin" style={{ borderColor: 'rgba(201,146,60,0.2)', borderTopColor: 'var(--gold-primary)' }} />
                                             Generating AI explanation...
                                         </>
                                     ) : (
@@ -452,7 +452,7 @@ export default function PracticePage() {
                                 disabled={!selected}
                                 className="flex-1 py-3 rounded-xl font-semibold text-sm transition-all duration-200 disabled:opacity-40"
                                 style={{
-                                    background: selected ? 'linear-gradient(135deg, #3b82f6, #2563eb)' : 'var(--bg-tertiary)',
+                                    background: selected ? 'linear-gradient(135deg, var(--gold-primary), #B8860B)' : 'var(--bg-tertiary)',
                                     color: selected ? '#fff' : 'var(--text-ghost)',
                                 }}
                             >
@@ -462,14 +462,14 @@ export default function PracticePage() {
                             <button
                                 onClick={handleNext}
                                 className="flex-1 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
-                                style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff' }}
+                                style={{ background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)', color: '#fff' }}
                             >
                                 Next Question →
                             </button>
                         ) : (
                             <div className="flex-1 text-center py-3 text-sm" style={{ color: 'var(--text-faint)' }}>
                                 🎉 Session complete! You scored {score.correct}/{score.total}
-                                <button onClick={loadQuestions} className="block mx-auto mt-3 text-sm font-medium" style={{ color: '#60a5fa' }}>
+                                <button onClick={loadQuestions} className="block mx-auto mt-3 text-sm font-medium" style={{ color: 'var(--gold-primary)' }}>
                                     Start New Session
                                 </button>
                             </div>
@@ -485,20 +485,19 @@ export default function PracticePage() {
             )}
 
             {/* Upgrade CTA */}
-            <div className="mt-8 card-dark p-6 sm:p-8 text-center" style={{ borderColor: 'rgba(139,92,246,0.3)' }}>
+            <div className="mt-8 card-dark p-6 sm:p-8 text-center" style={{ borderColor: 'rgba(201,146,60,0.3)' }}>
                 <div className="flex items-center justify-center gap-2 mb-3">
-                    <svg className="w-5 h-5" style={{ color: '#a78bfa' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-5 h-5" style={{ color: 'var(--gold-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                     </svg>
-                    <span className="text-sm font-semibold" style={{ color: '#a78bfa' }}>Upgrade to Premium</span>
+                    <span className="text-sm font-semibold" style={{ color: 'var(--gold-primary)' }}>Upgrade to Premium</span>
                 </div>
                 <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>
                     Get unlimited questions, AI explanations, mock tests, and a personalized study plan.
                 </p>
                 <Link
                     href="/sat-prep"
-                    className="inline-flex items-center px-6 py-2.5 rounded-xl text-sm font-semibold transition-all"
-                    style={{ background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', color: '#fff' }}
+                    className="btn-gold px-6 py-2.5 text-sm"
                 >
                     See Plans & Pricing →
                 </Link>

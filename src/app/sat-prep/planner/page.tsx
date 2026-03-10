@@ -85,7 +85,7 @@ function generatePlan(form: PlanForm): WeekPlan[] {
 }
 
 const sectionColors: Record<string, string> = {
-    math: '#3b82f6',
+    math: 'var(--gold-primary)',
     reading: '#8b5cf6',
     writing: '#f59e0b',
     review: '#22c55e',
@@ -105,8 +105,8 @@ export default function StudyPlannerPage() {
             {/* Header */}
             <div className="mb-8">
                 <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                    <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                    <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                         Premium Feature
                     </span>
                 </div>
@@ -206,7 +206,7 @@ export default function StudyPlannerPage() {
                     disabled={!form.currentScore || !form.targetScore}
                     className="mt-6 w-full py-3 rounded-xl font-semibold text-sm transition-all disabled:opacity-40"
                     style={{
-                        background: form.currentScore && form.targetScore ? 'linear-gradient(135deg, #3b82f6, #2563eb)' : 'var(--bg-tertiary)',
+                        background: form.currentScore && form.targetScore ? 'linear-gradient(135deg, var(--gold-primary), #B8860B)' : 'var(--bg-tertiary)',
                         color: form.currentScore && form.targetScore ? '#fff' : 'var(--text-ghost)',
                     }}
                 >
@@ -230,7 +230,7 @@ export default function StudyPlannerPage() {
                                 <div className="flex items-center gap-3">
                                     <span
                                         className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold"
-                                        style={{ background: 'rgba(59,130,246,0.15)', color: '#60a5fa' }}
+                                        style={{ background: 'rgba(201,146,60,0.15)', color: 'var(--gold-primary)' }}
                                     >
                                         W{week.week}
                                     </span>

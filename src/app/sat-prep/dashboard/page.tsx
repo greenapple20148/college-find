@@ -68,7 +68,7 @@ export default function SATDashboard() {
         return (
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
                 <div className="card-dark p-12 text-center">
-                    <div className="w-8 h-8 border-2 rounded-full animate-spin mx-auto mb-3" style={{ borderColor: 'var(--border-primary)', borderTopColor: '#60a5fa' }} />
+                    <div className="w-8 h-8 border-2 rounded-full animate-spin mx-auto mb-3" style={{ borderColor: 'var(--border-primary)', borderTopColor: 'var(--gold-primary)' }} />
                     <p className="text-sm" style={{ color: 'var(--text-faint)' }}>Loading your dashboard...</p>
                 </div>
             </div>
@@ -79,14 +79,14 @@ export default function SATDashboard() {
         return (
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
                 <div className="card-dark p-12 text-center">
-                    <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)' }}>
-                        <svg className="w-8 h-8" style={{ color: '#60a5fa' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+                    <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(201,146,60,0.1)', border: '1px solid rgba(201,146,60,0.25)' }}>
+                        <svg className="w-8 h-8" style={{ color: 'var(--gold-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
                         </svg>
                     </div>
                     <h2 className="heading-serif text-xl mb-2" style={{ color: 'var(--text-primary)' }}>Sign in to track your progress</h2>
                     <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>Practice questions and your scores will be saved automatically.</p>
-                    <Link href="/login" className="inline-flex items-center px-6 py-2.5 rounded-xl text-sm font-semibold" style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff' }}>
+                    <Link href="/login" className="inline-flex items-center px-6 py-2.5 rounded-xl text-sm font-semibold" style={{ background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)', color: '#fff' }}>
                         Sign In →
                     </Link>
                 </div>
@@ -108,13 +108,13 @@ export default function SATDashboard() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
                 <div>
                     <div className="flex items-center gap-2 mb-2">
-                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>Dashboard</span>
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>Dashboard</span>
                     </div>
                     <h1 className="heading-serif text-2xl sm:text-3xl" style={{ color: 'var(--text-primary)' }}>Your SAT Progress</h1>
                 </div>
                 <div className="flex gap-2">
-                    <Link href="/sat-prep/practice" className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all" style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff' }}>
+                    <Link href="/sat-prep/practice" className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all" style={{ background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)', color: '#fff' }}>
                         Practice Now →
                     </Link>
                     <Link href="/sat-prep/planner" className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium border transition-all" style={{ borderColor: 'var(--border-primary)', color: 'var(--text-secondary)' }}>
@@ -125,15 +125,15 @@ export default function SATDashboard() {
 
             {isEmpty ? (
                 <div className="card-dark p-12 text-center">
-                    <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)' }}>
-                        <svg className="w-8 h-8" style={{ color: '#60a5fa' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+                    <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(201,146,60,0.1)', border: '1px solid rgba(201,146,60,0.25)' }}>
+                        <svg className="w-8 h-8" style={{ color: 'var(--gold-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                             <path d="M4 4h16v16H4z" /><path d="M12 4v16M4 12h16" />
                         </svg>
                     </div>
                     <h2 className="heading-serif text-xl mb-2" style={{ color: 'var(--text-primary)' }}>No practice data yet</h2>
                     <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>Start practicing to see your progress, accuracy, and score trends here.</p>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                        <Link href="/sat-prep/practice" className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-sm font-semibold" style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff' }}>
+                        <Link href="/sat-prep/practice" className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-sm font-semibold" style={{ background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)', color: '#fff' }}>
                             Start Practicing
                         </Link>
                         <Link href="/sat-prep/calculator" className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-sm font-medium border" style={{ borderColor: 'var(--border-primary)', color: 'var(--text-secondary)' }}>
@@ -145,7 +145,7 @@ export default function SATDashboard() {
                 <>
                     {/* Stats Grid */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                        <StatCard label="EST. Score" value={stats.estimatedScore ? String(stats.estimatedScore) : '—'} sub={stats.estimatedScore ? 'from latest score' : 'use calculator'} color="#60a5fa" />
+                        <StatCard label="EST. Score" value={stats.estimatedScore ? String(stats.estimatedScore) : '—'} sub={stats.estimatedScore ? 'from latest score' : 'use calculator'} color="var(--gold-primary)" />
                         <StatCard label="Questions" value={String(stats.totalQuestions)} sub="completed" color="var(--text-primary)" />
                         <StatCard label="Accuracy" value={`${stats.accuracy}%`} sub={`${stats.correctCount} correct`} color={stats.accuracy >= 70 ? '#22c55e' : '#eab308'} />
                         <StatCard label="Streak" value={stats.streak > 0 ? `${stats.streak} day${stats.streak !== 1 ? 's' : ''}` : '—'} sub={stats.streak > 0 ? '🔥 keep going!' : 'practice today!'} color="#f97316" />
@@ -165,10 +165,10 @@ export default function SATDashboard() {
                                         const height = ((d.score - min) / range) * 80 + 20
                                         return (
                                             <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                                                <span className="text-[10px] font-mono" style={{ color: '#60a5fa' }}>{d.score}</span>
+                                                <span className="text-[10px] font-mono" style={{ color: 'var(--gold-primary)' }}>{d.score}</span>
                                                 <div
                                                     className="w-full rounded-t-md transition-all duration-500"
-                                                    style={{ height: `${height}%`, background: 'linear-gradient(180deg, #3b82f6, #2563eb)', opacity: 0.8 }}
+                                                    style={{ height: `${height}%`, background: 'linear-gradient(180deg, var(--gold-primary), #B8860B)', opacity: 0.8 }}
                                                 />
                                                 <span className="text-[9px]" style={{ color: 'var(--text-ghost)' }}>{d.date}</span>
                                             </div>
@@ -189,19 +189,19 @@ export default function SATDashboard() {
                                 <div>
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Math</span>
-                                        <span className="text-lg font-bold font-mono" style={{ color: '#60a5fa' }}>{stats.mathScore || '—'}</span>
+                                        <span className="text-lg font-bold font-mono" style={{ color: 'var(--gold-primary)' }}>{stats.mathScore || '—'}</span>
                                     </div>
                                     <div className="h-3 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                                        <div className="h-full rounded-full" style={{ width: `${stats.mathScore ? ((stats.mathScore - 200) / 600) * 100 : 0}%`, background: 'linear-gradient(90deg, #3b82f6, #60a5fa)' }} />
+                                        <div className="h-full rounded-full" style={{ width: `${stats.mathScore ? ((stats.mathScore - 200) / 600) * 100 : 0}%`, background: 'linear-gradient(90deg, var(--gold-primary), #D4A846)' }} />
                                     </div>
                                 </div>
                                 <div>
                                     <div className="flex items-center justify-between mb-2">
                                         <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Reading & Writing</span>
-                                        <span className="text-lg font-bold font-mono" style={{ color: '#818cf8' }}>{stats.rwScore || '—'}</span>
+                                        <span className="text-lg font-bold font-mono" style={{ color: '#B8860B' }}>{stats.rwScore || '—'}</span>
                                     </div>
                                     <div className="h-3 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
-                                        <div className="h-full rounded-full" style={{ width: `${stats.rwScore ? ((stats.rwScore - 200) / 600) * 100 : 0}%`, background: 'linear-gradient(90deg, #8b5cf6, #a78bfa)' }} />
+                                        <div className="h-full rounded-full" style={{ width: `${stats.rwScore ? ((stats.rwScore - 200) / 600) * 100 : 0}%`, background: 'linear-gradient(90deg, #B8860B, #C8A243)' }} />
                                     </div>
                                 </div>
                             </div>

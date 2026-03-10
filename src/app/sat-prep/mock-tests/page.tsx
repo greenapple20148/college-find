@@ -58,8 +58,8 @@ export default function MockTestsPage() {
             {/* Header */}
             <div className="mb-8">
                 <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                    <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                    <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                         Premium Feature
                     </span>
                 </div>
@@ -74,7 +74,7 @@ export default function MockTestsPage() {
             {/* Test overview stats */}
             <div className="grid grid-cols-3 gap-4 mb-8">
                 <div className="card-dark p-4 text-center">
-                    <p className="text-2xl font-bold font-mono" style={{ color: '#60a5fa' }}>4</p>
+                    <p className="text-2xl font-bold font-mono" style={{ color: 'var(--gold-primary)' }}>4</p>
                     <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-ghost)' }}>Available Tests</p>
                 </div>
                 <div className="card-dark p-4 text-center">
@@ -98,9 +98,9 @@ export default function MockTestsPage() {
                                     <span
                                         className="text-[10px] px-2 py-0.5 rounded-full font-medium"
                                         style={{
-                                            backgroundColor: 'rgba(59,130,246,0.1)',
-                                            color: '#60a5fa',
-                                            border: '1px solid rgba(59,130,246,0.2)',
+                                            backgroundColor: 'rgba(201,146,60,0.1)',
+                                            color: 'var(--gold-primary)',
+                                            border: '1px solid rgba(201,146,60,0.2)',
                                         }}
                                     >
                                         {test.difficulty}
@@ -136,9 +136,9 @@ export default function MockTestsPage() {
                                 onClick={() => setShowUpgrade(true)}
                                 className="px-6 py-2.5 rounded-xl text-sm font-semibold transition-all"
                                 style={{
-                                    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                                    background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)',
                                     color: '#fff',
-                                    boxShadow: '0 2px 10px rgba(59,130,246,0.2)',
+                                    boxShadow: '0 2px 10px rgba(201,146,60,0.2)',
                                 }}
                             >
                                 {test.attempts > 0 ? 'Retake' : 'Start Test'}
@@ -154,11 +154,11 @@ export default function MockTestsPage() {
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
                     <div
                         className="relative w-full max-w-md rounded-2xl border p-8 text-center"
-                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'rgba(59,130,246,0.3)' }}
+                        style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'rgba(201,146,60,0.3)' }}
                         onClick={e => e.stopPropagation()}
                     >
-                        <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)' }}>
-                            <svg className="w-8 h-8" style={{ color: '#60a5fa' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+                        <div className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-5" style={{ background: 'rgba(201,146,60,0.1)', border: '1px solid rgba(201,146,60,0.25)' }}>
+                            <svg className="w-8 h-8" style={{ color: 'var(--gold-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                                 <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
                             </svg>
                         </div>
@@ -179,7 +179,7 @@ export default function MockTestsPage() {
                             <Link
                                 href="/sat-prep"
                                 className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center"
-                                style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: '#fff' }}
+                                style={{ background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)', color: '#fff' }}
                             >
                                 See Plans
                             </Link>

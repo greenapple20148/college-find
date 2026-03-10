@@ -144,28 +144,21 @@ export default function SATAcePage() {
                     className="absolute inset-0 pointer-events-none"
                     aria-hidden="true"
                     style={{
-                        background: 'radial-gradient(ellipse 60% 50% at 50% 30%, rgba(59,130,246,0.08) 0%, transparent 70%)',
+                        background: 'radial-gradient(ellipse 60% 50% at 50% 30%, rgba(201,146,60,0.07) 0%, transparent 70%)',
                     }}
                 />
 
                 <div className="relative max-w-3xl mx-auto text-center">
                     <div className="flex items-center justify-center gap-2 mb-6">
-                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                             SAT Preparation
                         </span>
                     </div>
 
                     <h1 className="heading-serif text-4xl sm:text-5xl lg:text-6xl mb-6 leading-[1.15]" style={{ color: 'var(--text-primary)' }}>
                         Ace the SAT with{' '}
-                        <span
-                            className="heading-serif-italic"
-                            style={{
-                                background: 'linear-gradient(135deg, #60a5fa, #3b82f6, #818cf8)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                            }}
-                        >
+                        <span className="heading-serif-italic text-gradient-gold">
                             confidence
                         </span>
                     </h1>
@@ -178,22 +171,13 @@ export default function SATAcePage() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
                             href="/sat-prep/calculator"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300"
-                            style={{
-                                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                                color: '#fff',
-                                boxShadow: '0 4px 20px rgba(59,130,246,0.3)',
-                            }}
+                            className="btn-gold text-lg px-8 py-3"
                         >
                             Try Score Calculator →
                         </Link>
                         <Link
                             href="/sat-prep/practice"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300 border"
-                            style={{
-                                borderColor: 'rgba(59,130,246,0.4)',
-                                color: 'var(--text-primary)',
-                            }}
+                            className="btn-outline text-lg px-8 py-3"
                         >
                             Practice Questions
                         </Link>
@@ -206,7 +190,7 @@ export default function SATAcePage() {
                             { num: '4.9★', label: 'Rating' },
                         ].map(s => (
                             <div key={s.label} className="text-center">
-                                <div className="text-xl font-bold" style={{ color: '#60a5fa' }}>{s.num}</div>
+                                <div className="text-xl font-bold" style={{ color: 'var(--gold-primary)' }}>{s.num}</div>
                                 <div className="text-xs" style={{ color: 'var(--text-ghost)' }}>{s.label}</div>
                             </div>
                         ))}
@@ -219,21 +203,14 @@ export default function SATAcePage() {
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-14">
                         <div className="flex items-center justify-center gap-2 mb-4">
-                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                            <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                            <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                                 Features
                             </span>
                         </div>
                         <h2 className="heading-serif text-3xl sm:text-4xl" style={{ color: 'var(--text-primary)' }}>
                             Everything you need to{' '}
-                            <span
-                                className="heading-serif-italic"
-                                style={{
-                                    background: 'linear-gradient(135deg, #60a5fa, #818cf8)',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                }}
-                            >
+                            <span className="heading-serif-italic text-gradient-gold">
                                 ace the SAT
                             </span>
                         </h2>
@@ -250,9 +227,9 @@ export default function SATAcePage() {
                                     <span
                                         className="absolute top-4 right-4 text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full"
                                         style={{
-                                            background: 'rgba(139,92,246,0.15)',
-                                            color: '#a78bfa',
-                                            border: '1px solid rgba(139,92,246,0.25)',
+                                            background: 'rgba(201,146,60,0.12)',
+                                            color: 'var(--gold-primary)',
+                                            border: '1px solid rgba(201,146,60,0.25)',
                                         }}
                                     >
                                         Premium
@@ -260,7 +237,7 @@ export default function SATAcePage() {
                                 )}
                                 <div
                                     className="mb-4 transition-transform duration-300 group-hover:scale-110 inline-block"
-                                    style={{ color: '#60a5fa' }}
+                                    style={{ color: 'var(--gold-primary)' }}
                                 >
                                     {f.icon}
                                 </div>
@@ -280,21 +257,14 @@ export default function SATAcePage() {
             <section className="py-20 px-4 relative" aria-label="How SAT Ace Works">
                 <div className="max-w-3xl mx-auto text-center">
                     <div className="flex items-center justify-center gap-2 mb-4">
-                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                        <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                             How It Works
                         </span>
                     </div>
                     <h2 className="heading-serif text-3xl sm:text-4xl mb-14" style={{ color: 'var(--text-primary)' }}>
                         Your path to a{' '}
-                        <span
-                            className="heading-serif-italic"
-                            style={{
-                                background: 'linear-gradient(135deg, #60a5fa, #818cf8)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                            }}
-                        >
+                        <span className="heading-serif-italic text-gradient-gold">
                             higher score
                         </span>
                     </h2>
@@ -310,9 +280,9 @@ export default function SATAcePage() {
                                 <div
                                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-lg font-bold"
                                     style={{
-                                        background: 'rgba(59,130,246,0.1)',
-                                        border: '1px solid rgba(59,130,246,0.3)',
-                                        color: '#60a5fa',
+                                        background: 'rgba(201,146,60,0.1)',
+                                        border: '1px solid rgba(201,146,60,0.3)',
+                                        color: 'var(--gold-primary)',
                                     }}
                                 >
                                     {s.step}
@@ -330,21 +300,14 @@ export default function SATAcePage() {
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-14">
                         <div className="flex items-center justify-center gap-2 mb-4">
-                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                            <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                            <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                                 Pricing
                             </span>
                         </div>
                         <h2 className="heading-serif text-3xl sm:text-4xl" style={{ color: 'var(--text-primary)' }}>
                             Start free,{' '}
-                            <span
-                                className="heading-serif-italic"
-                                style={{
-                                    background: 'linear-gradient(135deg, #60a5fa, #818cf8)',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                }}
-                            >
+                            <span className="heading-serif-italic text-gradient-gold">
                                 upgrade when ready
                             </span>
                         </h2>
@@ -356,15 +319,15 @@ export default function SATAcePage() {
                                 key={plan.name}
                                 className="card-dark p-6 sm:p-8 relative flex flex-col"
                                 style={plan.highlight ? {
-                                    borderColor: 'rgba(59,130,246,0.4)',
-                                    boxShadow: '0 0 40px rgba(59,130,246,0.1)',
+                                    borderColor: 'rgba(201,146,60,0.4)',
+                                    boxShadow: '0 0 40px rgba(201,146,60,0.08)',
                                 } : {}}
                             >
                                 {plan.highlight && (
                                     <div
                                         className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
                                         style={{
-                                            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                                            background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)',
                                             color: '#fff',
                                         }}
                                     >
@@ -385,7 +348,7 @@ export default function SATAcePage() {
                                 <ul className="flex flex-col gap-2.5 mb-8 flex-1">
                                     {plan.features.map(f => (
                                         <li key={f} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-muted)' }}>
-                                            <svg className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#3b82f6' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                            <svg className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: 'var(--gold-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                                                 <polyline points="20 6 9 17 4 12" />
                                             </svg>
                                             {f}
@@ -395,15 +358,7 @@ export default function SATAcePage() {
 
                                 <Link
                                     href={plan.href}
-                                    className="inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold text-sm transition-all duration-300"
-                                    style={plan.highlight ? {
-                                        background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                                        color: '#fff',
-                                        boxShadow: '0 4px 15px rgba(59,130,246,0.25)',
-                                    } : {
-                                        border: '1px solid var(--border-primary)',
-                                        color: 'var(--text-secondary)',
-                                    }}
+                                    className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${plan.highlight ? 'btn-gold' : 'btn-outline'}`}
                                 >
                                     {plan.cta}
                                 </Link>
@@ -418,14 +373,7 @@ export default function SATAcePage() {
                 <div className="max-w-2xl mx-auto">
                     <h2 className="heading-serif text-3xl sm:text-4xl mb-4" style={{ color: 'var(--text-primary)' }}>
                         Start your SAT prep{' '}
-                        <span
-                            className="heading-serif-italic"
-                            style={{
-                                background: 'linear-gradient(135deg, #60a5fa, #818cf8)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                            }}
-                        >
+                        <span className="heading-serif-italic text-gradient-gold">
                             today
                         </span>
                     </h2>
@@ -434,12 +382,7 @@ export default function SATAcePage() {
                     </p>
                     <Link
                         href="/sat-prep/calculator"
-                        className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl font-semibold text-lg transition-all duration-300"
-                        style={{
-                            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                            color: '#fff',
-                            boxShadow: '0 4px 20px rgba(59,130,246,0.3)',
-                        }}
+                        className="btn-gold text-lg px-10 py-4"
                     >
                         Get Started — It&apos;s Free →
                     </Link>
