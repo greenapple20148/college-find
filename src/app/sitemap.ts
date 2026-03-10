@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next'
 import { createServiceClient } from '@/lib/supabase/server'
 import { US_STATES, MAJOR_OPTIONS } from '@/lib/types'
+import { ALL_SAT_SCORE_PAGES } from '@/lib/sat-seo-data'
 
 const SITE_URL = 'https://collegefindtool.com'
 
 const GPA_VALUES = [4.0, 3.9, 3.8, 3.7, 3.6, 3.5, 3.4, 3.3, 3.2, 3.0, 2.8, 2.5]
-const SAT_VALUES = [1600, 1550, 1500, 1450, 1400, 1350, 1300, 1250, 1200, 1150, 1100, 1000]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
@@ -39,8 +39,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }))
 
-  const satUrls: MetadataRoute.Sitemap = SAT_VALUES.map(s => ({
-    url: `${SITE_URL}/sat/${s}-colleges`,
+  const satUrls: MetadataRoute.Sitemap = ALL_SAT_SCORE_PAGES.map(p => ({
+    url: `${SITE_URL}/sat/${p.score}-colleges`,
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.75,
@@ -104,5 +104,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...satUrls,
     ...majorUrls,
     ...stateUrls,
+    // SAT Ace pages
+    { url: `${SITE_URL}/sat-prep`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${SITE_URL}/sat-prep/calculator`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
+    { url: `${SITE_URL}/sat-prep/practice`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.8 },
+    { url: `${SITE_URL}/sat-prep/planner`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.75 },
+    { url: `${SITE_URL}/sat-prep/dashboard`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.6 },
+    { url: `${SITE_URL}/sat-prep/mock-tests`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.75 },
   ]
 }
