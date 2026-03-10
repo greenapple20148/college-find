@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
+import { FEATURES, type PlanId, getFeatureLimit } from '@/lib/feature-config'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -62,6 +63,32 @@ export async function POST(req: NextRequest) {
   const service = createServiceClient()
 
   if (user) {
+    // ── Feature gate: check saved colleges limit ──────────
+    const { data: profile } = await service
+      .from('user_profiles')
+      .select('plan')
+      .eq('user_id', user.id)
+      .single()
+
+    const plan = (profile?.plan ?? 'free') as PlanId
+    const limitDef = getFeatureLimit('saved_colleges', plan)
+
+    if (limitDef && limitDef.limit !== Infinity) {
+      const { count } = await service
+        .from('saved_colleges')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', user.id)
+
+      if ((count ?? 0) >= limitDef.limit) {
+        return NextResponse.json({
+          error: 'limit_reached',
+          message: FEATURES.saved_colleges.upgradeMessage,
+          remaining: 0,
+          upgrade_required: true,
+        }, { status: 403 })
+      }
+    }
+
     // Auth user: save with user_id
     const { data, error } = await service
       .from('saved_colleges')

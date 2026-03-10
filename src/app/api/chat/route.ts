@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient } from '@supabase/supabase-js'
 import { checkRateLimit, AI_CHAT_LIMIT } from '@/lib/rate-limit'
+import { gateAndRecord } from '@/lib/feature-gate'
 
 const SYSTEM_PROMPT = `You are CollegeFind AI Advisor — a warm, knowledgeable college admissions counselor built into the CollegeFind platform. You help high school students (primarily 11th and 12th graders) navigate the college search and application process.
 
@@ -69,17 +70,38 @@ export async function POST(req: NextRequest) {
         )
     }
 
-    // Rate limiting — identify user by auth token or fall back to IP
+    // Auth + feature gate — identify user by auth token or fall back to IP
     let rateLimitKey = `chat:${req.headers.get('x-forwarded-for') || 'unknown'}`
+    let authUserId: string | null = null
     const authHeader = req.headers.get('authorization')
     if (authHeader && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
         try {
             const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
             const { data: { user: authUser } } = await sb.auth.getUser(authHeader.replace('Bearer ', ''))
-            if (authUser) rateLimitKey = `chat:${authUser.id}`
+            if (authUser) {
+                rateLimitKey = `chat:${authUser.id}`
+                authUserId = authUser.id
+            }
         } catch { /* use IP-based key */ }
     }
 
+    // Plan-based usage gate (daily/monthly limits)
+    if (authUserId) {
+        const access = await gateAndRecord(authUserId, 'ai_advisor')
+        if (!access.allowed) {
+            return new Response(
+                JSON.stringify({
+                    error: 'limit_reached',
+                    message: access.message,
+                    remaining: access.remaining,
+                    upgrade_required: access.upgrade_required,
+                }),
+                { status: 403, headers: { 'Content-Type': 'application/json' } }
+            )
+        }
+    }
+
+    // Burst rate limiting (in-memory, per-process)
     const rl = checkRateLimit(rateLimitKey, AI_CHAT_LIMIT)
     if (!rl.allowed) {
         return new Response(

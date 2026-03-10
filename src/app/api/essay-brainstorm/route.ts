@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { checkRateLimit, AI_ESSAY_BRAINSTORM_LIMIT } from '@/lib/rate-limit'
+import { gateAndRecord } from '@/lib/feature-gate'
 
 const SYSTEM_PROMPT = `You are a college admissions counselor helping a student brainstorm essay ideas.
 
@@ -47,7 +48,18 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Rate limiting
+    // Plan-based usage gate (daily limits)
+    const access = await gateAndRecord(user.id, 'essay_brainstorm')
+    if (!access.allowed) {
+        return NextResponse.json({
+            error: 'limit_reached',
+            message: access.message,
+            remaining: access.remaining,
+            upgrade_required: access.upgrade_required,
+        }, { status: 403 })
+    }
+
+    // Burst rate limiting (in-memory)
     const rl = checkRateLimit(`essay-brainstorm:${user.id}`, AI_ESSAY_BRAINSTORM_LIMIT)
     if (!rl.allowed) {
         return NextResponse.json(

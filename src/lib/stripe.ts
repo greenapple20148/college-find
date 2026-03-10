@@ -16,8 +16,25 @@ export const stripe = key
 /**
  * Map plan IDs to Stripe Price IDs.
  * After creating products/prices in Stripe Dashboard, paste the price_xxx IDs here.
+ *
+ * Plans:
+ *   - pro:     $12/month or $59/year
+ *   - premium: $99/year only
+ *
+ * Legacy (kept for existing subscribers):
+ *   - student-pro, prep-pro-plus, toolkit, bundle
  */
 export const STRIPE_PRICE_MAP: Record<string, { monthly?: string; yearly?: string; oneTime?: string }> = {
+    // ── New plan IDs ─────────────────────────────────
+    'pro': {
+        monthly: process.env.STRIPE_PRICE_PRO_MONTHLY ?? '',
+        yearly: process.env.STRIPE_PRICE_PRO_YEARLY ?? '',
+    },
+    'premium': {
+        yearly: process.env.STRIPE_PRICE_PREMIUM_YEARLY ?? '',
+    },
+
+    // ── Legacy plan IDs (kept for backward compat) ───
     'student-pro': {
         monthly: process.env.STRIPE_PRICE_STUDENT_PRO_MONTHLY ?? '',
         yearly: process.env.STRIPE_PRICE_STUDENT_PRO_YEARLY ?? '',

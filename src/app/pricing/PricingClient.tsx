@@ -5,13 +5,14 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/context/AuthContext'
 import { useSubscription } from '@/hooks/useSubscription'
+import { PLANS, PLAN_HIERARCHY, type PlanId } from '@/lib/feature-config'
 
 /* ─── Plan Data ─────────────────────────────────────────────────── */
 
 type BillingCycle = 'monthly' | 'yearly'
 
 interface PlanTier {
-    id: string
+    id: PlanId
     name: string
     tagline: string
     monthlyPrice: number
@@ -35,105 +36,36 @@ const SUBSCRIPTION_PLANS: PlanTier[] = [
         accent: 'var(--gold-primary)',
         accentBg: 'rgba(201,146,60,0.06)',
         accentBorder: 'rgba(201,146,60,0.15)',
-        features: [
-            'College search (6,000+ schools)',
-            'Admission chance calculator',
-            'View college profiles',
-            'Save up to 10 colleges',
-            'Cost & ROI calculators',
-            'View application deadlines',
-            'Compare up to 2 colleges',
-        ],
+        features: PLANS.free.features,
         cta: 'Start Free',
         ctaStyle: 'outline',
     },
     {
-        id: 'student-pro',
-        name: 'Student Pro',
-        tagline: 'For seniors actively applying',
-        monthlyPrice: 7,
-        yearlyPrice: 29,
+        id: 'pro',
+        name: 'Pro',
+        tagline: 'For serious students actively applying',
+        monthlyPrice: 12,
+        yearlyPrice: 59,
         accent: 'var(--gold-primary)',
         accentBg: 'rgba(201,146,60,0.08)',
         accentBorder: 'rgba(201,146,60,0.25)',
         popular: true,
-        features: [
-            'Unlimited saved colleges',
-            'Advanced admission model',
-            'Unlimited college comparisons',
-            'Application deadline tracker',
-            'Scholarship search',
-            'Personalized college recommendations',
-            'Application checklist per college',
-            'College essay guides & examples',
-        ],
+        features: PLANS.pro.features,
         cta: 'Upgrade to Pro',
         ctaStyle: 'gold',
     },
     {
-        id: 'prep-pro-plus',
-        name: 'College Prep Pro+',
-        tagline: 'Full toolkit for serious applicants',
-        monthlyPrice: 12,
-        yearlyPrice: 49,
+        id: 'premium',
+        name: 'Premium',
+        tagline: 'Full toolkit for maximum results',
+        monthlyPrice: 0,
+        yearlyPrice: 99,
         accent: 'var(--gold-primary)',
         accentBg: 'rgba(201,146,60,0.1)',
         accentBorder: 'rgba(201,146,60,0.2)',
-        features: [
-            'Everything in Student Pro',
-            'AI college advisor (chat)',
-            'Essay Toolkit (8 AI tools)',
-            'Essay analyzer & idea scorer',
-            'Supplemental essay helper',
-            'Activity resume guide',
-            'Early access to new features',
-        ],
-        cta: 'Go Pro+',
+        features: PLANS.premium.features,
+        cta: 'Go Premium',
         ctaStyle: 'gradient',
-    },
-]
-
-interface OneTimePlan {
-    id: string
-    name: string
-    price: number
-    badge: string
-    badgeColor: string
-    badgeBg: string
-    tagline: string
-    features: string[]
-}
-
-const ONE_TIME_PLANS: OneTimePlan[] = [
-    {
-        id: 'toolkit',
-        name: 'College Application Toolkit',
-        price: 19,
-        badge: 'One-Time',
-        badgeColor: 'var(--gold-primary)',
-        badgeBg: 'rgba(201,146,60,0.08)',
-        tagline: 'Pay once — keep access for 6 months',
-        features: [
-            'Pro features for 6 months',
-            'Unlimited comparisons & saves',
-            'Application checklist',
-            'Personalized recommendations',
-        ],
-    },
-    {
-        id: 'bundle',
-        name: 'College Application Bundle',
-        price: 25,
-        badge: 'Best Value',
-        badgeColor: '#C9923C',
-        badgeBg: 'rgba(201,146,60,0.1)',
-        tagline: 'Everything you need — one purchase',
-        features: [
-            'All Pro+ features for 6 months',
-            'Essay Toolkit (8 AI tools)',
-            'AI college advisor (chat)',
-            'Application checklist & tracker',
-        ],
     },
 ]
 
@@ -150,7 +82,7 @@ function CheckSvg({ color }: { color: string }) {
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <path d="M20 6 9 17l-5-5" />
+            <polyline points="20 6 9 17 4 12" />
         </svg>
     )
 }
@@ -158,7 +90,7 @@ function CheckSvg({ color }: { color: string }) {
 function SparklesSvg() {
     return (
         <svg
-            className="w-5 h-5"
+            className="w-3.5 h-3.5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -167,6 +99,10 @@ function SparklesSvg() {
             strokeLinejoin="round"
         >
             <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+            <path d="M5 3v4" />
+            <path d="M19 17v4" />
+            <path d="M3 5h4" />
+            <path d="M17 19h4" />
         </svg>
     )
 }
@@ -188,25 +124,6 @@ function ShieldSvg() {
     )
 }
 
-function GiftSvg() {
-    return (
-        <svg
-            className="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <rect x="3" y="8" width="18" height="4" rx="1" />
-            <path d="M12 8v13" />
-            <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
-            <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 4.8 0 0 1 12 8a4.8 4.8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
-        </svg>
-    )
-}
-
 /* ─── Component ─────────────────────────────────────────────────── */
 
 export function PricingPage() {
@@ -220,11 +137,7 @@ export function PricingPage() {
     const canceled = searchParams.get('canceled') === 'true'
     const successPlan = searchParams.get('plan')
 
-    const PLAN_LEVEL: Record<string, number> = {
-        free: 0, 'student-pro': 1, toolkit: 1, 'prep-pro-plus': 2, bundle: 2,
-    }
-
-    async function handleCheckout(planId: string, cycle: 'monthly' | 'yearly' | 'one_time') {
+    async function handleCheckout(planId: string, cycle: 'monthly' | 'yearly') {
         if (!user) {
             router.push('/signup')
             return
@@ -287,7 +200,7 @@ export function PricingPage() {
                             color: 'var(--gold-primary)',
                         }}
                     >
-                        You&apos;re now on the <strong>{successPlan?.replace('-', ' ')}</strong> plan. Welcome aboard!
+                        You&apos;re now on the <strong>{successPlan}</strong> plan. Welcome aboard!
                     </div>
                 )}
                 {canceled && (
@@ -384,11 +297,17 @@ export function PricingPage() {
                 <div className="grid md:grid-cols-3 gap-5 mb-20">
                     {SUBSCRIPTION_PLANS.map(plan => {
                         const price =
-                            billing === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice
+                            billing === 'monthly'
+                                ? (plan.monthlyPrice > 0 ? plan.monthlyPrice : plan.yearlyPrice)
+                                : plan.yearlyPrice
+                        const showMonthly = billing === 'monthly' && plan.monthlyPrice > 0
                         const isPopular = plan.popular
-                        const planLevel = PLAN_LEVEL[plan.id] ?? 0
+                        const planLevel = PLAN_HIERARCHY[plan.id] ?? 0
                         const isCurrent = currentPlan === plan.id || (currentLevel === planLevel && currentLevel > 0)
                         const isDowngrade = planLevel < currentLevel
+
+                        // Premium is yearly-only
+                        const isYearlyOnly = plan.id === 'premium' && billing === 'monthly'
 
                         return (
                             <div
@@ -469,10 +388,15 @@ export function PricingPage() {
                                                 className="text-sm"
                                                 style={{ color: 'var(--text-faint)' }}
                                             >
-                                                /{billing === 'monthly' ? 'mo' : 'yr'}
+                                                /{showMonthly ? 'mo' : 'yr'}
                                             </span>
                                         )}
                                     </div>
+                                    {isYearlyOnly && (
+                                        <p className="text-xs mt-1" style={{ color: 'var(--gold-primary)' }}>
+                                            Annual plan only — ${Math.round(plan.yearlyPrice / 12)}/mo billed yearly
+                                        </p>
+                                    )}
                                     {billing === 'yearly' && plan.monthlyPrice > 0 && (
                                         <p className="text-xs mt-1" style={{ color: 'var(--text-ghost)' }}>
                                             <span
@@ -532,7 +456,7 @@ export function PricingPage() {
                                     </Link>
                                 ) : (
                                     <button
-                                        onClick={() => handleCheckout(plan.id, billing)}
+                                        onClick={() => handleCheckout(plan.id, isYearlyOnly ? 'yearly' : billing)}
                                         disabled={loadingPlan === plan.id}
                                         className="block w-full py-3 rounded-xl text-sm font-semibold text-center transition-all duration-200 hover:opacity-90 disabled:opacity-50"
                                         style={
@@ -559,113 +483,71 @@ export function PricingPage() {
                     })}
                 </div>
 
-                {/* ── One-Time Purchases ─────────────────────────────── */}
-                <div className="mb-16">
-                    <div className="text-center mb-8">
-                        <div
-                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium mb-4"
-                            style={{
-                                backgroundColor: 'rgba(201,146,60,0.08)',
-                                color: 'var(--gold-primary)',
-                                border: '1px solid rgba(201,146,60,0.15)',
-                            }}
-                        >
-                            <GiftSvg />
-                            One-Time Purchases — No Subscription Needed
-                        </div>
-                        <h2
-                            className="text-2xl md:text-3xl font-bold heading-serif"
-                            style={{ color: 'var(--text-primary)' }}
-                        >
-                            Prefer to pay once?
-                        </h2>
-                        <p
-                            className="text-sm mt-2 max-w-md mx-auto"
-                            style={{ color: 'var(--text-faint)' }}
-                        >
-                            Get everything you need for your applications with a single
-                            purchase — no recurring charges.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-5 max-w-3xl mx-auto">
-                        {ONE_TIME_PLANS.map(plan => (
-                            <div
-                                key={plan.id}
-                                className="rounded-2xl border p-6 flex flex-col transition-all duration-300 hover:translate-y-[-2px]"
-                                style={{
-                                    backgroundColor: 'var(--bg-secondary)',
-                                    borderColor: 'var(--border-subtle)',
-                                    boxShadow: 'var(--shadow-card)',
-                                }}
-                            >
-                                <div className="flex items-center justify-between mb-3">
-                                    <h3
-                                        className="text-lg font-bold"
-                                        style={{ color: 'var(--text-primary)' }}
-                                    >
-                                        {plan.name}
-                                    </h3>
-                                    <span
-                                        className="text-xs font-bold px-2.5 py-1 rounded-full"
+                {/* ── Feature Comparison Table ─────────────────────────── */}
+                <div className="mb-20">
+                    <h2
+                        className="text-2xl md:text-3xl font-bold text-center mb-8 heading-serif"
+                        style={{ color: 'var(--text-primary)' }}
+                    >
+                        Compare Plans
+                    </h2>
+                    <div
+                        className="rounded-2xl border overflow-hidden"
+                        style={{
+                            backgroundColor: 'var(--bg-secondary)',
+                            borderColor: 'var(--border-subtle)',
+                        }}
+                    >
+                        <table className="w-full text-sm">
+                            <thead>
+                                <tr style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                                    <th className="text-left px-5 py-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Feature</th>
+                                    <th className="text-center px-4 py-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Free</th>
+                                    <th className="text-center px-4 py-4 font-semibold" style={{ color: 'var(--gold-primary)' }}>Pro</th>
+                                    <th className="text-center px-4 py-4 font-semibold" style={{ color: 'var(--gold-primary)' }}>Premium</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[
+                                    { feature: 'SAT practice questions', free: '15/day', pro: 'Unlimited', premium: 'Unlimited' },
+                                    { feature: 'AI advisor messages', free: '3/day', pro: '50/month', premium: 'Unlimited' },
+                                    { feature: 'Essay brainstorming', free: '1/day', pro: 'Unlimited', premium: 'Unlimited' },
+                                    { feature: 'Saved colleges', free: '5', pro: 'Unlimited', premium: 'Unlimited' },
+                                    { feature: 'AI answer explanations', free: '—', pro: true, premium: true },
+                                    { feature: 'Personalized recommendations', free: '—', pro: true, premium: true },
+                                    { feature: 'Admission predictor', free: '—', pro: true, premium: true },
+                                    { feature: 'Full application checklist', free: '—', pro: true, premium: true },
+                                    { feature: 'Deadline tracker', free: '—', pro: true, premium: true },
+                                    { feature: 'Scholarship alerts', free: '—', pro: true, premium: true },
+                                    { feature: 'Score improvement predictor', free: '—', pro: '—', premium: true },
+                                    { feature: 'Weak area diagnostics', free: '—', pro: '—', premium: true },
+                                    { feature: 'Personalized study plan', free: '—', pro: '—', premium: true },
+                                    { feature: 'AI admission strategy', free: '—', pro: '—', premium: true },
+                                    { feature: 'Major & career match', free: '—', pro: '—', premium: true },
+                                    { feature: 'Financial aid estimator', free: '—', pro: '—', premium: true },
+                                    { feature: 'Essay feedback', free: '—', pro: '—', premium: true },
+                                ].map((row, i) => (
+                                    <tr
+                                        key={i}
                                         style={{
-                                            backgroundColor: plan.badgeBg,
-                                            color: plan.badgeColor,
+                                            borderBottom: '1px solid var(--border-subtle)',
+                                            backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(201,146,60,0.02)',
                                         }}
                                     >
-                                        {plan.badge}
-                                    </span>
-                                </div>
-                                <p
-                                    className="text-sm mb-4"
-                                    style={{ color: 'var(--text-faint)' }}
-                                >
-                                    {plan.tagline}
-                                </p>
-
-                                <div className="mb-5">
-                                    <span
-                                        className="text-3xl font-bold"
-                                        style={{ color: 'var(--text-primary)' }}
-                                    >
-                                        ${plan.price}
-                                    </span>
-                                    <span
-                                        className="text-sm ml-1"
-                                        style={{ color: 'var(--text-ghost)' }}
-                                    >
-                                        one-time
-                                    </span>
-                                </div>
-
-                                <ul className="space-y-2 mb-6 flex-1">
-                                    {plan.features.map((f, i) => (
-                                        <li key={i} className="flex items-start gap-2.5">
-                                            <CheckSvg color={plan.badgeColor} />
-                                            <span
-                                                className="text-sm"
-                                                style={{ color: 'var(--text-secondary)' }}
-                                            >
-                                                {f}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <button
-                                    onClick={() => handleCheckout(plan.id, 'one_time' as 'monthly')}
-                                    disabled={loadingPlan === plan.id}
-                                    className="block w-full py-3 rounded-xl text-sm font-semibold text-center transition-all duration-200 hover:opacity-90 disabled:opacity-50"
-                                    style={{
-                                        backgroundColor: 'var(--bg-tertiary)',
-                                        color: 'var(--text-primary)',
-                                        border: '1px solid var(--border-subtle)',
-                                    }}
-                                >
-                                    {loadingPlan === plan.id ? 'Redirecting...' : `Get ${plan.name}`}
-                                </button>
-                            </div>
-                        ))}
+                                        <td className="px-5 py-3" style={{ color: 'var(--text-secondary)' }}>{row.feature}</td>
+                                        <td className="text-center px-4 py-3" style={{ color: 'var(--text-faint)' }}>
+                                            {typeof row.free === 'string' ? row.free : <CheckSvg color="var(--gold-primary)" />}
+                                        </td>
+                                        <td className="text-center px-4 py-3" style={{ color: 'var(--text-secondary)' }}>
+                                            {typeof row.pro === 'string' ? row.pro : row.pro === true ? <span className="inline-flex justify-center"><CheckSvg color="var(--gold-primary)" /></span> : row.pro}
+                                        </td>
+                                        <td className="text-center px-4 py-3" style={{ color: 'var(--text-secondary)' }}>
+                                            {typeof row.premium === 'string' ? row.premium : row.premium === true ? <span className="inline-flex justify-center"><CheckSvg color="var(--gold-primary)" /></span> : row.premium}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -685,15 +567,7 @@ export function PricingPage() {
                             },
                             {
                                 icon: (
-                                    <svg
-                                        className="w-4 h-4"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
+                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
                                         <path d="M21 3v5h-5" />
                                         <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
@@ -704,15 +578,7 @@ export function PricingPage() {
                             },
                             {
                                 icon: (
-                                    <svg
-                                        className="w-4 h-4"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
+                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <rect width="20" height="16" x="2" y="4" rx="2" />
                                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                                     </svg>
@@ -721,15 +587,7 @@ export function PricingPage() {
                             },
                             {
                                 icon: (
-                                    <svg
-                                        className="w-4 h-4"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
+                                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                                     </svg>
                                 ),
@@ -760,18 +618,22 @@ export function PricingPage() {
                         {[
                             {
                                 q: 'Can I use CollegeFind for free?',
-                                a: 'Absolutely! The free plan gives you access to college search, admission calculators, profiles, and deadlines — enough for most exploratory research.',
+                                a: 'Absolutely! The free plan gives you 15 SAT practice questions per day, basic college search, up to 5 saved colleges, and limited AI advisor access — enough to get started.',
+                            },
+                            {
+                                q: 'What does Pro unlock?',
+                                a: 'Pro gives you unlimited SAT practice, AI answer explanations, personalized college recommendations, unlimited saved colleges, the full application checklist, deadline tracker, and scholarship alerts.',
+                            },
+                            {
+                                q: 'What makes Premium worth it?',
+                                a: 'Premium adds advanced tools: SAT score improvement predictor, weak area diagnostics, a personalized study plan, AI admission strategy, major & career matching, financial aid estimator, essay feedback, and unlimited AI advisor usage.',
                             },
                             {
                                 q: 'What happens if I cancel?',
                                 a: 'You keep access until the end of your billing period. After that, you\u2019ll be downgraded to the Free plan. Your saved data is never deleted.',
                             },
                             {
-                                q: 'Are the one-time purchases separate from subscriptions?',
-                                a: 'Yes. One-time purchases give you time-limited access to Pro features without an ongoing subscription. Great for students who only need tools during application season.',
-                            },
-                            {
-                                q: 'Can I upgrade mid-billing to the College Prep Pro+ plan?',
+                                q: 'Can I upgrade from Pro to Premium?',
                                 a: 'Yes! When you upgrade, we prorate the cost for the remainder of your current billing period.',
                             },
                             {

@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 const PLAN_LABELS: Record<string, string> = {
+    'pro': 'CollegeFind Pro',
+    'premium': 'CollegeFind Premium',
     'student-pro': 'Student Pro',
     'prep-pro-plus': 'College Prep Pro+',
     'toolkit': 'College Application Toolkit',
@@ -191,23 +193,30 @@ export function SuccessPageClient() {
 
 function getFeatures(plan: string): string[] {
     switch (plan) {
+        case 'pro':
         case 'student-pro':
             return [
-                'Unlimited saved colleges',
-                'Advanced admission probability model',
-                'Unlimited college comparisons',
-                'Application deadline tracker',
+                'Unlimited SAT practice questions',
+                'AI explanations for SAT answers',
+                'Personalized college recommendations',
+                'Save unlimited colleges',
+                'Admission chance predictor',
+                'Full application checklist',
+                'Deadline tracker',
                 'Scholarship alerts',
-                'Personalized recommendations',
             ]
+        case 'premium':
         case 'prep-pro-plus':
             return [
-                'Everything in Student Pro',
-                'AI college advisor',
-                'Essay brainstorming assistant',
-                'Activity resume builder',
-                'Priority scholarship alerts',
-                'Early access to new features',
+                'Everything in Pro',
+                'SAT score improvement predictor',
+                'Weak area diagnostics',
+                'Personalized SAT study plan',
+                'AI college admission strategy',
+                'Major & career match engine',
+                'Financial aid estimator',
+                'Essay feedback & improvement suggestions',
+                'Unlimited AI advisor usage',
             ]
         case 'toolkit':
             return [

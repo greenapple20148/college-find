@@ -3,72 +3,26 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { createClient } from '@/lib/supabase/client'
+import {
+    type PlanId,
+    PLAN_HIERARCHY,
+    PLANS,
+    hasFeatureAccess,
+    type FeatureKey,
+} from '@/lib/feature-config'
 
 /* ═══════════════════════════════════════════════════════════════
    Plan hierarchy — higher index = more features
    ═══════════════════════════════════════════════════════════════ */
 
-export type PlanId = 'free' | 'student-pro' | 'prep-pro-plus' | 'toolkit' | 'bundle'
-
-const PLAN_LEVEL: Record<string, number> = {
-    free: 0,
-    'student-pro': 1,
-    toolkit: 1,          // one-time toolkit = pro-level access
-    'prep-pro-plus': 2,
-    bundle: 2,           // one-time bundle = pro+ level access
+// Legacy plan mapping (for users on old plan IDs)
+const LEGACY_MAP: Record<string, PlanId> = {
+    free: 'free',
+    'student-pro': 'pro',
+    toolkit: 'pro',
+    'prep-pro-plus': 'premium',
+    bundle: 'premium',
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   Feature definitions
-   ═══════════════════════════════════════════════════════════════ */
-
-export interface PlanLimits {
-    maxSavedColleges: number
-    maxComparisons: number
-    canExportList: boolean
-    canUseAIAdvisor: boolean
-    canUseEssayToolkit: boolean
-    canViewRecommendations: boolean
-    canUseChecklist: boolean
-    hasEssayContent: boolean
-}
-
-const PLAN_LIMITS: Record<number, PlanLimits> = {
-    0: {
-        // All features are now available to every logged-in user
-        maxSavedColleges: Infinity,
-        maxComparisons: Infinity,
-        canExportList: true,
-        canUseAIAdvisor: true,
-        canUseEssayToolkit: true,
-        canViewRecommendations: true,
-        canUseChecklist: true,
-        hasEssayContent: true,
-    },
-    1: {
-        // Student Pro / Toolkit  (same as free now)
-        maxSavedColleges: Infinity,
-        maxComparisons: Infinity,
-        canExportList: true,
-        canUseAIAdvisor: true,
-        canUseEssayToolkit: true,
-        canViewRecommendations: true,
-        canUseChecklist: true,
-        hasEssayContent: true,
-    },
-    2: {
-        // Prep Pro+ / Bundle  (same as free now)
-        maxSavedColleges: Infinity,
-        maxComparisons: Infinity,
-        canExportList: true,
-        canUseAIAdvisor: true,
-        canUseEssayToolkit: true,
-        canViewRecommendations: true,
-        canUseChecklist: true,
-        hasEssayContent: true,
-    },
-}
-
 
 /* ═══════════════════════════════════════════════════════════════
    Hook
@@ -76,7 +30,7 @@ const PLAN_LIMITS: Record<number, PlanLimits> = {
 
 export function useSubscription() {
     const { user } = useAuth()
-    const [plan, setPlan] = useState<string>('free')
+    const [plan, setPlan] = useState<PlanId>('free')
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -94,7 +48,11 @@ export function useSubscription() {
                         .select('plan')
                         .eq('user_id', user.id)
                         .single()
-                    setPlan(data?.plan || 'free')
+
+                    const rawPlan = data?.plan || 'free'
+                    // Normalize legacy plan names to new plan IDs
+                    const normalizedPlan = LEGACY_MAP[rawPlan] ?? (rawPlan as PlanId)
+                    setPlan(normalizedPlan)
                 } catch {
                     setPlan('free')
                 } finally {
@@ -103,35 +61,38 @@ export function useSubscription() {
             })()
     }, [user])
 
-    const level = PLAN_LEVEL[plan] ?? 0
-    const limits = PLAN_LIMITS[level] ?? PLAN_LIMITS[0]
+    const level = PLAN_HIERARCHY[plan] ?? 0
     const isPro = level >= 1
-    const isProPlus = level >= 2
+    const isPremium = level >= 2
 
-    const PLAN_LABELS: Record<string, string> = {
-        free: 'Free Plan',
-        'student-pro': 'Student Pro',
-        toolkit: 'Student Pro',
-        'prep-pro-plus': 'Prep Pro+',
-        bundle: 'Prep Pro+',
-    }
-    const planLabel = PLAN_LABELS[plan] ?? 'Free Plan'
+    const planConfig = PLANS[plan] ?? PLANS.free
+    const planLabel = planConfig.name
 
     return {
+        /** Current plan ID */
         plan,
+        /** Display name for the plan */
         planLabel,
+        /** Numeric level (0=free, 1=pro, 2=premium) */
         level,
-        limits,
+        /** Is the user on Pro or higher? */
         isPro,
-        isProPlus,
+        /** Is the user on Premium? */
+        isPremium,
+        /** Still fetching plan data? */
         loading,
-        /** Check if user can perform an action; returns true or the required plan name */
+        /** Check if a feature is available on the current plan */
+        canAccess: (feature: FeatureKey): boolean => hasFeatureAccess(feature, plan),
+        /** Check if user meets the minimum plan level */
         requirePlan: (minLevel: number): { allowed: boolean; requiredPlan: string } => {
             if (level >= minLevel) return { allowed: true, requiredPlan: '' }
             return {
                 allowed: false,
-                requiredPlan: minLevel >= 2 ? 'College Prep Pro+' : 'Student Pro',
+                requiredPlan: minLevel >= 2 ? 'Premium' : 'Pro',
             }
         },
     }
 }
+
+// Re-export PlanId for convenience
+export type { PlanId }

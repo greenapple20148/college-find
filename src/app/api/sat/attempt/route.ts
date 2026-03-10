@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
+import { gateAndRecord } from '@/lib/feature-gate'
 
 export async function POST(req: NextRequest) {
     try {
@@ -8,6 +9,17 @@ export async function POST(req: NextRequest) {
 
         if (!user_id || !question_id || !selected_answer || section === undefined) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+        }
+
+        // ── Feature gate: check & record SAT question usage ───
+        const access = await gateAndRecord(user_id, 'sat_questions')
+        if (!access.allowed) {
+            return NextResponse.json({
+                error: 'limit_reached',
+                message: access.message,
+                remaining: access.remaining,
+                upgrade_required: access.upgrade_required,
+            }, { status: 403 })
         }
 
         const supabase = createServiceClient()
@@ -32,7 +44,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: error.message }, { status: 500 })
         }
 
-        return NextResponse.json({ data })
+        return NextResponse.json({ data, remaining: access.remaining })
     } catch (err) {
         const message = err instanceof Error ? err.message : 'Unknown error'
         return NextResponse.json({ error: message }, { status: 500 })

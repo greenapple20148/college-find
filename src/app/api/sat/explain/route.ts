@@ -1,7 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { checkFeatureAccess } from '@/lib/feature-gate'
 
 export async function POST(req: NextRequest) {
     try {
+        // ── Auth + feature gate: AI explanations require Pro ──
+        const supabase = await createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+
+        if (!user) {
+            return NextResponse.json({ error: 'Unauthorized — sign in to use AI explanations' }, { status: 401 })
+        }
+
+        const access = await checkFeatureAccess(user.id, 'ai_explanations')
+        if (!access.allowed) {
+            return NextResponse.json({
+                error: 'upgrade_required',
+                message: access.message,
+                upgrade_required: access.upgrade_required,
+            }, { status: 403 })
+        }
+
         const body = await req.json()
         const { question_text, section, options, correct_answer, selected_answer, passage_text } = body
 
