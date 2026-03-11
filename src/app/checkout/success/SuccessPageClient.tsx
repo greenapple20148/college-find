@@ -203,7 +203,6 @@ function getFeatures(plan: string): string[] {
                 'Admission chance predictor',
                 'Full application checklist',
                 'Deadline tracker',
-                'Scholarship alerts',
             ]
         case 'premium':
         case 'prep-pro-plus':

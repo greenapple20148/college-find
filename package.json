@@ -10,7 +10,9 @@
     "type-check": "tsc --noEmit",
     "seed": "tsx scripts/seed-colleges.ts",
     "seed:scholarships": "tsx scripts/ingest-scholarships.ts",
-    "crawl:scholarships": "tsx scripts/crawl-university-scholarships.ts"
+    "crawl:scholarships": "tsx scripts/crawl-university-scholarships.ts",
+    "test:e2e": "npx playwright test",
+    "test:e2e:ui": "npx playwright test --ui"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
@@ -24,6 +26,7 @@
     "stripe": "^20.4.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

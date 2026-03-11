@@ -221,20 +221,20 @@ export default function HomePage() {
             className="absolute inset-0 pointer-events-none"
             aria-hidden="true"
             style={{
-              background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(59,130,246,0.06) 0%, transparent 70%)',
+              background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,146,60,0.06) 0%, transparent 70%)',
             }}
           />
           <div className="relative max-w-5xl mx-auto">
             <div className="rounded-2xl border p-8 sm:p-12" style={{
               backgroundColor: 'var(--bg-secondary)',
-              borderColor: 'rgba(59,130,246,0.2)',
-              boxShadow: '0 0 60px rgba(59,130,246,0.06)',
+              borderColor: 'rgba(201,146,60,0.2)',
+              boxShadow: '0 0 60px rgba(201,146,60,0.06)',
             }}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#3b82f6' }} />
-                    <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: '#60a5fa' }}>
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
+                    <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
                       New Feature
                     </span>
                   </div>
@@ -243,7 +243,7 @@ export default function HomePage() {
                     <span
                       className="heading-serif-italic"
                       style={{
-                        background: 'linear-gradient(135deg, #60a5fa, #3b82f6, #818cf8)',
+                        background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                       }}
@@ -261,9 +261,9 @@ export default function HomePage() {
                       href="/sat-prep"
                       className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300"
                       style={{
-                        background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                        background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))',
                         color: '#fff',
-                        boxShadow: '0 4px 15px rgba(59,130,246,0.25)',
+                        boxShadow: '0 4px 15px rgba(201,146,60,0.25)',
                       }}
                     >
                       Explore SAT Ace <ArrowRightIcon className="w-4 h-4" />
@@ -272,7 +272,7 @@ export default function HomePage() {
                       href="/sat-prep/calculator"
                       className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 border"
                       style={{
-                        borderColor: 'rgba(59,130,246,0.4)',
+                        borderColor: 'rgba(201,146,60,0.4)',
                         color: 'var(--text-primary)',
                       }}
                     >
@@ -301,7 +301,7 @@ export default function HomePage() {
                       </h4>
                       <p className="text-[11px]" style={{ color: 'var(--text-faint)' }}>{f.desc}</p>
                       {f.free && (
-                        <span className="text-[9px] font-semibold uppercase tracking-wider mt-1 inline-block" style={{ color: '#22c55e' }}>
+                        <span className="text-[9px] font-semibold uppercase tracking-wider mt-1 inline-block" style={{ color: 'var(--gold-primary)' }}>
                           Free
                         </span>
                       )}

@@ -222,6 +222,39 @@ export default function CostCalculatorPage() {
               {' '}for accurate aid determination.
             </div>
           )}
+          {/* Financial Aid Estimator CTA */}
+          <div
+            className="rounded-xl border p-6 flex flex-col sm:flex-row items-center gap-5"
+            style={{
+              backgroundColor: 'rgba(201,146,60,0.06)',
+              borderColor: 'rgba(201,146,60,0.25)',
+            }}
+          >
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))' }}>
+              <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+              </svg>
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <p className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>
+                Want to know how much aid you&apos;ll actually get?
+              </p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                Our Financial Aid Estimator calculates your EFC, Pell Grant eligibility, federal loans, and estimated institutional aid.
+              </p>
+            </div>
+            <a
+              href="/financial-aid"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold flex-shrink-0 transition-all duration-300"
+              style={{
+                background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))',
+                color: '#fff',
+                boxShadow: '0 4px 15px rgba(201,146,60,0.25)',
+              }}
+            >
+              Estimate My Aid →
+            </a>
+          </div>
         </div>
       </div>
     </div>

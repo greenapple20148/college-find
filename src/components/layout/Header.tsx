@@ -16,6 +16,7 @@ const navLinks = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/advisor', label: 'AI Advisor' },
   { href: '/college-essays', label: 'Essays' },
+  { href: '/pricing', label: 'Pricing' },
 ]
 
 const toolsDropdownLinks = [
@@ -24,6 +25,11 @@ const toolsDropdownLinks = [
   { href: '/cost-calculator', label: 'Cost Calculator' },
   { href: '/college-roi-calculator', label: 'ROI Calculator' },
   { href: '/scholarships', label: 'Scholarships' },
+  { href: '/score-predictor', label: 'Score Predictor' },
+  { href: '/admission-strategy', label: 'Admission Strategy' },
+  { href: '/major-match', label: 'Major & Career Match' },
+  { href: '/financial-aid', label: 'Financial Aid Estimator' },
+  { href: '/essay-feedback', label: 'Essay Feedback' },
 ]
 
 const allNavLinks = [...navLinks, ...toolsDropdownLinks]

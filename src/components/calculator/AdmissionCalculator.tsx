@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { estimateAdmissionChance } from '@/lib/matching'
 import { MAJOR_OPTIONS } from '@/lib/types'
+import { useSubscription } from '@/hooks/useSubscription'
 import type { College, StudentProfile, MatchCategory } from '@/lib/types'
 
 interface AdmissionCalculatorProps {
@@ -15,8 +17,8 @@ interface AdmissionCalculatorProps {
 
 const CATEGORY_COLORS: Record<MatchCategory, { bg: string; text: string; label: string }> = {
   safety: { bg: 'rgba(52, 211, 153, 0.15)', text: '#34d399', label: 'Safety' },
-  match:  { bg: 'rgba(96, 165, 250, 0.15)', text: '#60a5fa', label: 'Match' },
-  reach:  { bg: 'rgba(251, 146, 60, 0.15)',  text: '#fb923c', label: 'Reach' },
+  match: { bg: 'rgba(96, 165, 250, 0.15)', text: '#60a5fa', label: 'Match' },
+  reach: { bg: 'rgba(251, 146, 60, 0.15)', text: '#fb923c', label: 'Reach' },
 }
 
 interface TopMatchResult {
@@ -39,6 +41,8 @@ export function AdmissionCalculator({
   const [topResults, setTopResults] = useState<TopMatchResult[]>([])
   const [loading, setLoading] = useState(false)
   const [hasCalculated, setHasCalculated] = useState(false)
+  const [showUpgrade, setShowUpgrade] = useState(false)
+  const { canAccess } = useSubscription()
 
   // Pre-fill from localStorage profile on mount
   useEffect(() => {
@@ -105,6 +109,11 @@ export function AdmissionCalculator({
   }
 
   function handleCalculate() {
+    if (!canAccess('admission_predictor')) {
+      setShowUpgrade(true)
+      return
+    }
+    setShowUpgrade(false)
     if (mode === 'single') {
       calculateSingle()
     } else {
@@ -202,6 +211,23 @@ export function AdmissionCalculator({
       >
         {loading ? 'Calculating…' : 'Calculate My Chances'}
       </button>
+
+      {/* Upgrade prompt */}
+      {showUpgrade && (
+        <div
+          className="rounded-lg p-5 border text-center"
+          style={{ backgroundColor: 'rgba(201,146,60,0.08)', borderColor: 'rgba(201,146,60,0.3)' }}
+        >
+          <svg className="w-8 h-8 mx-auto mb-2" style={{ color: 'var(--gold-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17" />
+          </svg>
+          <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>Upgrade to Pro</p>
+          <p className="text-xs mb-3" style={{ color: 'var(--text-muted)' }}>Admission chance predictions are available on the Pro plan.</p>
+          <Link href="/pricing" className="inline-block px-5 py-2 rounded-lg text-xs font-semibold" style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-dark))', color: '#fff' }}>
+            View Plans →
+          </Link>
+        </div>
+      )}
 
       {/* Single college result */}
       {mode === 'single' && hasCalculated && result && colors && (

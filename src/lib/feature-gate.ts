@@ -68,7 +68,17 @@ export async function checkFeatureAccess(
         .eq('user_id', userId)
         .single()
 
-    const plan = (profile?.plan ?? 'free') as PlanId
+    // Legacy plan mapping (matches useSubscription.ts)
+    const LEGACY_MAP: Record<string, PlanId> = {
+        free: 'free',
+        'student-pro': 'pro',
+        toolkit: 'pro',
+        'prep-pro-plus': 'premium',
+        bundle: 'premium',
+    }
+
+    const rawPlan = (profile?.plan ?? 'free') as string
+    const plan = LEGACY_MAP[rawPlan] ?? (rawPlan as PlanId)
     const userLevel = getPlanLevel(plan)
     const requiredLevel = getPlanLevel(def.minPlan)
 

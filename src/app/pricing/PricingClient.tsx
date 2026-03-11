@@ -518,7 +518,6 @@ export function PricingPage() {
                                     { feature: 'Admission predictor', free: '—', pro: true, premium: true },
                                     { feature: 'Full application checklist', free: '—', pro: true, premium: true },
                                     { feature: 'Deadline tracker', free: '—', pro: true, premium: true },
-                                    { feature: 'Scholarship alerts', free: '—', pro: true, premium: true },
                                     { feature: 'Score improvement predictor', free: '—', pro: '—', premium: true },
                                     { feature: 'Weak area diagnostics', free: '—', pro: '—', premium: true },
                                     { feature: 'Personalized study plan', free: '—', pro: '—', premium: true },
@@ -622,7 +621,7 @@ export function PricingPage() {
                             },
                             {
                                 q: 'What does Pro unlock?',
-                                a: 'Pro gives you unlimited SAT practice, AI answer explanations, personalized college recommendations, unlimited saved colleges, the full application checklist, deadline tracker, and scholarship alerts.',
+                                a: 'Pro gives you unlimited SAT practice, AI answer explanations, personalized college recommendations, unlimited saved colleges, the full application checklist, and deadline tracker.',
                             },
                             {
                                 q: 'What makes Premium worth it?',

@@ -239,7 +239,6 @@ export const PLANS: Record<PlanId, PlanConfig> = {
             'Admission chance predictor',
             'Full application checklist',
             'Deadline tracker',
-            'Scholarship alerts',
             'Unlimited essay brainstorming',
             '50 AI advisor questions per month',
         ],

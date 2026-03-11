@@ -1,10 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServiceClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { generateRecommendations } from '@/lib/recommendations'
 import { applyPreferenceFilters } from '@/lib/matching'
+import { checkFeatureAccess } from '@/lib/feature-gate'
 import type { StudentProfile } from '@/lib/types'
 
 export async function POST(req: NextRequest) {
+    // Feature gate: college_recommendations requires Pro
+    const supabaseAuth = await createClient()
+    const { data: { user } } = await supabaseAuth.auth.getUser()
+    if (user) {
+        const access = await checkFeatureAccess(user.id, 'college_recommendations')
+        if (!access.allowed) {
+            return NextResponse.json({ error: 'upgrade_required', message: access.message, upgrade_required: true }, { status: 403 })
+        }
+    }
+
     let body: Partial<StudentProfile>
     try {
         body = await req.json()

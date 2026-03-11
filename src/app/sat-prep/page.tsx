@@ -84,56 +84,7 @@ const features = [
     },
 ]
 
-const plans = [
-    {
-        name: 'Free',
-        price: '$0',
-        period: 'forever',
-        desc: 'Get started with essential SAT tools',
-        features: [
-            'SAT Score Calculator',
-            '10 practice questions/day',
-            'Basic score tracking',
-            'Answer explanations',
-        ],
-        cta: 'Start Free',
-        href: '/sat-prep/calculator',
-        highlight: false,
-    },
-    {
-        name: 'Premium Basic',
-        price: '$9',
-        period: '/month',
-        desc: 'Unlimited practice & personalized planning',
-        features: [
-            'Unlimited practice questions',
-            'Saved mistakes review',
-            'Performance dashboard',
-            'Study planner',
-            'Topic-level analytics',
-        ],
-        cta: 'Start Free Trial',
-        href: '/signup',
-        highlight: true,
-    },
-    {
-        name: 'Premium Plus',
-        price: '$29',
-        period: '/month',
-        desc: 'Everything + AI & mock tests',
-        features: [
-            'Everything in Basic',
-            'Unlimited mock tests',
-            'AI-powered explanations',
-            'Advanced analytics',
-            'Adaptive recommendations',
-            'Weak area detection',
-        ],
-        cta: 'Start Free Trial',
-        href: '/signup',
-        highlight: false,
-    },
-]
+
 
 export default function SATAcePage() {
     return (
@@ -295,78 +246,6 @@ export default function SATAcePage() {
                 </div>
             </section>
 
-            {/* Pricing */}
-            <section className="py-20 px-4" aria-label="SAT Ace Pricing">
-                <div className="max-w-5xl mx-auto">
-                    <div className="text-center mb-14">
-                        <div className="flex items-center justify-center gap-2 mb-4">
-                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: 'var(--gold-primary)' }} />
-                            <span className="text-xs font-medium tracking-[0.2em] uppercase" style={{ color: 'var(--gold-primary)' }}>
-                                Pricing
-                            </span>
-                        </div>
-                        <h2 className="heading-serif text-3xl sm:text-4xl" style={{ color: 'var(--text-primary)' }}>
-                            Start free,{' '}
-                            <span className="heading-serif-italic text-gradient-gold">
-                                upgrade when ready
-                            </span>
-                        </h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                        {plans.map(plan => (
-                            <div
-                                key={plan.name}
-                                className="card-dark p-6 sm:p-8 relative flex flex-col"
-                                style={plan.highlight ? {
-                                    borderColor: 'rgba(201,146,60,0.4)',
-                                    boxShadow: '0 0 40px rgba(201,146,60,0.08)',
-                                } : {}}
-                            >
-                                {plan.highlight && (
-                                    <div
-                                        className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-1 rounded-full"
-                                        style={{
-                                            background: 'linear-gradient(135deg, var(--gold-primary), #B8860B)',
-                                            color: '#fff',
-                                        }}
-                                    >
-                                        Most Popular
-                                    </div>
-                                )}
-
-                                <div className="mb-6">
-                                    <h3 className="font-semibold text-lg mb-1" style={{ color: 'var(--text-primary)' }}>{plan.name}</h3>
-                                    <p className="text-xs" style={{ color: 'var(--text-faint)' }}>{plan.desc}</p>
-                                </div>
-
-                                <div className="flex items-baseline gap-1 mb-6">
-                                    <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>{plan.price}</span>
-                                    <span className="text-sm" style={{ color: 'var(--text-ghost)' }}>{plan.period}</span>
-                                </div>
-
-                                <ul className="flex flex-col gap-2.5 mb-8 flex-1">
-                                    {plan.features.map(f => (
-                                        <li key={f} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-muted)' }}>
-                                            <svg className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: 'var(--gold-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                                <polyline points="20 6 9 17 4 12" />
-                                            </svg>
-                                            {f}
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <Link
-                                    href={plan.href}
-                                    className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${plan.highlight ? 'btn-gold' : 'btn-outline'}`}
-                                >
-                                    {plan.cta}
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* Final CTA */}
             <section className="py-20 px-4 text-center">
